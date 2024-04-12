@@ -3,6 +3,7 @@ import Header from '../Header/Header.js'
 import Footer from '../Footer/Footer.js';
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Product = () => {
     const [products, setProducts] = useState([]);
@@ -14,6 +15,12 @@ const Product = () => {
                 console.log(err);
             })
     }, []);
+
+    const navigate = useNavigate();
+    const BuyNow = (product) => {
+        navigate("/BuyNow", { state: product });
+    }
+
 
     return (<>
         <Header />
@@ -34,7 +41,7 @@ const Product = () => {
                                 </div>
                                 <div className="d-flex justify-content-evenly w-100">
                                     <button className="btnn addtocart-btn text-white m-2">Add To cart</button>
-                                    <button className="btnn buynow-btn text-white m-2">Buy Now</button>
+                                    <button className="btnn buynow-btn text-white m-2" onClick={() => BuyNow(product)}>Buy Now</button>
                                 </div>
                             </div>
                         </div>
