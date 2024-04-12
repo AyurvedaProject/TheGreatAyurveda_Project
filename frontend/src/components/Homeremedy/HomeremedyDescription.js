@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
-import ReactPLayer from 'react-player/youtube';
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
@@ -9,7 +8,6 @@ export default function ViewMore() {
     const navigate = useNavigate();
     const { state } = useLocation();
     const instructions = state.instructions.split(",");
-    // console.log(instructions[0]);
     const back = () => {
         navigate("/homeremedy")
     }
@@ -19,7 +17,7 @@ export default function ViewMore() {
         <div className="mt-3 mb-4">
             <div className="d-flex align-items-start justify-content-evenly m-5 mt-2 p-3 flex-wrap">
                 <div className="d-flex flex-column" style={{ height: "400px", width: "600px" }}>
-                    <img src={state.imageUrl} style={{ height: "100%", width: '100%' }} />
+                    <img className=" shadow-lg border" alt="Homeremedy_image" src={state.imageUrl} style={{ height: "100%", width: '100%' }} />
                     <span className="text-center fs-2 mt-3 mb-3" >{state.remedyName}</span>
                 </div>
                 <div className="ms-4 d-flex flex-column" style={{ width: "600px" }}>

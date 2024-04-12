@@ -9,9 +9,10 @@ import Home from "./components/Home/Home.js";
 import Homeremedy from "./components/Homeremedy/Homeremedy.js";
 import Yoga from "./components/Yoga/Yoga.js";
 import Product from "./components/Product/Product.js";
-import GetStart from "./components/Yoga/Yogadescription.js";
+import GetStart from "./components/Yoga/yogadescription.js";
 import Disease from "./components/Disease/Disease.js";
 import ViewMore from "./components/Homeremedy/HomeremedyDescription.js";
+import BuyNow from "./components/Product/ProductByNow.js";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/yoga" element={<Yoga />} />
           <Route path='/getstart' element={<GetStart />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/BuyNow" element={<BuyNow/>}/>
           <Route path="/disease" element={<Disease />} />
           <Route path="/product" element={<Product />} />
           <Route path="/user" element={<UserLogIn />} />
