@@ -64,9 +64,9 @@ export default function LogIn() {
         <div>
             <Header />
             <div className='login'>
-                <div className={`containe ${isSignUp ? 'active' : ''}`}>
-                    <div className="form-container sign-up">
-                        <form onSubmit={handleSubmit}>
+                <div className={` containe ${isSignUp ? 'active' : ''}`}>
+                    <div className="form-container sign-up ">
+                        <form onSubmit={handleSubmit} className='signincon '>
                             <h1 className='fs-2'>Create Account</h1>
                             <div className="social-icons">
                                 <div className="ms-2 me-2 icon-google"></div>
@@ -86,9 +86,9 @@ export default function LogIn() {
                             {(input2 == pass2 && pass2 == email2 && email2 == number2) ? <button onClick={signUp}>Sign Up</button> : <button onClick={() => { (name == "") ? setinput2("name is required") : (email == "") ? setemail2("email is required") : (password == "") ? setpass2("password is required") : (contactNumber == "") ? setnumber2("number is required") : setpass2(" ") }} style={{ background: "var(--green-3)" }}>Sign Up</button>}
                         </form>
                     </div>
-                    <div className="form-container sign-in">
-                        <form onSubmit={handleSubmit}>
-                            <h1 className='fs-2'>Sign In</h1>
+                    <div className="form-container sign-in ">
+                        <form onSubmit={handleSubmit} className='signincon  '>
+                            <h1 className='fs-2 '>Sign In</h1>
                             <div className="social-icons">
                                 <div className="ms-2 me-2 icon-google"></div>
                                 <div className="ms-2 me-2 icon-facebook"></div>
@@ -100,18 +100,18 @@ export default function LogIn() {
                             <small className='signin-input-message'>{email2}</small>
                             <input className='signin-password' onChange={(event) => { (event.target.value == "") ? setpass("password is required") : setpass(""); setPassword(event.target.value); }} type="password" placeholder="Password" />
                             <small className='signin-input-message'>{pass}</small>
-                            <Link className="ml-3 links" to="/forgetpassword">→ Forget Your Password? ←</Link>
+                            <Link className="ml-3 links " to="/forgetpassword">→ Forget Your Password? ←</Link>
                             {(input == pass) ? <button onClick={signIn}>Sign In</button> : <button onClick={() => { (name == "") ? setinput("name is required") : (password == "") ? setpass("password is required") : setpass(" ") }} style={{ background: "var(--green-3)" }}>Sign In</button>}
                         </form>
                     </div>
                     <div className="toggle-container">
                         <div className="toggle">
-                            <div className="toggle-panel toggle-left">
+                            <div className="toggle-panel toggle-left signincon">
                                 <h1 className='fs-2'>Welcome Back!</h1>
                                 <p>Enter your personal details to use all of site features</p>
                                 <button className={`hidden ${isSignUp ? '' : 'visible'}`} onClick={toggleForm}>Sign In</button>
                             </div>
-                            <div className="toggle-panel toggle-right">
+                            <div className="toggle-panel toggle-right signincon">
                                 <h1 className='fs-2'>Hello, Friend!</h1>
                                 <p>Register with your personal details to use all of site features</p>
                                 <button className={`hidden ${isSignUp ? 'visible' : ''}`} onClick={toggleForm}>Sign Up</button>
@@ -121,7 +121,7 @@ export default function LogIn() {
                     <ToastContainer className="toast" />
                 </div >
             </div >
-            <Footer />
+            {/* <Footer /> */}
         </div >
     );
-}
+}  

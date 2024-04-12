@@ -3,9 +3,9 @@
 }
 
 .Home-image {
-    height: 46vw;
+    height: 37vw;
     width: 100%;
-    background: url("./images/ayurveda-img.jpg") no-repeat center;
+    background: url("./images/home1.jpg") no-repeat center;
     background-size: cover;
 }
 
@@ -58,14 +58,38 @@
 
 @media only screen and (max-width: 600px) {
     .remede-box {
-        width: 300px;
-        height: 390px;
+        width: 250px;
+        /* height: 390px; */
     }
 
     .remede-img {
-        height: 170px;
+        height: 150px;
         width: 98%;
         cursor: pointer;
+    }
+
+    .home-homeremedies .text-center {
+        font-size: 22px !important;
+    }
+
+    .home-products .text-center {
+        font-size: 22px !important;
+    }
+
+    .home-yoga .text-center {
+        font-size: 22px !important;
+    }
+
+    .remede-value .fs-5 {
+        font-size: 15px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .remede-value .flex-wrap {
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 12px !important;
     }
 }
 

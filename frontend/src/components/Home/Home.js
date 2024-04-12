@@ -3,7 +3,6 @@ import Header from '../Header/Header.js'
 import Footer from '../Footer/Footer.js';
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Yoga from "../Yoga/Yoga.js";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 import { FaPlay } from "react-icons/fa";
@@ -52,9 +51,29 @@ const Home = () => {
         <Header />
         <div className="home">
             <div className="home-contain ">
-                <div className="home-image-section ">
-                    <div className="Home-image"></div>
+                {/* -------------------- */}
+                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="./images/home1.jpg" class="d-block w-100" alt="..." />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/home2.jpg" class="d-block w-100" alt="..." />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/HistoryImage.jpg" class="d-block w-100" alt="..." />
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
                 </div>
+                {/* -------------------- */}
                 <div className="home-homeremedies text-center">
                     <span className="text-center fs-1 fw-bold border-bottom border-dark border-3 pt-1 ps-4 pe-4 ">Home Remedies</span>
                     <div className="containerr mt-3 mb-3 d-flex align-items-center">
@@ -76,7 +95,7 @@ const Home = () => {
                 <div className="home-products text-center">
                     <span className="text-center fs-1 fw-bold border-bottom border-dark border-3 pt-1 ps-4 pe-4 ">Products</span>
                     <div className="containerr mt-3 mb-3 d-flex align-items-center">
-                        <div className="containerr-inline d-flex align-items-center mb-3">
+                        <div className="containerr-inline d-flex align-items-center mb-3 mt-2">
                             {products.map((product, index) => <div key={index}>
                                 {index < 10 ? <div className="remede-box d-flex flex-column align-items-center justify-content-center">
                                     <div className="remede-img m-1"><img src={product.imageUrl} style={{ height: "100%", width: '100%' }} /></div>
@@ -91,7 +110,7 @@ const Home = () => {
                                         </div>
                                         <div className="d-flex justify-content-evenly w-100">
                                             <button className="btnn addtocart-btn text-white m-2">Add To cart</button>
-                                            <button className="btnn buynow-btn text-white m-2">Buy NowX</button>
+                                            <button className="btnn buynow-btn text-white m-2">Buy Now</button>
                                         </div>
                                     </div>
                                 </div> : ""}

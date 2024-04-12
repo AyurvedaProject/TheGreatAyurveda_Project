@@ -12,7 +12,6 @@ router.post("/addProduct",
     body("imageUrl", "invalid imageUrl").notEmpty(),
     body("categoryname", "invalid categoryname").notEmpty(),
     Add);
-
 router.post("/addinbulk", saveInBulk);
 
 router.put("/updateProduct",

@@ -8,7 +8,7 @@ const DoctorDetail = sequelize.define('doctordetail', {
         primaryKey: true,
         autoIncrement: true
     },
-    qualificationImage: {
+    qualification: {
         type: DataTypes.STRING,
         allowNull: false
     },

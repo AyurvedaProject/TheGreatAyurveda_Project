@@ -6,6 +6,14 @@
 }
 
 @media only screen and (max-width: 750px) {
+    .footer-inner {
+        margin: 2vw !important;
+    }
+
+    .footer-customersupport {
+        padding: 0vw !important;
+    }
+
     .footer-h3 {
         font-size: 15px;
     }
@@ -22,29 +30,38 @@
 
     .footer-bottom {
         display: flex;
-        flex-wrap: nowrap;
+        flex-wrap: nowrap !important;
         align-items: center;
-        justify-content: center;
-        border: 1px solid black;
     }
 
     .footer-logo {
-        height: 50px;
-        width: 80px;
+        height: 60px;
+        width: 90px;
         background: url("./images/A2.png") no-repeat center;
         background-size: cover;
         margin: 0 !important;
     }
 
+    .footer-text {
+        margin-left: 6px !important;
+    }
+
     .footer-text h6 {
+        margin-top: 3vw;
         font-size: 10px;
+
+    }
+
+    .footer-aboutus, .footer-customersupport, .footer-account, .footer-privacypolicy, .footer-privacypolicy-top {
+        padding: 0 !important;
     }
 }
 
-/* <div className="footer-bottom d-flex align-items-center flex-wrap">
-                    <div className="footer-logo ms-3"></div>
-                    <div className="footer-text d-flex flex-wrap ms-3">
-                        <h6>Worldwide Copyright © The Great Ayurveda  (brand owners of The Great Ayurveda). All rights reserved.</h6>
-                    </div>
-                </div>
-            </div> */
+@media only screen and (max-width: 600px) {
+    .footer-privacypolicy {
+        display: flex;
+        margin-top: 3vw;
+        width: 100%;
+        align-items: center;
+    }
+}

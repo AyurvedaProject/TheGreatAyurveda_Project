@@ -108,7 +108,7 @@ export const AddDoctorDetail = (request, response, next) => {
         return response.status(401).json({ error: errors.array() });
 
     DoctorDetail.create({
-        qualificationImage: request.body.qualificationImage,
+        qualification: request.body.qualification,
         experience: request.body.experience,
         gender: request.body.gender,
         language: request.body.language,
@@ -132,7 +132,7 @@ export const UpdateDoctorDetail = (request, response, next) => {
 
     DoctorDetail.update(
         {
-            qualificationImage: request.body.qualificationImage,
+            qualification: request.body.qualification,
             experience: request.body.experience,
             gender: request.body.gender,
             language: request.body.language,
@@ -252,4 +252,29 @@ export const updateAppointmentStatus = (request, response, next) => {
             console.log(err);
             return response.status(500).json({ error: "Internal server error...", err });
         })
+
 }
+
+export const doctorConsult = (request, response, next) => {
+    const errors = validationResult(request);
+    if (!errors.isEmpty()) {
+        console.log("DoctorConsult");
+        return response.status(401).json({ error: errors.array() });
+    }
+    Doctor.findAll({
+        attributes: ['doctorName'],
+        include: [{
+            model: DoctorDetail,
+            attributes: ['doctorImage', 'specialization', 'experience', 'qualification', 'clinicAddress', 'gender', 'language']
+        }]
+    })
+        .then((result) => {
+            return response.status(200).json({ message: 'Status updated....', result })
+        })
+        .catch(error => {
+            return response.status(500).json({ error: "Internal server error...", err });
+        });
+        
+
+}
+

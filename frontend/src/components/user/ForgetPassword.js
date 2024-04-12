@@ -62,7 +62,7 @@ export default function ForgetPassword() {
             <div className='login'>
                 <div className={`containe ${isSignUp ? 'active' : ''}`}>
                     <div className="form-container sign-up">
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit} className='signincon'>
                             <h1 className='fs-2'>Create Password</h1>
                             <span className='forget-text'>enter new password</span>
                             <input className='signin-password' onChange={(event) => { (event.target.value == "") ? setpass2("password is required") : (!event.target.value.match(/^(?=.*\d)/)) ? setpass("Password must contain at least one digit.") : (!event.target.value.match(/^(?=.*[a-zA-Z])/)) ? setpass("Password must contain at least one letter.") : (!event.target.value.match(/^.{5,}$/)) ? setpass("Password must be at least 5 characters long.") : setpass(""); setPassword(event.target.value); }} type="password" placeholder="Enter New Password" />
@@ -73,7 +73,7 @@ export default function ForgetPassword() {
                         </form>
                     </div>
                     <div className="form-container sign-in">
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit} className='signincon'>
                             <h1 className='fs-2'>Forget Password</h1>
                             <span className='forget-text'>enter your name email</span>
                             <input className='signin-input' onChange={(event) => { (event.target.value == "") ? setinput("name is required") : (!event.target.value.match("^[a-z A-Z]+$")) ? setinput("name contains only charecters") : (!event.target.value.match("^[a-z A-Z]{2,20}$")) ? setinput("invelid name") : setinput(""); setname(event.target.value); }} type="text" placeholder="User Name" />
@@ -86,22 +86,22 @@ export default function ForgetPassword() {
                     </div>
                     <div className="toggle-container">
                         <div className="toggle">
-                            <div className="toggle-panel toggle-left">
+                            <div className="toggle-panel toggle-left signincon">
                                 <h1 className='fs-2'>Welcome Back!</h1>
                                 <p>We received a request to reset your password after set new password</p>
-                                <h1 className='fs-2'>→</h1>
+                                <h2 className='fs-2'>→</h2>
                             </div>
-                            <div className="toggle-panel toggle-right">
+                            <div className="toggle-panel toggle-right signincon">
                                 <h1 className='fs-2'>Hello, Friend!</h1>
                                 <p>Please use the email or name to log in and reset your password</p>
-                                <h1 className='fs-2'>←</h1>
+                                <h2 className='fs-2'>←</h2>
                             </div>
                         </div>
                     </div>
                     <ToastContainer className="toast" />
                 </div>
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }

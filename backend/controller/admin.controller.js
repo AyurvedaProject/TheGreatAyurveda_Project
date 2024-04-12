@@ -7,6 +7,7 @@ export const SignUp = (request, response, next) => {
     if (!errors.isEmpty())
         return response.status(401).json({ error: errors.array() });
 
+        
     Admin.create({
         name: request.body.name,
         email: request.body.email,

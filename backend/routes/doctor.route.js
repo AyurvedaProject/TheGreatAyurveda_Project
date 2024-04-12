@@ -1,7 +1,7 @@
 import express from 'express';
 import { verifyToken } from '../middleware/auth.js';
 import { body } from 'express-validator';
-import { AddDoctorDetail, SignUp, UpdateDoctorDetail, appointmentList, doctorAppointment, doctorProfile, list, remove, signIn, update } from '../controller/doctor.controller.js';
+import { AddDoctorDetail, SignUp, UpdateDoctorDetail, appointmentList, doctorAppointment, doctorConsult, doctorProfile, list, remove, signIn, update, } from '../controller/doctor.controller.js';
 
 const router = express.Router();
 
@@ -32,7 +32,7 @@ router.delete("/remove", body("email", "invalid email").isEmail().notEmpty(), re
 
 
 router.post("/addDoctordetail",
-    body("qualificationImage", "invalid qualificationImage").notEmpty(),
+    body("qualification", "invalid qualification").notEmpty(),
     body("experience", "invalid experience").notEmpty(),
     body("gender", "invalid gender").notEmpty(),
     body("language", "invalid language").notEmpty(),
@@ -46,7 +46,7 @@ router.get("/doctorProfile", body("id", "invalid id").notEmpty(), doctorProfile)
 
 router.put("/updateDoctordetail",
     body("id", "invalid id").notEmpty(),
-    body("qualificationImage", "invalid qualificationImage").notEmpty(),
+    body("qualification", "invalid qualification").notEmpty(),
     body("experience", "invalid experience").notEmpty(),
     body("gender", "invalid gender").notEmpty(),
     body("language", "invalid language").notEmpty(),
@@ -59,5 +59,21 @@ router.put("/updateDoctordetail",
 router.post("/doctorAppointment", body("userId", "invalid userId").notEmpty(), body("doctorId", "invalid doctorId").notEmpty(), doctorAppointment);
 
 router.get("/appointmentList", appointmentList);
+
+
+
+
+
+router.get("/doctorconsult",
+    // body("qualification", "invalid qualification").notEmpty(),
+    // body("experience", "invalid experience").notEmpty(),
+    // body("gender", "invalid gender").notEmpty(),
+    // body("language", "invalid language").notEmpty(),
+    // body("clinicAddress", "invalid clinicAddress").notEmpty(),
+    // body("doctorimage", "invalid doctorimage").notEmpty(),
+    // body("specialization", "invalid specialization").notEmpty(),
+    // body("doctorId", "invalid doctorId").notEmpty(),
+    doctorConsult);
+    
 
 export default router;
