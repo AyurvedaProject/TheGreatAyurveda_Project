@@ -13,6 +13,7 @@ import GetStart from "./components/Yoga/yogadescription.js";
 import Disease from "./components/Disease/Disease.js";
 import DoctorConsult from "./components/DoctorConsult/DoctorConsult.js";
 import ViewMore from "./components/Homeremedy/HomeremedyDescription.js";
+import ProductView from "./components/Product/ProductViewMore.js";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/product" element={<Product />} />
           <Route path="/disease" element={<Disease />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/ProductView" element={<ProductView/>}/>
           <Route path="/user" element={<UserLogIn />} />
           <Route path="/forgetpassword" element={<UserForgetPassword />} />
           <Route path="/aboutUs" element={<AboutUs />} />
@@ -37,6 +39,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

@@ -3,7 +3,7 @@ import Header from '../Header/Header.js'
 import Footer from '../Footer/Footer.js';
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const Product = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
@@ -15,6 +15,11 @@ const Product = () => {
             })
     }, []);
 
+    const navigate = useNavigate();
+    const ProductView = (product) => {
+        navigate("/ProductView", { state: product });
+    }
+
     return (<>
         <Header />
         <div className="home">
@@ -22,7 +27,7 @@ const Product = () => {
                 <div className="containerr-inline d-flex align-items-center justify-content-center m-1 flex-wrap" style={{ gap: "0" }}>
                     {products.map((product, index) => <div key={index}>
                         <div className="remede-box d-flex flex-column align-items-center justify-content-start m-5 text-center">
-                            <div className="remede-img m-1"><img src={product.imageUrl} style={{ height: "100%", width: '100%' }} /></div>
+                            <div className="remede-img m-1"><img src={product.imageUrl} alt="Product" onClick={() => ProductView(product)}  style={{ height: "100%", width: '100%' }} /></div>
                             <div className="remede-value m-1 d-flex flex-column justify-content-center align-items-center">
                                 <span className="fs-5 fw-bold ms-2 me-2">{product.title.slice(0, 25)}</span>
                                 <span className="fs-5 fw-bold ms-2 me-2" style={{ color: "var(--green)" }}>{product.price} Rs</span>
@@ -34,7 +39,7 @@ const Product = () => {
                                 </div>
                                 <div className="d-flex justify-content-evenly w-100">
                                     <button className="btnn addtocart-btn text-white m-2">Add To cart</button>
-                                    <button className="btnn buynow-btn text-white m-2">Buy Now</button>
+                                    <button className="btnn buynow-btn text-white m-2" onClick={() => ProductView(product)}>Buy Now</button>
                                 </div>
                             </div>
                         </div>

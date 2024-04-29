@@ -39,6 +39,6 @@ export default function ViewMore() {
                 </div>
             </div>
         </div>
-        <Footer />
+        <Footer/>
     </>
 }

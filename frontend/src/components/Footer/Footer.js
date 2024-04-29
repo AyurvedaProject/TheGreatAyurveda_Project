@@ -33,11 +33,20 @@ const Footer = () => {
                                 <small className="footer-values links ps-3">Terms & Conditions</small>
                             </div>
                             <div className="footer-privacypolicy d-flex justify-content-evenly flex-wrap social-icons">
-                                <div style={{ filter: "invert(98%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(104%) contrast(102%)" }} className="border-dark footer-icon icon-google"></div>
-                                <div style={{ filter: "invert(98%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(104%) contrast(102%)" }} className="border-dark footer-icon icon-facebook"></div>
-                                <div style={{ filter: "invert(98%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(104%) contrast(102%)" }} className="border-dark footer-icon icon-git"></div>
-                                <div style={{ filter: "invert(98%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(104%) contrast(102%)" }} className="border-dark footer-icon icon-linkedin"></div>
+                                <a href="https://en.wikipedia.org/wiki/Ayurveda" target="_blank" rel="noopener noreferrer">
+                                    <div style={{ filter: "invert(98%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(104%) contrast(102%)" }} className="border-dark footer-icon icon-google"></div>
+                                </a>
+                                <a href="https://www.facebook.com/prathaayurveda/" target="_blank" rel="noopener noreferrer">
+                                    <div style={{ filter: "invert(98%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(104%) contrast(102%)" }} className="border-dark footer-icon icon-facebook"></div>
+                                </a>
+                                <a href="https://www.google.com/search?sca_esv=00fee2c195b96c2e&sxsrf=ACQVn0_cKL_yijq7YJDcp8Y-6hwLOvjv1g:1714371093104&q=ayurveda&source=lnms&uds=AMwkrPsF4AhfhjtVp64WR6poPe2do02cCzdfOOcWqwkAx_2ITWxyOj8RxUeflVzX7KCc1DOZB7zRaATEnqjcMCTM62HrSoEfi0YnrRoKl1gcT53pSm7VEeig0lyXvcmmRs8S3J-3oDoId4gxg5nAPcC7LzUSqx5NusJ9-P9GcelvWgX0cJyTp-8fXFG-wfYFyLWPcUqcgmXbuFMIixb4mWAxuuzRtlvyCy0rqNynegr9mBWYkVTlofoRZJ7_U6Coi-8zk8g7s6GtrR0mlFGDW85EBZvDL2fMXec_Y5zqUYA4E7aJ9JGnvks&sa=X&ved=2ahUKEwiX3JGA4uaFAxWriK8BHYeKAVwQ0pQJegQIERAB&biw=1366&bih=641&dpr=1" target="_blank" rel="noopener noreferrer">
+                                    <div style={{ filter: "invert(98%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(104%) contrast(102%)" }} className="border-dark footer-icon icon-google"></div>
+                                </a>
+                                <a href="https://www.instagram.com/amrutamofficial/?hl=en" target="_blank" rel="noopener noreferrer">
+                                    <div style={{ filter: "invert(98%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(104%) contrast(102%)" }} className="border-dark footer-icon icon-linkedin"></div>
+                                </a>
                             </div>
+
                         </div>
                     </div>
                     <div className="footer-bottom d-flex align-items-center flex-wrap">

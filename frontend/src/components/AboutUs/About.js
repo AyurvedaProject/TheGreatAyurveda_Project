@@ -12,29 +12,8 @@ export default function AboutUs() {
       {/* ====================================================FIRST-SECTION======================================================= */}
 
       {/* FIRST SECTION */}
-      {/* <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-10 mt-2" id="about_Image">
-            <div id="about_Image_text">
-              <h1 className="mb-3">Ayurveda</h1>
-              <p>
-                Ayurveda is an ancient Indian system of medicine that focuses on
-                natural remedies, diet, and lifestyle to prmot health and
-                prevent illness.Ayurveda emphasizes the interconnectedness of
-                body, mind, and sprit
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      {/* FIRST SECTION */}
       <div className="container-fluid position-relative about_Image">
-  <img
-    src="./images/ayurvedas1.jpg"
-    className="img-fluid about_Image"
-    alt="Ayurveda Image"
-  />
+  <img src="./images/ayurvedas1.jpg" className="img-fluid about_Image" alt="Ayurveda Image" />
   <div className="position-absolute top-50 start-50 translate-middle text-center Image_text" style={{color: "white"}}> {/* Center content */}
     <h1 className="mb-2">Ayurveda</h1>
     <p>

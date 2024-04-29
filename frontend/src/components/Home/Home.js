@@ -47,6 +47,9 @@ const Home = () => {
         navigate("/viewmore", { state: remedy });
     }
 
+    const ProductView = (product) => {
+        navigate("/ProductView", { state: product });
+    }
     return (<>
         <Header />
         <div className="home">
@@ -80,7 +83,7 @@ const Home = () => {
                         <div className="containerr-inline d-flex align-items-center mb-3">
                             {homeremedies.map((remedy, index) => <div key={index}>
                                 {index < 10 ? <div className="remede-box d-flex flex-column align-items-center justify-content-start">
-                                    <div className="remede-img m-1"><img src={remedy.imageUrl} onClick={() => viewmore(remedy)} style={{ height: "100%", width: '100%' }} /></div>
+                                    <div className="remede-img m-1"><img src={remedy.imageUrl} alt="remedy" onClick={() => viewmore(remedy)} style={{ height: "100%", width: '100%' }} /></div>
                                     <div className="remede-value h-100 m-1 d-flex flex-column justify-content-evenly align-items-center">
                                         <span className="fs-5 fw-bold ms-2 me-2">{remedy.remedyName.slice(0, 25)}</span>
                                         <span className="d-flex flex-wrap m-2">{remedy.description.slice(0, 80)}</span>
@@ -98,7 +101,7 @@ const Home = () => {
                         <div className="containerr-inline d-flex align-items-center mb-3 mt-2">
                             {products.map((product, index) => <div key={index}>
                                 {index < 10 ? <div className="remede-box d-flex flex-column align-items-center justify-content-center">
-                                    <div className="remede-img m-1"><img src={product.imageUrl} style={{ height: "100%", width: '100%' }} /></div>
+                                    <div className="remede-img m-1"><img src={product.imageUrl} onClick={() => ProductView(product)} alt="Product" style={{ height: "100%", width: '100%' }} /></div>
                                     <div className="remede-value m-1 d-flex flex-column justify-content-center align-items-center">
                                         <span className="fs-5 fw-bold ms-2 me-2">{product.title.slice(0, 25)}</span>
                                         <span className="fs-5 fw-bold ms-2 me-2" style={{ color: "var(--green)" }}>{product.price} Rs</span>
@@ -125,7 +128,7 @@ const Home = () => {
                         <div className="containerr-inline d-flex align-items-center mb-3">
                             {yoga.map((yogaa, index) => <div key={index}>
                                 {index < 10 ? <div className="remede-box d-flex flex-column align-items-center justify-content-start">
-                                    <div className="remede-img m-1"><img src={yogaa.imageUrl} style={{ height: "100%", width: '100%' }} /></div>
+                                    <div className="remede-img m-1"><img src={yogaa.imageUrl} alt="Yoga" style={{ height: "100%", width: '100%' }} /></div>
                                     <FaPlay className="youtube-icon" size={30} onClick={() => getStart(yoga)} />
                                     <div className="remede-value m-1 d-flex flex-column justify-content-evenly h-100 align-items-center">
                                         <span className="fs-5 fw-bold ms-2 me-2">{yogaa.yogaName.slice(0, 25)}</span>

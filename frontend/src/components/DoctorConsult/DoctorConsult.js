@@ -23,7 +23,6 @@ const DoctorConsult = () => {
     }, []);
 
     return <>
-
         <Header />
         {doctorConsult.map((doctor, index) => <div key={index}>
             <div className="doctor-profile container border border-success rounded mt-5 mb-4 ">

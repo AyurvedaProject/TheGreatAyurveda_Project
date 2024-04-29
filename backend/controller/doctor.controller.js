@@ -271,7 +271,7 @@ export const doctorConsult = (request, response, next) => {
         .then((result) => {
             return response.status(200).json({ message: 'Status updated....', result })
         })
-        .catch(error => {
+        .catch(err => {
             return response.status(500).json({ error: "Internal server error...", err });
         });
         
