@@ -34,7 +34,7 @@ const Footer = () => {
                             </div>
                             <div className="footer-privacypolicy d-flex justify-content-evenly flex-wrap social-icons">
                                 <a href="https://en.wikipedia.org/wiki/Ayurveda" target="_blank" rel="noopener noreferrer">
-                                    <div style={{ filter: "invert(98%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(104%) contrast(102%)" }} className="border-dark footer-icon icon-google"></div>
+                                    <div style={{ filter: "invert(98%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(1004%) contrast(102%)" }} className="border-dark footer-icon icon-wikipedia"></div>
                                 </a>
                                 <a href="https://www.facebook.com/prathaayurveda/" target="_blank" rel="noopener noreferrer">
                                     <div style={{ filter: "invert(98%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(104%) contrast(102%)" }} className="border-dark footer-icon icon-facebook"></div>
@@ -43,7 +43,7 @@ const Footer = () => {
                                     <div style={{ filter: "invert(98%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(104%) contrast(102%)" }} className="border-dark footer-icon icon-google"></div>
                                 </a>
                                 <a href="https://www.instagram.com/amrutamofficial/?hl=en" target="_blank" rel="noopener noreferrer">
-                                    <div style={{ filter: "invert(98%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(104%) contrast(102%)" }} className="border-dark footer-icon icon-linkedin"></div>
+                                    <div style={{ filter: "invert(100%) sepia(57%) saturate(10%) hue-rotate(227deg) brightness(1004%) contrast(102%)" }} className="border-dark footer-icon icon-insta"></div>
                                 </a>
                             </div>
 

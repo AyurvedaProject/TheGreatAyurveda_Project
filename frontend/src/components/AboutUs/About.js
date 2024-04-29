@@ -31,9 +31,8 @@ export default function AboutUs() {
       <div className="container border broder-dark">
         <div className="row d-flex align-items-center">
           <div classname="col-12">
-            <div className="text-center mb-3 mt-3">
-              <h1 className="border-bottom border-2 border-dark d-inline pb-1 ">
-                {" "}
+            <div className="text-center mb-3 mt-3 HistoryofAyurveda">
+              <h1 className="border-bottom border-2 border-dark d-inline pb-1">
                 History of Ayurveda
               </h1>
             </div>

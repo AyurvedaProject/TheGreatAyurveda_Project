@@ -5,6 +5,22 @@
     background-size: cover;
 }
 
+.icon-wikipedia {
+    height: 100%;
+    width: 100%;
+    background: url("./images/icons8-wikipedia-50.png") no-repeat center;
+    /* background-size: 120%; */
+    cursor: pointer;
+}
+
+.icon-insta {
+    height: 100%;
+    width: 100%;
+    background: url("./images/icons8-instagram-96.png") no-repeat center;
+    background-size: 70%;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 750px) {
     .footer-inner {
         margin: 2vw !important;
@@ -52,7 +68,11 @@
 
     }
 
-    .footer-aboutus, .footer-customersupport, .footer-account, .footer-privacypolicy, .footer-privacypolicy-top {
+    .footer-aboutus,
+    .footer-customersupport,
+    .footer-account,
+    .footer-privacypolicy,
+    .footer-privacypolicy-top {
         padding: 0 !important;
     }
 }

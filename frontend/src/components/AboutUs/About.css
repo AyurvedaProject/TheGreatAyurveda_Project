@@ -1,8 +1,7 @@
-
 /* {====================================================FIRST-SECTION=======================================================} */
 .about_Image {
     width: 100vw;
-    height: 80vh;
+    height: 550px;
 }
 
 .Image_text {
@@ -11,17 +10,18 @@
 
 /* media */
 
-@media (300px <=width <=500px) {
+@media (100px <=width <=500px) {
     .Image_text>h1 {
         font-size: 1.5rem;
     }
 
-    .Image_text{
+    .Image_text {
         padding-top: 30px;
     }
 
-    .about_Image{
-        margin-top: 25px;
+    .about_Image {
+        margin-top: 5px;
+        height: 200px;
     }
 
     .Image_text>p {
@@ -35,18 +35,25 @@
         font-size: 2.2rem;
     }
 
-    .about_Image{
-        margin-top: 25px;
+    .about_Image {
+        margin-top: 15px;
     }
 
 
     .Image_text>p {
         font-size: .8rem;
     }
+    .HistoryofAyurveda{
+        margin-top: 30px !important;
+    }
 
 }
 
 @media (760px <=width <=1600px) {
+    .about_Image {
+        margin-top: 10px;
+    }
+
     .Image_text>h1 {
         font-size: 2.6rem;
     }
