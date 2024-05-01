@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './Contact.css'
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 const Contact = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -35,7 +33,6 @@ const Contact = () => {
         });
     };
     return <>
-        <Header />
         <section className="contact" style={{ width: "99vw" }}>
 
             <div className="contact-img">
@@ -44,7 +41,7 @@ const Contact = () => {
             
 
 
-            <div class="text-overlay">
+            <div className="text-overlay">
                 <h1>Contact Us Today!</h1>
                 <h2>Let's get fit and healthy together</h2>
             </div>
@@ -131,7 +128,6 @@ const Contact = () => {
             </div>
         </section>
         <br></br>
-        <Footer />
     </>
 }
 export default Contact;

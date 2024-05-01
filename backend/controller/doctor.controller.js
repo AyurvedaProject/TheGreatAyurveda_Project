@@ -275,6 +275,5 @@ export const doctorConsult = (request, response, next) => {
             return response.status(500).json({ error: "Internal server error...", err });
         });
         
-
 }
 

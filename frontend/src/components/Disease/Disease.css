@@ -1,0 +1,13 @@
+.disease-solution {
+    width: 550px;
+}
+
+@media only screen and (max-width: 700px) {
+    .disease-solution {
+        width: auto !important;
+    }
+
+    .disease-card {
+        margin: 5vw !important;
+    }
+}

@@ -10,18 +10,19 @@ export const addToCart = async (request, response, next) => {
         const errors = validationResult(request);
         if (!errors.isEmpty())
             return response.status(401).json({ error: "Bad request..." });
+        
         let { userId, productId, quantity } = request.body;
         let cart = await Cart.findOne({ raw: true, where: { userId: userId * 1 } });
         if (cart) {
             let isExists = !! await CartItems.findOne({ raw: true, where: { cartId: cart.id, productId, quantity } });
             if (isExists)
                 return response.status(200).json({ message: "Product is already added in cart" });
-
+            
             await CartItems.create({ cartId: cart.id, productId, quantity }, { transaction });
             await transaction.commit();
             return response.status(201).json({ message: 'Product successfully added into cart' });
         }
-        else {
+        else {             
             cart = await Cart.create({ userId: userId * 1 }, { transaction })
                 .then(result => { return result.dataValues });
 
@@ -49,7 +50,7 @@ export const fetchCartItems = (request, response, next) => {
         include: [{ model: Product, required: true }]
     })
         .then(result => {
-            if (result[0])
+            if (result[0])  
                 return response.status(200).json({ data: result });
             return response.status(401).json({ error: "unautherized request........" });
         }).catch(err => {
@@ -76,3 +77,21 @@ export const removeFromCart = async (request, response, next) => {
         return response.status(401).json({ message: "unautherized request......", });
     }
 }
+
+export const updateQty = async (req, res, next) => {
+    let { productId, quantity, userId } = req.body;
+    try {
+        const cart = await Cart.findOne({ where: { userId } });
+        if (!cart) {
+            return res.status(404).json({ message: "Cart not found" });
+        }
+        const updatedItems = await CartItems.update(
+            { quantity: quantity },
+            { where: { cartId: cart.id, productId: productId } }
+        );
+        return res.status(200).json({ message: "Quantity updated successfully", updatedItems });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Something went wrong" });
+    }
+};

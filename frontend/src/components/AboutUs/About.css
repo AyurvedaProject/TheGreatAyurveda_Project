@@ -22,12 +22,13 @@
     .about_Image {
         margin-top: 5px;
         height: 200px;
-    }
+
 
     .Image_text>p {
         font-size: .4rem;
     }
 
+}
 }
 
 @media (500px <=width <=760px) {

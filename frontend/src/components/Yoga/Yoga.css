@@ -26,3 +26,36 @@
 #yoga_hover:hover>.youtube-icon {
     display: block;
 }
+
+@media only screen and (max-width: 770px) {
+    .remedydata {
+        height: auto !important;
+        width: 100vw !important;
+    }
+
+    .rmm {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .rmm .text-center {
+        font-weight: bold !important;
+    }
+
+    .rmm .fs-4 {
+        font-weight: bold !important;
+        font-size: 18px !important;
+        margin: 3px !important;
+    }
+
+    .rmm .fs-6 {
+        font-size: 15px !important;
+        margin-left: 5px !important;
+    }
+
+    .remedyimg {
+        height: auto !important;
+        width: 100vw !important;
+        padding: 3vw !important;
+    }
+}

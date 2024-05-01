@@ -70,6 +70,17 @@ export const getYoga = async (request, response, next) => {
         })
 }
 
+
+export const viewYogaByCategory = async (request, response, next) => {
+    Yoga.findAll({ where: { categoryname: request.body.categoryname } })
+        .then(result => {
+            return response.status(200).json({ yogalist: result });
+        }).catch(err => {
+            console.log(err);
+            return response.status(500).json({ error: "Internal Server Error", err });
+        })
+}
+
 export const getYogaByCategory = (request, response, next) => {
     Yoga.findAll({ where: { categoryname: request.params.categoryName } })
         .then(result => {

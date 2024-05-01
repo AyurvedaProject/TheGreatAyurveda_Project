@@ -13,12 +13,16 @@ import GetStart from "./components/Yoga/yogadescription.js";
 import Disease from "./components/Disease/Disease.js";
 import DoctorConsult from "./components/DoctorConsult/DoctorConsult.js";
 import ViewMore from "./components/Homeremedy/HomeremedyDescription.js";
+import Header from "./components/Header/Header.js";
 import ProductView from "./components/Product/ProductViewMore.js";
-
+import Viewcart from "./components/Product/Viewcart.js";
+import Checkout from "./components/Product/CheckOut.js";
+import Footer from "./components/Footer/Footer.js";
 function App() {
   return (
     <div className="d-flex justify-content-center">
       <div>
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/homeremedy" element={<Homeremedy />} />
@@ -26,6 +30,7 @@ function App() {
           <Route path="/yoga" element={<Yoga />} />
           <Route path='/getstart' element={<GetStart />} />
           <Route path="/product" element={<Product />} />
+          <Route path='/getstart' element={<GetStart />} />
           <Route path="/disease" element={<Disease />} />
           <Route path="/product" element={<Product />} />
           <Route path="/ProductView" element={<ProductView/>}/>
@@ -33,8 +38,12 @@ function App() {
           <Route path="/forgetpassword" element={<UserForgetPassword />} />
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/doctorconsult" element={<DoctorConsult/>}/>
+          <Route path="/viewcart" element={<Viewcart />} />
+          <Route path="/Checkout" element={<Checkout />} />
+          <Route path="/doctorconsult" element={<DoctorConsult />} />
+          <Route path="/header" element={<Header />} />
         </Routes>
+        <Footer />
       </div>
     </div>
   );

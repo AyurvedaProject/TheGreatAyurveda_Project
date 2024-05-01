@@ -3,7 +3,7 @@ import "./Footer.css";
 const Footer = () => {
     return (
         <>
-            <div className="footer border" style={{ backgroundColor: "var(--green)", color: "var(--white)", width: "99vw" }}>
+            <div className="footer border" style={{ backgroundColor: "var(--green)", position: "", top: "0", color: "var(--white)", width: "99vw" }}>
                 <div className="footer-inner m-1 ms-3 me-3">
                     <div className="footer-top d-flex justify-content-between flex-wrap">
                         <div className="footer-customersupport  d-flex flex-column p-3">

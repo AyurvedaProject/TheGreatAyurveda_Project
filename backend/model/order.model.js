@@ -12,6 +12,10 @@ const Order = sequelize.define("Order", {
         type: DataTypes.STRING,
         allowNull: false
     },
+    FullName: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     State: {
         type: DataTypes.STRING,
         allowNull: false

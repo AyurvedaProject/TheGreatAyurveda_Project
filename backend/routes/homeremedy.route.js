@@ -1,5 +1,5 @@
 import express from "express";
-import { Add, Remove, Update, getHomeRemedy, getHomeRemedyByCategory, saveInBulk } from "../controller/homeremedy.controller.js";
+import { Add, Remove, Update, getHomeRemedy, getHomeRemedyByCategory, saveInBulk, viewRemedyByCategory } from "../controller/homeremedy.controller.js";
 import { body } from "express-validator";
 
 const router = express.Router();
@@ -30,6 +30,8 @@ router.put("/updatehomeremedy", body("remedyName", "invalid remedyName").notEmpt
 router.get("/homeremedylist", getHomeRemedy);
 
 router.get("/viewByCategory/:categoryName", getHomeRemedyByCategory);
+
+router.post("/viewRemedyByCategory", viewRemedyByCategory);
 
 router.delete("/removehomeremedy", body("id", "invalid id").notEmpty(), Remove);
 

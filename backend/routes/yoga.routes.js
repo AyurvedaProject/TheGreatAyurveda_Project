@@ -1,5 +1,5 @@
 import express from "express";
-import { Add, Remove, Update, getYoga, getYogaByCategory, saveInBulk } from "../controller/yoga.controller.js";
+import { Add, Remove, Update, getYoga, getYogaByCategory, saveInBulk, viewYogaByCategory } from "../controller/yoga.controller.js";
 import { body } from "express-validator";
 
 const router = express.Router();
@@ -28,6 +28,8 @@ router.put("/updateYoga",
 router.get("/yogalist", getYoga);
 
 router.get("/viewByCategory/:categoryName", getYogaByCategory);
+
+router.post("/viewYogaByCategory", viewYogaByCategory);
 
 router.delete("/removeyoga", body("id", "invalid id").notEmpty(), Remove);
 

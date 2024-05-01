@@ -3,6 +3,7 @@ import Category from "../model/category.model.js";
 import Product from "../model/product.model.js";
 import HomeRemedy from "../model/homeremedy.model.js";
 import Yoga from "../model/yoga.model.js";
+import { Op } from "sequelize";
 
 export const save = (request, response, next) => {
     const errors = validationResult(request);
@@ -52,7 +53,8 @@ export const Categorydata = (request, response, next) => {
         return response.status(401).json({ error: errors.array() });
 
     Category.findOne({
-        where: { categoryName: request.body.categoryName }, include: [{ model: Product, required: true }, { model: HomeRemedy, required: true }, { model: Yoga, required: true }]
+        where: { categoryName: request.body.categoryName }
+        // , include: [{ model: Product, required: true }, { model: HomeRemedy, required: true }, { model: Yoga, required: true }]
     }).then(result => {
         if (result)
             return response.status(200).json({ categories: result });
@@ -62,3 +64,29 @@ export const Categorydata = (request, response, next) => {
     })
 }
 
+// ================================================================
+
+export const search = async (request, response, next) => {
+    try {
+        const query = request.body.data;
+        const keywords = query
+            .toLowerCase()
+            .split(" ")
+            .filter((word) => word.length > 0);
+
+        // Assuming Category, Yoga, HomeRemedy, and Product are Sequelize models
+        const searchResults = await Category.findAll({
+            where: {
+                categoryName: {
+                    [Op.or]: keywords.map((keyword) => ({ [Op.like]: `%${keyword}%` }))
+                }
+            },
+            // include: [Yoga, HomeRemedy, Product] // Include associated models
+        });
+
+        return response.status(200).json(searchResults);
+    } catch (error) {
+        console.error("Error during search:", error);
+        return response.status(500).json({ error: "An error occurred during search.", error });
+    }
+}

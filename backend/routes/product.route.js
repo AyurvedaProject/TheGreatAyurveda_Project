@@ -1,5 +1,5 @@
 import express from "express";
-import { Add, ProductList, getProductByCategory, removeProduct, saveInBulk, updateProduct } from "../controller/product.controller.js";
+import { Add, ProductList, getProductByCategory, removeProduct, saveInBulk, updateProduct, viewProductByCategory } from "../controller/product.controller.js";
 import { body } from "express-validator";
 
 const router = express.Router();
@@ -27,6 +27,8 @@ router.put("/updateProduct",
 router.get("/productlist", ProductList);
 
 router.get("/viewByCategory/:categoryName", getProductByCategory);
+
+router.post("/viewProductByCategory", viewProductByCategory);
 
 router.delete("/removeProduct", body("id", "invalid id").notEmpty(), removeProduct);
 

@@ -1,5 +1,3 @@
-import Header from '../Header/Header.js'
-import Footer from '../Footer/Footer.js';
 import { IoLocationOutline } from "react-icons/io5";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -23,7 +21,6 @@ const DoctorConsult = () => {
     }, []);
 
     return <>
-        <Header />
         {doctorConsult.map((doctor, index) => <div key={index}>
             <div className="doctor-profile container border border-success rounded mt-5 mb-4 ">
                 <div className='row mt-4 mb-2 alldata'>
@@ -68,8 +65,6 @@ const DoctorConsult = () => {
             </div>
 
         </div>)}
-
-        <Footer />
     </>
 };
 

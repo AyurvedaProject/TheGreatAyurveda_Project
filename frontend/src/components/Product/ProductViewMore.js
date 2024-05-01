@@ -6,7 +6,6 @@ export default function ProductView() {
     const { state } = useLocation();
     const rat = [1, 2, 3, 4, 5]
     return <>
-        <Header />
         <div className="rmm mt-3 mb-4">
             <div className="rmm remedydata d-flex align-items-start justify-content-evenly m-5 mt-2 p-3 flex-wrap">
                 <div className="remedydata d-flex flex-column border shadow-lg" style={{ height: "450px", width: "560px" }}>
@@ -29,6 +28,5 @@ export default function ProductView() {
                 </div>
             </div>
         </div>
-        <Footer/>
     </>
 }

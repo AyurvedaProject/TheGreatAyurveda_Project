@@ -74,6 +74,16 @@ export const ProductList = async (request, response, next) => {
         })
 }
 
+export const viewProductByCategory = async (request, response, next) => {
+    Product.findAll({ where: { categoryname: request.body.categoryname } })
+        .then(result => {
+            return response.status(200).json({ productList: result });
+        }).catch(err => {
+            console.log(err);
+            return response.status(500).json({ error: "Internal Server Error", err });
+        })
+}
+
 export const getProductByCategory = (request, response, next) => {
     Product.findAll({ where: { categoryname: request.params.categoryName } })
         .then(result => {

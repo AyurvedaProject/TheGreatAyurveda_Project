@@ -1,5 +1,3 @@
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
 import { FaHeart, FaLeaf } from "react-icons/fa";
 import { IoMdDoneAll } from "react-icons/io";
 import "./About.css";
@@ -7,7 +5,6 @@ import "./About.css";
 export default function AboutUs() {
   return (
     <>
-      <Header />
 
       {/* ====================================================FIRST-SECTION======================================================= */}
 
@@ -80,7 +77,7 @@ export default function AboutUs() {
               <div className="col-md-12 text-center mt-3 mb-3">
                 <FaHeart style={{ color: "rgb(86, 142, 86)" }} size={50} />
                 <br></br>
-                <spna className="mt-2 d-block">Promise of Ayurveda</spna>
+                <span className="mt-2 d-block">Promise of Ayurveda</span>
               </div>
             </div>
             <div className="shadow p-3 mb-5" id="history_box">
@@ -150,7 +147,6 @@ export default function AboutUs() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

@@ -2,6 +2,47 @@ import { validationResult } from "express-validator";
 import User from "../model/user.model.js";
 import jwt from "jsonwebtoken";
 
+// sed mail with OTP start =================================================================
+
+import nodemailer from 'nodemailer';
+
+// Function to generate a random OTP
+let OTP;
+const generateOTP = () => {
+    const otpLength = 4; // Length of the OTP
+    const digits = '0123456789'; // Possible digits in the OTP
+    OTP = '';
+    for (let i = 0; i < otpLength; i++) {
+        OTP += digits[Math.floor(Math.random() * 10)]; // Randomly select a digit
+    }
+    return OTP;
+};
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user: 'thegreatayurveda@gmail.com', pass: 'mscy bdjt dttl plbj' }
+});
+
+const sendOTP = (receverMail) => {
+    const otp = generateOTP(); // Generate OTP
+    const mailOptions = {
+        from: 'thegreatayurveda@gmail.com',
+        to: `${receverMail}`,
+        subject: 'Your OTP for The Great Ayurveda',
+        text: `Your OTP is: ${otp}` // Include OTP in the email body
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log('Error sending email:', error);
+        } else {
+            console.log('Email sent successfully...');
+        }
+    });
+};
+
+// sed mail with OTP end =================================================================
+
 export const SignUp = (request, response, next) => {
     const errors = validationResult(request);
     if (!errors.isEmpty())
@@ -50,20 +91,29 @@ export const forgotpassword = (request, response, next) => {
     if (!errors.isEmpty())
         return response.status(401).json({ error: errors.array() });
 
-    User.findOne({
-        where: {
-            name: request.body.name,
-            email: request.body.email
-        }
-    })
+    User.findOne({ where: { email: request.body.email } })
         .then((result) => {
-            if (result)
-                return response.status(200).json({ message: 'User exist....' })
-            return response.status(401).json({ message: 'unauthorized request....' })
+            if (result) {
+                sendOTP(request.body.email);
+                return response.status(200).json({ message: 'User exist....', Message: 'Email sent successfully...' });
+            }
+            else {
+                return response.status(401).json({ message: 'unauthorized request....' })
+            }
         })
         .catch((err) => {
             return response.status(500).json({ error: 'internal server error....', err })
         })
+}
+
+export const verifyOTP = (request, response, next) => {
+    let otp = request.body.OTP;
+    if (otp == OTP) {
+        return response.status(200).json({ message: 'OTP Verification Successfuly....' })
+    }
+    else {
+        return response.status(401).json({ message: 'OTP Verification failed....' })
+    }
 }
 
 export const setnewpassword = (request, response, next) => {
@@ -75,7 +125,6 @@ export const setnewpassword = (request, response, next) => {
         password: request.body.password,
     }, {
         where: {
-            name: request.body.name,
             email: request.body.email
         }, raw: true
     })

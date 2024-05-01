@@ -3,9 +3,9 @@
 }
 
 .login-icon {
-    height: 35px;
-    width: 35px;
-    background: url("./images/icons8-user-80.png") 0%;
+    height: 32px;
+    width: 32px;
+    background: url("./images/icons8-user-80.png") 50%;
     background-size: cover;
 }
 
@@ -33,7 +33,7 @@
 .login-user {
     height: 30px;
     width: 30px;
-    background: url("./images/icons8-user-64.png") 0%;
+    background: url("./images/icons8-user-64.png") 50%;
     background-size: cover;
 }
 
@@ -43,6 +43,36 @@
     background: url("./images/icons8-doctor-100\ \(1\).png") 0%;
     background-size: cover;
 }
+
+.login-orders {
+    height: 30px;
+    width: 30px;
+    background: url("./images/icons8-clipboard-64.png") 50%;
+    background-size: 115%;
+}
+
+.login-cart {
+    height: 30px;
+    width: 30px;
+    background: url("./images/icons8-cart-96.png") 50%;
+    background-size: 130%;
+}
+
+.login-logout {
+    height: 30px;
+    width: 30px;
+    background: url("./images/icons8-logout-96.png") 0%;
+    background-size: cover;
+}
+
+.loginheader {
+    transition: all 0.5s;
+}
+
+.loginheader:hover {
+    scale: 1.05;
+}
+
 
 @media only screen and (max-width: 800px) {
     .header-sch {

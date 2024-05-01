@@ -28,7 +28,7 @@ export const saveInBulk = async (request, response, next) => {
         let HomeRemedyList = request.body;
 
         for (let homeremedy of HomeRemedyList) {
-            let {remedyName, description, ingredients, instructions, imageUrl, caution, categoryname } = homeremedy;
+            let { remedyName, description, ingredients, instructions, imageUrl, caution, categoryname } = homeremedy;
 
             await HomeRemedy.create({
                 remedyName, description, ingredients, instructions, imageUrl, caution, categoryname
@@ -38,6 +38,17 @@ export const saveInBulk = async (request, response, next) => {
     } catch (err) {
         return response.status(500).json({ error: "Internal Server Error", err });
     }
+}
+
+
+export const viewRemedyByCategory = async (request, response, next) => {
+    HomeRemedy.findAll({ where: { categoryname: request.body.categoryname } })
+        .then(result => {
+            return response.status(200).json({ remedyList: result });
+        }).catch(err => {
+            console.log(err);
+            return response.status(500).json({ error: "Internal Server Error", err });
+        })
 }
 
 export const Update = (request, response, next) => {
