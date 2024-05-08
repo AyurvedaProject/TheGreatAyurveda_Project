@@ -15,10 +15,11 @@ const DoctorConsultation = () => {
 
     return <>
         <div>
-            <div className="container  border shadow-lg p-3 mb-5 b
+        <h1 className="d-flex justify-content-center align-items-center">Consultation</h1>
+            <div className="container  border shadow-lg p-3 mt-2 b
             g-body rounded ">
                 <table className="table ">
-                    <thead>
+                    <thead> 
                         <tr>
                             <th> Patient Name</th>
                             <th>Phone Number</th>

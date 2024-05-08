@@ -33,8 +33,8 @@ Product.hasMany(orderItem, { foreignKey: "id" });
 orderItem.belongsTo(Product, { foreignKey: "productId", targetKey: "id", onDelete: 'CASCADE' });
 
 // user
-User.hasMany(Order, { foreignKey: "id" });
-Order.belongsTo(User, { foreignKey: "userId", targetKey: "id", onDelete: 'CASCADE' });
+User.hasMany(Order, { foreignKey: 'userId'  }); // A user can have many orders
+Order.belongsTo(User, { foreignKey: 'userId' }); 
 
 // appointment
 Doctor.hasMany(Appointment, { foreignKey: 'doctorId', onDelete: 'CASCADE' })

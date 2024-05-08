@@ -3,7 +3,6 @@ import "./Header.css";
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom"
 
 const Header = () => {
     const navigate = useNavigate();
@@ -42,7 +41,7 @@ const Header = () => {
 
     useEffect(() => {
         const userId = localStorage.getItem("userId");
-        axios.get(`http://localhost:3005/cart/fetchCartItems/${userId}`)
+        axios.get("http://localhost:3005/cart/fetchCartItems/${userId}")
             .then(response => {
                 for (let product of response.data.data) {
                     product.qty = 1;
@@ -78,7 +77,7 @@ const Header = () => {
                         </button>
                         <div className="collapse navbar-collapse" style={{}} id="mynavbar">
                             <form className="header-sch me-auto d-flex bg-light position-relative" role="button" style={{ borderRadius: "50px", marginLeft: "17vw", width: "45%" }}>
-                                <input className="form-control me-2" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" onChange={(event) => { Search(event.target.value); setDiseases2(event.target.value); }} style={{ borderRadius: "50px", border: "none" }} type="text" placeholder="What are you looking for ?" />
+                                <input className="form-control me-2 form-control no-border" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" onChange={(event) => { Search(event.target.value); setDiseases2(event.target.value); }} style={{ borderRadius: "50px", border: "none" }} type="text" placeholder="What are you looking for ?" />
                                 <button className="btnn text-white" onClick={() => searchSolution()} style={{ borderRadius: "50px" }} type="button">Search</button>
                                 {(diseases2) ? <ul class="dropdown-menu m-2" style={{ width: "45%" }} aria-labelledby="dropdownMenuButton1">
                                     <li>
@@ -100,7 +99,7 @@ const Header = () => {
                                         <ul className="dropdown-menu">
                                             <li>
                                                 <Link style={{ color: "var(--green)", textDecoration: "none" }} to="/">
-                                                    <div className="dropdown-item d-flex align-items-center" style={{ color: "var(--green)" }}>
+                                                    <div className="dropdown-item d-flex align-items-center bg-white" style={{ color: "var(--green)" }}>
                                                         <div className="login-user"></div>
                                                         <span className="login-texth ms-2">MyProfile</span>
                                                     </div>
@@ -109,7 +108,7 @@ const Header = () => {
                                             <li> <hr className="dropdown-divider" /></li>
                                             <li>
                                                 <Link style={{ color: "var(--green)", textDecoration: "none" }} to="/">
-                                                    <div className="dropdown-item d-flex align-items-center" style={{ color: "var(--green)" }}>
+                                                    <div className="dropdown-item d-flex align-items-center bg-white" style={{ color: "var(--green)" }}>
                                                         <div className="login-orders"></div>
                                                         <span className="login-texth ms-2">Orders</span>
                                                     </div>
@@ -118,7 +117,7 @@ const Header = () => {
                                             <li> <hr className="dropdown-divider" /></li>
                                             <li>
                                                 <Link style={{ color: "var(--green)", textDecoration: "none", cursor: "pointer" }} to="/">
-                                                    <div className="dropdown-item d-flex align-items-center" style={{ color: "var(--green)" }}>
+                                                    <div className="dropdown-item d-flex align-items-center bg-white" style={{ color: "var(--green)" }}>
                                                         <div className="login-cart"></div>
                                                         <span className="login-texth ms-2">Cart</span>
                                                     </div>
@@ -127,7 +126,7 @@ const Header = () => {
                                             <li> <hr className="dropdown-divider" /></li>
                                             <li>
                                                 <Link style={{ color: "var(--green)", textDecoration: "none" }} onClick={() => sessionStorage.setItem('userExist', 0)}>
-                                                    <div className="dropdown-item d-flex align-items-center" style={{ color: "var(--green)" }}>
+                                                    <div className="dropdown-item d-flex align-items-center bg-white" style={{ color: "var(--green)" }}>
                                                         <div className="login-logout"></div>
                                                         <span className="login-texth ms-2">Logout</span>
                                                     </div>
@@ -144,7 +143,7 @@ const Header = () => {
                                         <ul className="dropdown-menu">
                                             <li>
                                                 <Link style={{ color: "var(--green)", textDecoration: "none" }} to="/user">
-                                                    <div className="dropdown-item d-flex align-items-center">
+                                                    <div className="dropdown-item d-flex align-items-center bg-white">
                                                         <div className="login-user"></div>
                                                         <span className="login-texth ms-2" style={{ color: "var(--green)" }}>User</span>
                                                     </div>
@@ -152,8 +151,8 @@ const Header = () => {
                                             </li>
                                             <li><hr className="dropdown-divider" /></li>
                                             <li>
-                                                <Link style={{ color: "var(--green)", textDecoration: "none" }} to="">
-                                                    <div className="dropdown-item d-flex align-items-center" style={{ color: "var(--green)" }}>
+                                                <Link style={{ color: "var(--green)", textDecoration: "none" }} to="/doctorlogin">
+                                                    <div className="dropdown-item d-flex align-items-center bg-white" style={{ color: "var(--green)" }}>
                                                         <div className="login-doctor"></div>
                                                         <span className="login-texth ms-2">Doctor</span>
                                                     </div>
@@ -183,7 +182,7 @@ const Header = () => {
                                     <ul className="dropdown-menu">
                                         <li className="d-flex flex-wrap justify-content-between dropdownlist" style={{ width: "60vw" }}>
                                             {diseases.map((disease, i) => <span key={i}>
-                                                <span className="dropdown-item dlivalu loginheader" onClick={() => { Solution(disease); searchinput.value = ""; }} style={{ width: "200px", margin: ".5vw", cursor: "pointer" }}>{disease.categoryName}</span>
+                                                <span className="dropdown-item dlivalu loginheader bg-white" onClick={() => { Solution(disease); searchinput.value = ""; }} style={{ width: "200px", margin: ".5vw", cursor: "pointer" }}>{disease.categoryName}</span>
                                             </span>)}
                                         </li>
                                     </ul>
@@ -203,4 +202,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default Header;     

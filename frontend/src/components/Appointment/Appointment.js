@@ -13,7 +13,7 @@ import 'react-horizontal-strip-datepicker/dist/ReactHorizontalDatePicker.css'
 import { MdOutlineNightlight } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx"
 import axios from "axios";
-
+import { ToastContainer, toast } from "react-toastify";
 const Appointment = () => {
     const { state } = useLocation();
     console.log(state)
@@ -40,6 +40,12 @@ const Appointment = () => {
     const [selectedDate, setSelectedDate] = useState("");
 
 
+    let [validatename, validatesetName] = useState("");
+    let [validatephone, validatesetPhone] = useState("");
+  let [validateage, validatesetAge] = useState("");
+    let [validateemail, validatesetEmail] = useState("");
+
+
     const handleDateSelection = (date) => {
         setSelectedDate(date);
         console.log(date);
@@ -51,6 +57,7 @@ const Appointment = () => {
     };
     const handleSubmit = (event) => {
         event.preventDefault();
+        
 
         const formData = {
             name: name,
@@ -64,11 +71,17 @@ const Appointment = () => {
         };
 
         try {
-            axios.post('http://localhost:3005/doctor/doctorAppointment', formData).then(res => {
+            if ((name === "") && (phone === "") && (age === "") && (email === "")  || ((name === "" || (phone === "") || (age === "") || (email === "")))) {
+                toast.error("First Fill information")
+            }
+            else{
+            axios.post('http://localhost:3005/doctor/doctorAppointment', formData)
+            .then(res => {
                 console.log('Appointment booked successfully:', res.data);
-                alert("Appointment booked successfully")
+                toast.success("Appointment booked successfully")
             }).catch(err => {
                 console.log(err)
+          
             });
 
             setName('');
@@ -77,7 +90,7 @@ const Appointment = () => {
             setSelectedOption('');
             setSelectedTime('');
             setSelectedDate('');
-        } catch (error) {
+        }} catch (error) {
             // Handle errors
             console.error('Error booking appointment:', error);
         }
@@ -88,7 +101,7 @@ const Appointment = () => {
 
     return (
         <>
-          
+          <ToastContainer />
             <div className="doctor-consult container rounded my-5 shadow-lg p-0 bg-body rounded">
             <RxCross2  className="closeicon text-white mt-2" onClick={back} />
                 <h1 className="fs-3 text-center text-white p-2" style={{background:"var(--green)"}}>Schedule Appointment</h1>
@@ -122,12 +135,12 @@ const Appointment = () => {
 
                 <div className="timing-slots">
                     <div>
-                        <div className="shift">
+                        <div className="shift mt-3">
                             <span><PiSunHorizon /></span>
                             <span>Morning</span>
                             <br></br>
                         </div>
-                        <div className="time mb-2 mt-2">
+                        <div className="time mb-3 mt-3">
                             <span onClick={() => handleTimeSelection("10:00 AM")}  className={selectedTime === "10:00 AM" ? "selected-time" : ""}>10:00 AM</span>
                             <span onClick={() => handleTimeSelection("10:30 AM")}  className={selectedTime === "10:30 AM" ? "selected-time" : ""}>10:30 AM</span>
                             <span onClick={() => handleTimeSelection("11:00 AM")}  className={selectedTime === "11:00 AM" ? "selected-time" : ""}>11:00 AM</span>
@@ -145,7 +158,7 @@ const Appointment = () => {
                             <span><FiSun /></span>
                             <span>Afternoon</span>
                         </div>
-                        <div className="time mb-2 mt-2">
+                        <div className="time mb-3 mt-3">
                             <div className="time mb-2 mt-2">
                                 <span
                                     onClick={() => handleTimeSelection("12:00 PM")}
@@ -181,7 +194,7 @@ const Appointment = () => {
                             <span><MdOutlineNightlight /></span>
                             <span>Evening</span>
                         </div>
-                        <div className="time mb-2 mt-2">
+                        <div className="time mb-3 mt-3">
                             <span onClick={() => handleTimeSelection("05:00 PM")}>05:00 PM</span>
                             <span onClick={() => handleTimeSelection("05:30 PM")}>05:30 PM</span>
                             <span onClick={() => handleTimeSelection("06:00 PM")}>06:00 PM</span>
@@ -197,20 +210,24 @@ const Appointment = () => {
                         <div className="row">
                             <div className="mx-3 col-md-8 form-data">
                                 <div className="form-group"><br></br><label htmlFor="name">Name<span> *</span></label>
-                                    <input type="text" className="form-control form-control-sm custom-input custom-input mb-3" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
-                                </div>
+                                    <input type="text" className="form-control form-control-sm custom-input custom-input mb-3" id="name" name="name" value={name} onChange={(event) => { (event.target.value === "") ? validatesetName("name is required") : (!event.target.value.match("^[a-z A-Z]+$")) ? validatesetName("name contains only characters") : (!event.target.value.match("^[a-z A-Z]{2,20}$")) ? validatesetName("name must be at least 2 characters long.") : validatesetName(""); setName(event.target.value); }}  />
+                                    <small className="text-danger" style={{ fontSize: "12px" }}>{validatename}</small>
+                                   </div>
 
                                 <div className="form-group">
                                     <label htmlFor="Phone">Phone<span> *</span></label>
-                                    <input type="text" className="form-control form-control-sm custom-input custom-input mb-3" id="Phone" name="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} required  pattern="[0-9]{10}" title="Please enter a 10 digit phone number."/>
+                                    <input type="text" className="form-control form-control-sm custom-input custom-input mb-3" id="Phone" name="Phone" value={phone} onChange={(event) =>  { (event.target.value === "") ? validatesetPhone("number is required") : (!event.target.value.match(/^[0-9]+$/)) ? validatesetPhone("Number must contain only digits.") : (!event.target.value.match(/^\d{10}$/)) ? validatesetPhone("Number must only 10 digits.") : validatesetPhone(""); setPhone(event.target.value); }}  />
+                                    <small className="text-danger" style={{ fontSize: "12px" }}>{validatephone}</small>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="email">Email<span> *</span></label>
-                                    <input type="text" className="form-control form-control-sm custom-input custom-input mb-3" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address." />
+                                    <input type="text" className="form-control form-control-sm custom-input custom-input mb-3" id="email" name="email" value={email} onChange={(event) => { (event.target.value === "") ? validatesetEmail("email is required") : (!event.target.value.match(/^[^\s@]+@gmail\.com$/)) ? validatesetEmail("Invalid Email.") : validatesetEmail(""); setEmail(event.target.value); }} />
+                                    <small className="text-danger" style={{ fontSize: "12px" }}>{validateemail}</small>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="Age">Age<span> *</span></label>
-                                    <input type="text" className="form-control form-control-sm custom-input custom-input mb-3" id="Age" name="Age" value={age} onChange={(e) => setAge(e.target.value)} required min="1" max="100" title="Please enter a valid age between 1 and 100." />
+                                    <input type="text" className="form-control form-control-sm custom-input custom-input mb-3" id="Age" name="Age" value={age} onChange={(event) => { (event.target.value === "") ? validatesetAge("Age is required") : (!event.target.value.match(/^\d+$/) || age<1 || age > 100) ? validatesetAge("Invalid Age.") : validatesetAge(""); setAge(event.target.value); }}   />
+                                    <small className="text-danger" style={{ fontSize: "12px" }}>{validateage}</small>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="Gender">Gender<span> *</span></label><br></br><br></br>
@@ -252,7 +269,7 @@ const Appointment = () => {
 
                                 <div>
                                    
-                                    <button onClick={handleSubmit} type="submit" className="btnnn text-white mb-3 ms-3  mt-4 ">Book Appointment</button>
+                                    <button onClick={handleSubmit} type="submit" className="btnnn text-white mb-3 ms-3  mt-4 " >Book Appointment</button>
 
 
                                 </div>

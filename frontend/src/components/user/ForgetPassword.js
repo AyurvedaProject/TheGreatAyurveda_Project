@@ -66,7 +66,7 @@ export default function ForgetPassword() {
     }
 
     const handleSubmit = event => {
-        event.preventDefault(); // 👈️ prevent page refresh
+        event.preventDefault(); // prevent page refresh
     }
 
     return (
@@ -86,7 +86,7 @@ export default function ForgetPassword() {
                     </div>
                     <div className=" d-flex text-center align-items-center justify-content-center form-container sign-in">
                         <form onSubmit={handleSubmit} className=' d-flex align-items-center justify-content-center signincon'>
-                            <h1 className='fs-2'>Forget Passwordd</h1>
+                            <h1 className='fs-2'>Forget Password</h1>
                             <span className='forget-text mb-0'>enter your name email</span>
                             <input className='signin-password mt-0' onChange={(event) => { (event.target.value === "") ? setemail2("email is required") : (!event.target.value.match(/^[^\s@]+@gmail\.com$/)) ? setemail2("Invalid Email.") : setemail2(""); setEmail(event.target.value); }} type="email" placeholder="Email" />
                             <small className='signin-input-message'>{email2}</small>

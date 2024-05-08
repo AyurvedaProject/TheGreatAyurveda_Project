@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 import { FaPlay } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
 const Home = () => {
 
     const [homeremedies, setHomeremedies] = useState([]);
@@ -36,16 +37,36 @@ const Home = () => {
             })
     }, []);
 
-    const navigate = useNavigate();
-    const getStart = (yogaa) => {
-        navigate("/getstart", { state: yogaa });
+    const addToCart = (productId) => {
+        axios.post("http://localhost:3005/cart/addToCart", { userId: localStorage.getItem("userId"), productId, quantity: 1 })
+            .then(response => {
+                toast.success(response.data.message);
+            }).catch(err => {
+                toast.danger("Already added this product");
+            });
+    }
+    const Buynow = (product) => {
+        if (localStorage.getItem("userId")) {
+            navigate("/Buynow", { state: product });
+        }
+        else {
+            toast.error("please SignIn and add items in your cart");
+        }
     }
 
-    const viewmore = (remedy) => {
-        navigate("/viewmore", { state: remedy });
+    const navigate = useNavigate();
+    const ViewMore = (remedy) => {
+        navigate("/ViewMore", { state: remedy });
+    }
+    const ProductView = (product) => {
+        navigate("/ProductView", { state: product });
+    }
+    const getStart = (yoga) => {
+        navigate("/getstart", { state: yoga });
     }
 
     return (<>
+        <ToastContainer />
         <div className="home">
             <div className="home-contain ">
                 {/* -------------------- */}
@@ -74,11 +95,11 @@ const Home = () => {
                         <div className="containerr-inline d-flex align-items-center mb-3">
                             {homeremedies.map((remedy, index) => <div key={index}>
                                 {index < 10 ? <div className="remede-box d-flex flex-column align-items-center justify-content-start">
-                                    <div className="remede-img m-1"><img src={remedy.imageUrl} alt="..." onClick={() => viewmore(remedy)} style={{ height: "100%", width: '100%' }} /></div>
+                                    <div className="remede-img m-1"><img src={remedy.imageUrl} alt="..." onClick={() => ViewMore(remedy)} style={{ height: "100%", width: '100%' }} /></div>
                                     <div className="remede-value h-100 m-1 d-flex flex-column justify-content-evenly align-items-center">
                                         <span className="fs-5 fw-bold ms-2 me-2">{remedy.remedyName.slice(0, 25)}</span>
                                         <span className="d-flex flex-wrap m-2">{remedy.description.slice(0, 80)}</span>
-                                        <button onClick={() => viewmore(remedy)} className="btnn text-white m-2">View More</button>
+                                        <button onClick={() => ViewMore(remedy)} className="btnn text-white m-2">View More</button>
                                     </div>
                                 </div> : ""}
                             </div>)}
@@ -92,19 +113,14 @@ const Home = () => {
                         <div className="containerr-inline d-flex align-items-center mb-3 mt-2">
                             {products.map((product, index) => <div key={index}>
                                 {index < 10 ? <div className="remede-box d-flex flex-column align-items-center justify-content-center">
-                                    <div className="remede-img m-1"><img src={product.imageUrl} alt="..." style={{ height: "100%", width: '100%' }} /></div>
+                                    <div className="remede-img m-1"><img src={product.imageUrl} onClick={() => ProductView(product)} alt="..." style={{ height: "100%", width: '100%' }} /></div>
                                     <div className="remede-value m-1 d-flex flex-column justify-content-center align-items-center">
                                         <span className="fs-5 fw-bold ms-2 me-2">{product.title.slice(0, 25)}</span>
                                         <span className="fs-5 fw-bold ms-2 me-2" style={{ color: "var(--green)" }}>{product.price} Rs</span>
                                         <span className="d-flex flex-wrap m-2">{product.description.slice(0, 100)}</span>
-                                        <div className="w-100 d-flex align-items-center justify-content-center">
-                                            {products.map((r, i) => <div key={i} className="d-flex">
-                                                {i < product.rating ? <span className="product-reting text-center m-2"></span> : ""}
-                                            </div>)}
-                                        </div>
                                         <div className="d-flex justify-content-evenly w-100">
-                                            <button className="btnn addtocart-btn text-white m-2">Add To cart</button>
-                                            <button className="btnn buynow-btn text-white m-2">Buy Now</button>
+                                            <button className="btnn addtocart-btn text-white m-2" onClick={() => addToCart(product.id)}>Add To cart</button>
+                                            <button className="btnn buynow-btn text-white m-2" onClick={() => Buynow(product)}>Buy Now</button>
                                         </div>
                                     </div>
                                 </div> : ""}

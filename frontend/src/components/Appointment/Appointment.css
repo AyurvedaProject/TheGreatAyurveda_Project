@@ -200,7 +200,6 @@
     font-size: 30px;
     left: 66%;
     cursor: pointer;
-    z-index: 5000;
     color: black;
  }
 
@@ -311,3 +310,15 @@
     
 } */
 
+/* 
+@media (max-width: 1460px)and (min-width: 500px) {
+    .closeicon{
+        position: absolute;
+        
+        font-size: 30px;
+        left: 67%;
+        cursor: pointer;
+        color: black;
+        border:  2px solid red;
+     }
+} */

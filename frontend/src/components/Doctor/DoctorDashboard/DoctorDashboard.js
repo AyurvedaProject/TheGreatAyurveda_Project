@@ -22,21 +22,21 @@ const DoctorDashboard = () => {
 
     return <>
 
-        <div>
-            <h1>Dashboard</h1>
+        <div >
+            {/* <h1 className="d-flex justify-content-center align-items-center">Dashboard</h1> */}
             <div className="container">
-                <div className="row">
+                <div className="row ">
                     <div className="col-3">
                         {doctorConsult.map((doctor, index) => (
                             <div key={index}>
-                                <div className="doctor-profile container border shadow-lg p-3 mb-5 bg-body rounded mt-5 mb-4">
+                                <div className="doctor-profile container border shadow-lg p-3 mb-5 bg-body rounded-3 mt-5 mb-4">
                                     <div className='row mt-3 mb-2 '>
-                                        <div className="doctor-imgs d-flex justify-content-center align-item-center ">
+                                        <div className="doctor-imgs d-flex justify-content-center align-item-center  rounded-top-3 pb-3 ">
                                             <img src={doctor.doctordetail.doctorImage} alt="Doctor Image" className="doctor-image rounded-circle" />
                                         </div>
 
                                         <div className=' profile-info mt-2 ms-5 d-flex justify-content-center align-item-center flex-column'>
-                                            <h1 className="fs-5">{doctor.doctorName}</h1>
+                                            <h1 className="fs-5 ">{doctor.doctorName}</h1>
                                             <div className='doctor-details'>
                                                 <div>
                                                     <FaUserDoctor style={{fontSize:"14px"}} />
@@ -52,7 +52,9 @@ const DoctorDashboard = () => {
                                                 <ul className="mt-2 list-group " style={{listStyle:"none"}}>
                                                     <li className="border shadow-lg p-3  bg-body rounded px-5 ">Dashboard</li>
                                                     <li className="border shadow-lg p-3  bg-body rounded px-5 ">Appointments</li>
-                                                    <li className="border shadow-lg p-3  bg-body rounded  px-5">My Patients</li>
+                                                  <Link to="patientInformation">
+                                                     <li className="border shadow-lg p-3  bg-body rounded  px-5">My Patients</li>
+                                                  </Link> 
                                                     <Link to="doctorconsultation">
                                                     <li className="border shadow-lg p-3  bg-body rounded  px-5">Consult</li>
                                                     </Link>

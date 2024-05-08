@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
-import Header from '../Header/Header.js';
-import Footer from '../Footer/Footer.js';
 import { IoLocationOutline } from "react-icons/io5";
 import { FaGraduationCap } from "react-icons/fa";
 import { LiaLanguageSolid } from "react-icons/lia";
@@ -9,7 +7,7 @@ import { FaUserDoctor } from "react-icons/fa6";
 import { MdWorkHistory } from "react-icons/md";
 import "./Consult.css";
 import axios from 'axios';
-
+import { ToastContainer, toast } from "react-toastify";
 
 
 
@@ -53,21 +51,23 @@ const Consult = () => {
 
         // Logging form data
         console.log('Form Data:', formData);
+        
         axios.post("http://localhost:3005/consult/addconsult", { formData })
             .then(response => {
                 console.log("Response:", response.data);
                 setSuccessMessage("Message sent successfullly !");
                 setFormData({
-                    name:'',
-                    phone:"",
-                    message:" "
+                    name: '',
+                    phone: "",
+                    message: " "
                 });
                 setShowModal(true);
+                toast.success("consult is success");
             })
-            .catch(err=>{
+            .catch(err => {
                 console.log(err);
                 setFailureMessage('Failed to send message. Please try again later.');
-                
+
             })
         // Perform other actions like submitting to backend or navigating
     };
@@ -77,6 +77,9 @@ const Consult = () => {
 
         if (!data.name.trim()) {
             errors.name = 'Name is required';
+        }
+        else if (!/^[a-zA-Z\s]{1,100}$/.test(data.name)) {
+            errors.name = 'Invalid name';
         }
         if (!data.phone.trim()) {
             errors.phone = 'Phone is required';
@@ -91,12 +94,12 @@ const Consult = () => {
     };
 
     const back = () => {
-        navigate("/");
-        navigate("/doctorConsult");
-    };
+        navigate(-1)
+    }
 
     return (
         <>
+        <ToastContainer />
             <div className="doctor-consult container  rounded my-4 shadow-lg p-3 mt-0 bg-body rounded">
                 <div className='row mb-2 alldata pt-2 pb-2 '>
                     <div className='col-4'>
@@ -150,7 +153,7 @@ const Consult = () => {
                     </form>
                 </div>
             </div>
-          
+
         </>
     );
 };

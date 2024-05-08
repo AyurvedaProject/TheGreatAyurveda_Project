@@ -13,7 +13,7 @@ export default function GetStart() {
             <div className=" rmm d-flex align-items-start justify-content-evenly m-5 mt-2 p-3 flex-wrap ">
                 <div className="rmm d-flex flex-column ">
                     <div className="rmm remedyimg" style={{ height: "400px", width: "600px" }}>
-                        <ReactPLayer url={state.videoUrl} style={{ height: "100%", width: '100%' }} muted volume={0.8} />
+                        <ReactPLayer url={state.videoUrl} style={{ height: "100%", width: '100%' }} volume={0.8} />
                     </div>
                     <span className="rmm text-center fs-2 mt-3 mb-3 " >{state.yogaName}</span>
                 </div>

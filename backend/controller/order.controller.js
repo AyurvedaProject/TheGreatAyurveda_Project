@@ -4,23 +4,23 @@ import Product from "../model/product.model.js";
 import Order from "../model/order.model.js";
 import orderItem from "../model/orderitems.model.js";
 import { validationResult } from "express-validator";
+import User from "../model/user.model.js";
 
 export const placedOrder = async (request, res, next) => {
-    const errors = validationResult(request);
-    if (!errors.isEmpty())
-        return res.status(401).json({ error: errors.array() });
+    // const errors = validationResult(request);
+    // if (!errors.isEmpty())
+    //     return res.status(401).json({ error: errors.array() });
 
     let date = new Date();
     let currentDate = date.toString().split("GM")[0];
     let userId = request.body.userId;
+    console.log(userId)
     let cartResult = await Cart.findOne({ where: { userId: userId } });
-    if (!cartResult)
-        return res.status(401).json({ message: "unautherized request........" });
+    console.log(cartResult)
     let cartId = cartResult.dataValues.id;
     let cartItemResult = await CartItems.findAll({ where: { cartId: cartId }, raw: true });
-    // console.log(cartItemResult);
-
-    await CartItems.destroy({ where: { cartId: cartId } });
+    
+    
     let orderItemRes;
     for (let i = 0; i < cartItemResult.length; i++) {
         let productId = cartItemResult[i].productId;
@@ -34,7 +34,7 @@ export const placedOrder = async (request, res, next) => {
             Pincode: request.body.Pincode,
             status: "pending",
             UserContact: request.body.UserContact,
-            userId: request.body.userId
+            userId: userId
         });
         let orderId = await Order.findAll({ where: { OrderDate: currentDate }, raw: true })
         orderId = orderId[i].id;
@@ -86,3 +86,7 @@ export const orderHistory = (request, res, next) => {
             return res.status(401).json({ message: "Something went wrong", err })
         })
 }
+
+
+User.hasMany(Order); // A user can have many orders
+Order.belongsTo(User, { foreignKey: 'userId' }); // An order belongs to a user
