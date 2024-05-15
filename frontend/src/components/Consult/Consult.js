@@ -19,7 +19,7 @@ const Consult = () => {
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
-        message: ''
+        message: '',
     });
     const [successMessage, setSuccessMessage] = useState('');
     const [failureMessage, setFailureMessage] = useState('');
@@ -51,8 +51,8 @@ const Consult = () => {
 
         // Logging form data
         console.log('Form Data:', formData);
-        
-        axios.post("http://localhost:3005/consult/addconsult", { formData })
+
+        axios.post("http://localhost:3005/consult/addconsult", {name:formData.name, phone:formData.phone, message:formData.message, doctorId: state.doctordetail.doctorId })
             .then(response => {
                 console.log("Response:", response.data);
                 setSuccessMessage("Message sent successfullly !");
@@ -99,7 +99,7 @@ const Consult = () => {
 
     return (
         <>
-        <ToastContainer />
+            <ToastContainer />
             <div className="doctor-consult container  rounded my-4 shadow-lg p-3 mt-0 bg-body rounded">
                 <div className='row mb-2 alldata pt-2 pb-2 '>
                     <div className='col-4'>
@@ -114,6 +114,8 @@ const Consult = () => {
                             <div><MdWorkHistory /><span style={{ margin: "15px" }}>{state.doctordetail.experience} years of experience</span></div>
                             <div><FaGraduationCap /><span style={{ margin: "15px" }}>{state.doctordetail.qualification}</span></div>
                             <div><LiaLanguageSolid /><span style={{ margin: "15px" }}>{state.doctordetail.language}</span></div>
+                            <div><LiaLanguageSolid /><span style={{ margin: "15px" }}>{state.doctordetail.doctorId}</span></div>
+
                             <div className="contact-info">
                                 <div className="address">
                                     <IoLocationOutline />

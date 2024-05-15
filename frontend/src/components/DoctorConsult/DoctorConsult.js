@@ -88,7 +88,7 @@ const DoctorConsult = () => {
                     </div>
                 ))}
             </div>
-            {isChatbotOpen && <ChatBot style={{ zIndex: 1 }} />} {/* Ensure ChatBot z-index is lower than buttons */}
+            {isChatbotOpen && <ChatBot style={{ zIndex: 1 }} />} Ensure ChatBot z-index is lower than buttons
          
         </>
     );

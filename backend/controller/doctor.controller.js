@@ -4,6 +4,7 @@ import DoctorDetail from "../model/doctordetail.model.js";
 import Appointment from "../model/appointment.model.js";
 import jwt from "jsonwebtoken";
 import User from "../model/user.model.js";
+import sequelize from "../db/dbConfig.js";
 
 // sed mail with OTP start =================================================================
 
@@ -291,6 +292,7 @@ export const updateAppointmentStatus = (request, response, next) => {
     Appointment.update({
         status: request.body.status
     },
+    
         {
             where: { id: request.body.id },
             raw: true
@@ -312,20 +314,23 @@ export const doctorConsult = (request, response, next) => {
         console.log("DoctorConsult");
         return response.status(401).json({ error: errors.array() });
     }
+
     Doctor.findAll({
-        attributes: ['doctorName'],
         include: [{
             model: DoctorDetail,
-            attributes: ['doctorId', 'doctorImage', 'specialization', 'experience', 'qualification', 'clinicAddress', 'gender', 'language']
+            where: { doctorId: sequelize.col('doctor.id') } // Join condition
         }]
     })
-
-        .then((result) => {
-            return response.status(200).json({ message: 'Status updated....', result })
-        })
-        .catch(err => {
-            return response.status(500).json({ error: "Internal server error...", err });
-        });
+    .then((result) => {
+        if (!result) {
+            return response.status(404).json({ error: "No data found" });
+        }
+        return response.status(200).json({ message: 'Doctors and details found', result });
+    })
+    .catch(err => {
+        console.error("Error:", err);
+        return response.status(500).json({ error: "Internal server error..." });
+    });
 }
 
 
