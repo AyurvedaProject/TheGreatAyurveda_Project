@@ -4,6 +4,48 @@ import DoctorDetail from "../model/doctordetail.model.js";
 import Appointment from "../model/appointment.model.js";
 import jwt from "jsonwebtoken";
 import User from "../model/user.model.js";
+import sequelize from "../db/dbConfig.js";
+
+// sed mail with OTP start =================================================================
+
+import nodemailer from 'nodemailer';
+
+// Function to generate a random OTP
+let OTP;
+const generateOTP = () => {
+    const otpLength = 4; // Length of the OTP
+    const digits = '0123456789'; // Possible digits in the OTP
+    OTP = '';
+    for (let i = 0; i < otpLength; i++) {
+        OTP += digits[Math.floor(Math.random() * 10)]; // Randomly select a digit
+    }
+    return OTP;
+};
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user: 'thegreatayurveda@gmail.com', pass: 'mscy bdjt dttl plbj' }
+});
+
+const sendOTP = (receverMail) => {
+    const otp = generateOTP(); // Generate OTP
+    const mailOptions = {
+        from: 'thegreatayurveda@gmail.com',
+        to: `${receverMail}`,
+        subject: 'Your OTP for The Great Ayurveda',
+        text: `Your OTP is: ${otp}` // Include OTP in the email body
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log('Error sending email:', error);
+        } else {
+            console.log('Email sent successfully...');
+        }
+    });
+};
+
+// sed mail with OTP end =================================================================
 
 export const SignUp = (request, response, next) => {
     const errors = validationResult(request);
@@ -24,6 +66,7 @@ export const SignUp = (request, response, next) => {
             return response.status(500).json({ error: "Internal server error...", err });
         })
 }
+
 
 export const signIn = async (request, response, next) => {
     const errors = validationResult(request);
@@ -86,7 +129,6 @@ export const update = (request, response, next) => {
             email: request.body.email,
             password: request.body.password,
             contactNumber: request.body.contactNumber,
-            registrationNumber: request.body.registrationNumber
         }, {
         where: { id: request.body.id },
         raw: true
@@ -161,9 +203,9 @@ export const doctorProfile = (request, response, next) => {
     if (!errors.isEmpty())
         return response.status(401).json({ error: errors.array() });
 
-    Doctor.findOne({
-        where: { id: request.body.id },
-        include: [{ model: DoctorDetail, required: true }]
+    DoctorDetail.findOne({
+        where: { doctorId: request.body.id },
+        include: [{ model: Doctor, required: true }]
     })
         .then((result) => {
             if (result)
@@ -175,21 +217,31 @@ export const doctorProfile = (request, response, next) => {
         })
 }
 
+
 export const doctorAppointment = (request, response, next) => {
-    const errors = validationResult(request);
-    if (!errors.isEmpty())
-        return response.status(401).json({ error: errors.array() });
+    // const errors = validationResult(request);
+    // if (!errors.isEmpty())
+    //     return response.status(401).json({ error: errors.array() });
 
     Appointment.create({
         status: "pending",
-        appointmentTime: "pending",
-        userId: request.body.userId,
-        doctorId: request.body.doctorId
+        appointmentTime: request.body.appointmentTime,
+        appointmentDate: request.body.appointmentDate,
+        doctorId: request.body.doctorId,
+        name: request.body.name,
+        phone: request.body.phone,
+        age: request.body.age,
+        email: request.body.email,
+        gender: request.body.gender,
+
+
+
     })
         .then((result) => {
-            return response.status(200).json({ message: "Appointment Saved...." });
+            return response.status(200).json({ message: "Appointment Saved....", result });
         })
         .catch((err) => {
+            console.log(err)
             return response.status(500).json({ error: "Internal server error...", err });
         })
 }
@@ -203,6 +255,7 @@ export const appointmentList = (request, response, next) => {
             return response.status(500).json({ error: "Internal server error...", err });
         })
 }
+
 
 export const appointmentDetailslist = (request, response, next) => {
 
@@ -254,6 +307,24 @@ export const updateAppointmentStatus = (request, response, next) => {
         })
 
 }
+// export const doctorConsult = (request, response, next) => {
+//     const errors = validationResult(request);
+//     if (!errors.isEmpty()) {
+//         console.log("DoctorConsult");
+//         return response.status(401).json({ error: errors.array() });
+//     }
+//     Doctor.findAll({
+//         // , include: [{ model: Product, required: true }, { model: HomeRemedy, required: true }, { model: Yoga, required: true }]
+//         include: [{ model: DoctorDetail, required: true, attributes: ['doctorId', 'doctorImage', 'specialization', 'experience', 'qualification', 'clinicAddress', 'gender', 'language'] }]
+//     })
+
+//         .then((result) => {
+//             return response.status(200).json({ message: 'Status updated....', result })
+//         })
+//         .catch(err => {
+//             return response.status(500).json({ error: "Internal server error...", err });
+//         });
+// }
 
 export const doctorConsult = (request, response, next) => {
     const errors = validationResult(request);
@@ -261,19 +332,73 @@ export const doctorConsult = (request, response, next) => {
         console.log("DoctorConsult");
         return response.status(401).json({ error: errors.array() });
     }
-    Doctor.findAll({
-        attributes: ['doctorName'],
-        include: [{
-            model: DoctorDetail,
-            attributes: ['doctorImage', 'specialization', 'experience', 'qualification', 'clinicAddress', 'gender', 'language']
-        }]
+
+    DoctorDetail.findAll({
+        include: [{ model: Doctor }]
     })
         .then((result) => {
-            return response.status(200).json({ message: 'Status updated....', result })
+            if (!result) {
+                return response.status(404).json({ error: "No data found" });
+            }
+            return response.status(200).json({ message: 'Doctors and details found', result });
         })
         .catch(err => {
-            return response.status(500).json({ error: "Internal server error...", err });
+            console.error("Error:", err);
+            return response.status(500).json({ error: "Internal server error..." });
         });
-        
 }
 
+
+// =================================================================================
+
+export const forgotpassword = (request, response, next) => {
+    const errors = validationResult(request);
+    if (!errors.isEmpty())
+        return response.status(401).json({ error: errors.array() });
+
+    Doctor.findOne({ where: { email: request.body.email } })
+        .then((result) => {
+            if (result) {
+                sendOTP(request.body.email);
+                return response.status(200).json({ message: 'doctor exist....', Message: 'Email sent successfully...' });
+            }
+            else {
+                return response.status(401).json({ message: 'unauthorized request....' })
+            }
+        })
+        .catch((err) => {
+            return response.status(500).json({ error: 'internal server error....', err })
+        })
+}
+
+export const verifyOTP = (request, response, next) => {
+    let otp = request.body.OTP;
+    if (otp == OTP) {
+        return response.status(200).json({ message: 'OTP Verification Successfuly....' })
+    }
+    else {
+        return response.status(401).json({ message: 'OTP Verification failed....' })
+    }
+}
+
+export const setnewpassword = (request, response, next) => {
+    const errors = validationResult(request);
+    if (!errors.isEmpty())
+        return response.status(401).json({ error: errors.array() });
+
+    Doctor.update({
+        password: request.body.password,
+    }, {
+        where: {
+            email: request.body.email
+        }, raw: true
+    })
+        .then((result) => {
+            if (result[0])
+                return response.status(200).json({ message: 'password updated....' })
+            return response.status(401).json({ message: 'unauthorized request....' })
+        })
+        .catch((err) => {
+            return response.status(500).json({ error: 'internal server error....', err })
+        })
+}

@@ -2,6 +2,12 @@
     padding: 0 2vw !important;
 }
 
+.no-border {
+    border: 0 !important;
+    box-shadow: none !important;
+    /* You may want to include this as bootstrap applies these styles too */
+}
+
 .login-icon {
     height: 32px;
     width: 32px;
@@ -24,10 +30,6 @@
 .cart-text {
     color: var(--green);
     font-weight: 700;
-}
-
-.header-sch {
-    box-shadow: 0 0 10px var(--gray);
 }
 
 .login-user {
@@ -99,7 +101,7 @@
     }
 
     .headernav {
-        height: 118px !important;
+        height: 60px !important;
     }
 
     .nav-li {

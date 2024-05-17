@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './style.css';
 import axios from 'axios';
 import OTPInput, { ResendOTP } from "otp-input-react";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function ForgetPassword() {
 
@@ -16,33 +17,33 @@ export default function ForgetPassword() {
     let [email2, setemail2] = useState(" ");
 
     const forgetpassword = (flag) => {
-        axios.post("http://localhost:3005/user/forgotpassword", { email })
+        axios.post("http://localhost:3005/doctor/forgotpassword", { email })
             .then(response => {
                 if (response.status === 200) {
-                    alert("OTP Send....")
+                    toast.success("OTP Send Successfuly....")
                     if (flag) setOtpVisible(!otpVisible);
                 } else {
-                    alert("OTP Send fail....")
+                    toast.info("OTP Send fail....")
                 }
             }).catch(err => {
                 console.log(err);
-                alert("user dos't exist ...")
+                toast.error("user dos't exist ...")
             })
     }
 
     let [OTP, setOTP] = useState("");
     const verifyOTP = () => {
-        axios.post("http://localhost:3005/user/verifyOTP", { OTP })
+        axios.post("http://localhost:3005/doctor/verifyOTP", { OTP })
             .then(response => {
                 if (response.status === 200) {
-                    alert(response.data.message)
+                    toast.success(response.data.message)
                     toggleForm();
                 } else {
-                    alert(response.data.message)
+                    toast.info(response.data.message)
                 }
             }).catch(err => {
                 console.log(err);
-                alert("Invalid OTP...");
+                toast.error("Invalid OTP...");
             })
     }
 
@@ -52,16 +53,16 @@ export default function ForgetPassword() {
     let [pass2, setpass2] = useState(" ");
 
     const setnewpassword = () => {
-        axios.put("http://localhost:3005/user/setnewpassword", { email, password })
+        axios.put("http://localhost:3005/doctor/setnewpassword", { email, password })
             .then(response => {
                 if (response.status === 200) {
-                    alert("Password Successfuly Chenged....")
+                    toast.error("Password Successfuly Chenged....")
                 } else {
-                    alert("problem in Password Chenged....")
+                    toast.error("problem in Password Chenged....")
                 }
             }).catch(err => {
                 console.log(err);
-                alert("set Password Fail...")
+                toast.error("set Password Fail...")
             })
     }
 
@@ -71,6 +72,7 @@ export default function ForgetPassword() {
 
     return (
         <div className=''>
+            <ToastContainer />
             <div className='login d-flex align-items-center justify-content-center flex-column'>
                 <div className={` containe ${isSignUp ? 'active' : ''}`}>
                     <div className="d-flex align-items-center justify-content-center text-center  form-container sign-up">
@@ -81,12 +83,12 @@ export default function ForgetPassword() {
                             <small className='signin-input-message'>{pass}</small>
                             <input className='signin-password' onChange={(event) => { (event.target.value === "") ? setpass2("password is required") : (!event.target.value.match(/^(?=.*\d)/)) ? setpass2("Password must contain at least one digit.") : (!event.target.value.match(/^(?=.*[a-zA-Z])/)) ? setpass2("Password must contain at least one letter.") : (!event.target.value.match(/^.{5,}$/)) ? setpass2("Password must be at least 5 characters long.") : setpass2(""); setPassword2(event.target.value); }} type="password" placeholder="Verify Password" />
                             <small className='signin-input-message'>{pass2}</small>
-                            {(pass === pass2 && password === password2) ? <Link to="/user" onClick={() => { (password === password2) ? setnewpassword() : alert("Password must be same...") }}><button>Reset</button></Link> : <button onClick={() => { (password === "") ? setpass("enter new password") : setpass2("enter verify password") }} style={{ background: "var(--green-3)" }}>Reset</button>}
+                            {(pass === pass2 && password === password2) ? <Link to="/doctorlogin" onClick={() => { (password === password2) ? setnewpassword() : toast.error("Password must be same...") }}><button>Reset</button></Link> : <button onClick={() => { (password === "") ? setpass("enter new password") : setpass2("enter verify password") }} style={{ background: "var(--green-3)" }}>Reset</button>}
                         </form>
                     </div>
                     <div className=" d-flex text-center align-items-center justify-content-center form-container sign-in">
                         <form onSubmit={handleSubmit} className=' d-flex align-items-center justify-content-center signincon'>
-                            <h1 className='fs-2'>Forget Passwordd</h1>
+                            <h1 className='fs-2'>Forget Password</h1>
                             <span className='forget-text mb-0'>enter your name email</span>
                             <input className='signin-password mt-0' onChange={(event) => { (event.target.value === "") ? setemail2("email is required") : (!event.target.value.match(/^[^\s@]+@gmail\.com$/)) ? setemail2("Invalid Email.") : setemail2(""); setEmail(event.target.value); }} type="email" placeholder="Email" />
                             <small className='signin-input-message'>{email2}</small>
@@ -94,18 +96,18 @@ export default function ForgetPassword() {
                             <OTPInput className="ps-3 pt-2" style={{ display: otpVisible ? "block" : "none" }} value={OTP} onChange={setOTP} autoFocus OTPLength={4} otpType="number" disabled={false} inputStyles={{ padding: "1px" }} />
                             {(OTP.length == 4) ? <button onClick={verifyOTP} style={{ display: otpVisible ? "block" : "none" }}>Submit</button> : <button style={{ background: "var(--green-3)", display: otpVisible ? "block" : "none" }}>Submit</button>}
                             <ResendOTP className="me-4" style={{ display: otpVisible ? "block" : "none" }} onResendClick={() => forgetpassword(0)} />
-                            <Link className="links" to="/user">→ Back ←</Link>
+                            <Link className="links" to="/doctorlogin">→ Back ←</Link>
                         </form>
                     </div>
                     <div className="toggle-container">
                         <div className="toggle">
                             <div className="toggle-panel toggle-left signincon">
-                                <h1 className='fs-2'>Welcome Back!</h1>
+                                <h1 className='fs-2'>Doctor Welcome Back!</h1>
                                 <p>We received a request to reset your password after set new password</p>
                                 <h2 className='fs-2'>→</h2>
                             </div>
                             <div className="toggle-panel toggle-right signincon">
-                                <h1 className='fs-2'>Hello, Friend!</h1>
+                                <h1 className='fs-2'>Doctor Hello, Friend!</h1>
                                 <p>Please use the email or name to log in and reset your password</p>
                                 <h2 className='fs-2'>←</h2>
                             </div>

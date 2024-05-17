@@ -9,43 +9,7 @@
     background-size: cover;
 }
 
-.remede-box {
-    margin-left: 4vw;
-    margin-right: 4vw;
-    width: 350px;
-    /* height: 400px; */
-    box-shadow: 5px 5px 15px;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.remede-img {
-    height: 200px;
-    width: 98%;
-    cursor: pointer;
-}
-
-.remede-img:hover {
-    scale: 1.02;
-}
-
-.remede-arrow {
-    height: 20px;
-    width: 20px;
-    background: url("./images/icons8-arrow-sign-100.png") no-repeat center;
-    background-size: cover;
-    cursor: pointer;
-}
-
-.remede-arrow:hover {
-    scale: 1.1;
-}
-
-.containerr-inline {
-    gap: 1.5vw;
-}
-
-.containerr {
+.remove-scroller {
     vertical-align: middle;
     overflow-x: scroll;
     scrollbar-width: none;
@@ -54,62 +18,4 @@
 
 .containerr::-webkit-scrollbar {
     display: none;
-}
-
-@media only screen and (max-width: 600px) {
-    .remede-box {
-        width: 250px;
-        /* height: 390px; */
-    }
-
-    .remede-img {
-        height: 150px;
-        width: 98%;
-        cursor: pointer;
-    }
-
-    .home-homeremedies .text-center {
-        font-size: 22px !important;
-    }
-
-    .home-products .text-center {
-        font-size: 22px !important;
-    }
-
-    .home-yoga .text-center {
-        font-size: 22px !important;
-    }
-
-    .remede-value .fs-5 {
-        font-size: 15px !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    .remede-value .flex-wrap {
-        margin: 0 !important;
-        padding: 0 !important;
-        font-size: 12px !important;
-    }
-}
-
-#yoga_hover {
-    position: relative;
-    top: 0;
-    left: 0;
-}
-
-.youtube-icon {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 30%;
-    left: 50%;
-    text-align: center;
-    z-index: 1;
-    display: none;
-    color: var(--white);
-}
-
-#yoga_hover:hover>.youtube-icon {
-    display: block;
 }

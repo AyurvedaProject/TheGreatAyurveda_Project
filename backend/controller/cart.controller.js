@@ -52,7 +52,7 @@ export const fetchCartItems = (request, response, next) => {
         .then(result => {
             if (result[0])  
                 return response.status(200).json({ data: result });
-            return response.status(401).json({ error: "unautherized request........" });
+            return response.status(401).json({ error: "data are not abelevel........" });
         }).catch(err => {
             return response.status(500).json({ error: "Internal Server Error", err });
         });

@@ -1,12 +1,15 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db/dbConfig.js";
-import User from "./user.model.js";
 
 const Order = sequelize.define("Order", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
+    },
+    FullName: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
     OrderDate: {
         type: DataTypes.STRING,
@@ -42,19 +45,10 @@ const Order = sequelize.define("Order", {
     },
     userId: {
         type: DataTypes.INTEGER,
-        foreignKey: true,
-        allowNull: false,
-        references: {
-            model: User,
-            key: 'id'
-        }
+        allowNull: false
     }
-});
 
-Order.belongsTo(User, {
-    foreignKey: 'userId',
-    onDelete: 'CASCADE'
-})
+});
 
 
 Order.sync().then(() => {
@@ -62,5 +56,7 @@ Order.sync().then(() => {
 }).catch(err => {
     console.log("Order table error ", err)
 });
+
+
 
 export default Order;

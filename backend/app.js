@@ -9,10 +9,21 @@ import CartRouter from './routes/cart.route.js';
 import YogaRouter from './routes/yoga.routes.js';
 import HomeRemedyRouter from './routes/homeremedy.route.js';
 import OrderRouter from './routes/order.route.js';
+import paymentRouter from './routes/payment.route.js';
+import { API } from './secreatKey/secreatKey.js';
+import ContactRouter from "./routes/contact.route.js";
+import ConsultRouter from  "./routes/consult.route.js"
 import './model/association.js';
 import cors from 'cors';
 
 const app = express();
+import Razorpay from "razorpay";
+
+export const instance = new Razorpay({
+    key_id: API.RAZORPAY_API_KEY,
+    key_secret: API.RAZORPAY_APT_SECRET,
+  });
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -27,4 +38,8 @@ app.use('/homeremedy', HomeRemedyRouter);
 app.use('/yoga', YogaRouter);
 app.use('/cart', CartRouter);
 app.use('/order', OrderRouter);
-app.listen(3005, () => { console.log("server started.....") })
+app.use("/payment", paymentRouter);
+app.use('/contact',ContactRouter);
+app.use("/consult",ConsultRouter);
+app.listen(3005, () => { console.log("server started.....") }) 
+

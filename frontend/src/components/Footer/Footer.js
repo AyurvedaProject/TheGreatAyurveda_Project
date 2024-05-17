@@ -3,7 +3,7 @@ import "./Footer.css";
 const Footer = () => {
     return (
         <>
-            <div className="footer border" style={{ backgroundColor: "var(--green)", position: "", top: "0", color: "var(--white)", width: "99vw" }}>
+            <div className="footer border" style={{ backgroundColor: "var(--green)", color: "var(--white)", width: "99vw" }}>
                 <div className="footer-inner m-1 ms-3 me-3">
                     <div className="footer-top d-flex justify-content-between flex-wrap">
                         <div className="footer-customersupport  d-flex flex-column p-3">
@@ -19,7 +19,7 @@ const Footer = () => {
                             <small className="footer-values links ps-3">Our Story</small>
                             <small className="footer-values links ps-3">Blogs</small>
                             <small className="footer-values links ps-3">Ingredients Index</small>
-                            <small className="footer-values links ps-3">Hotel & Spa</small>
+                            <small className="footer-values links ps-3">clinin & hospitals</small>
                             <small className="footer-values links ps-3">Media</small>
                         </div>
                         <div className="footer-account  d-flex flex-column p-3">

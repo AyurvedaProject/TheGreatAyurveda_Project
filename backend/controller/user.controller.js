@@ -138,6 +138,32 @@ export const setnewpassword = (request, response, next) => {
         })
 }
 
+export const updatepassword = async (request, response, next) => {
+    const errors = validationResult(request);
+    if (!errors.isEmpty())
+        return response.status(401).json({ error: errors.array() });
+
+
+    let password = request.body.oldpassword;
+    let id = request.body.id;
+    let user = await User.findOne({ where: { id: id }, raw: true });
+    if (User.checkPassword(password, user.password)) {
+        User.update({ password: request.body.newpassword, },
+            { where: { id: id }, raw: true })
+            .then((result) => {
+                if (result[0])
+                    return response.status(200).json({ message: 'Password Updated....' })
+                return response.status(401).json({ message: "Old password dos't Match...." })
+            })
+            .catch((err) => {
+                console.log(err);
+                return response.status(500).json({ error: 'internal server error....', err })
+            })
+    } else {
+        return response.status(401).json({ message: "Old password dos't Match...." })
+    }
+}
+
 export const update = (request, response, next) => {
     const errors = validationResult(request);
     if (!errors.isEmpty())
@@ -146,8 +172,30 @@ export const update = (request, response, next) => {
         {
             name: request.body.name,
             email: request.body.email,
-            password: request.body.password,
-            contactNumber: request.body.contactNumber
+            contactNumber: request.body.contactNumber,
+            gender: request.body.gender
+        },
+        { where: { id: request.body.id }, raw: true })
+        .then((result) => {
+            if (result[0])
+                return response.status(200).json({ message: 'user updated....' })
+            return response.status(401).json({ message: 'unauthorized request....' })
+        })
+        .catch((err) => {
+            return response.status(500).json({ error: 'internal server error....', err })
+        })
+}
+
+export const updateAddress = (request, response, next) => {
+    const errors = validationResult(request);
+    if (!errors.isEmpty())
+        return response.status(401).json({ error: errors.array() });
+    User.update(
+        {
+            state: request.body.state,
+            city: request.body.city,
+            address: request.body.address,
+            pincode: request.body.pincode
         },
         { where: { id: request.body.id }, raw: true })
         .then((result) => {
@@ -167,6 +215,24 @@ export const listbyemail = (request, response, next) => {
 
     User.findOne({
         where: { email: request.body.email }, raw: true
+    })
+        .then((result) => {
+            if (result)
+                return response.status(200).json({ data: result });
+            return response.status(401).json({ message: 'unauthorized request' });
+        })
+        .catch((err) => {
+            return response.status(500).json({ error: 'internal server err.....', err })
+        })
+}
+
+export const Viewuserbyid = (request, response, next) => {
+    const errors = validationResult(request);
+    if (!errors.isEmpty())
+        return response.status(401).json({ error: errors.array() });
+
+    User.findOne({
+        where: { id: request.body.id }, raw: true
     })
         .then((result) => {
             if (result)

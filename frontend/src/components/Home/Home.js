@@ -1,9 +1,9 @@
 import "./Home.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom"
 import { FaPlay } from "react-icons/fa";
+import { useNavigate } from "react-router-dom"
+import { ToastContainer, toast } from "react-toastify";
 const Home = () => {
 
     const [homeremedies, setHomeremedies] = useState([]);
@@ -36,22 +36,35 @@ const Home = () => {
             })
     }, []);
 
+    const addToCart = (productId) => {
+        if (localStorage.getItem('userId')) {
+            axios.post("http://localhost:3005/cart/addToCart", { userId: localStorage.getItem("userId"), productId, quantity: 1 })
+                .then(response => {
+                    toast.success(response.data.message);
+                }).catch(err => {
+                    toast.danger("Already added this product");
+                });
+        }
+        else {
+            toast.error("please SignIn and add items in your cart");
+        }
+    }
+
     const navigate = useNavigate();
-    const getStart = (yoga) => {
-        navigate("/getstart", { state: yoga});
+    const ViewMore = (remedy) => {
+        navigate("/ViewMore", { state: remedy });
     }
-
-    const viewmore = (remedy) => {
-        navigate("/viewmore", { state: remedy });
-    }
-
     const ProductView = (product) => {
         navigate("/ProductView", { state: product });
     }
+    const getStart = (yoga) => {
+        navigate("/getstart", { state: yoga });
+    }
+
     return (<>
+        <ToastContainer />
         <div className="home">
             <div className="home-contain ">
-                {/* -------------------- */}
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
@@ -70,72 +83,48 @@ const Home = () => {
                         </button>
                     </div>
                 </div>
-                {/* -------------------- */}
-                <div className="home-homeremedies text-center">
-                    <span className="text-center fs-1 fw-bold border-bottom border-dark border-3 pt-1 ps-4 pe-4 ">Home Remedies</span>
-                    <div className="containerr mt-3 mb-3 d-flex align-items-center">
-                        <div className="containerr-inline d-flex align-items-center mb-3">
-                            {homeremedies.map((remedy, index) => <div key={index}>
-                                {index < 10 ? <div className="remede-box d-flex flex-column align-items-center justify-content-start">
-                                    <div className="remede-img m-1"><img src={remedy.imageUrl} alt="remedy" onClick={() => viewmore(remedy)} style={{ height: "100%", width: '100%' }} /></div>
-
-                                    <div className="remede-value h-100 m-1 d-flex flex-column justify-content-evenly align-items-center">
-                                        <span className="fs-5 fw-bold ms-2 me-2">{remedy.remedyName.slice(0, 25)}</span>
-                                        <span className="d-flex flex-wrap m-2">{remedy.description.slice(0, 80)}</span>
-                                        <button onClick={() => viewmore(remedy)} className="btnn text-white m-2">View More</button>
-                                    </div>
-                                </div> : ""}
-                            </div>)}
+                <h3 className="text-center fw-bold my-4">Homeremedy</h3>
+                <div className="container-fluid text-center gap-5 d-flex flex-nowrap overflow-auto overflow-x-scroll" style={{ scrollbarWidth: "none" }}>
+                    {homeremedies.map((remedy, index) => <div key={index} className="mb-4 mt-1 card shadow" id="view_hover" style={{ width: "20rem", flex: "0 0 auto" }}>
+                        <img src={remedy.imageUrl} style={{ height: "220px", cursor: "pointer" }} onClick={() => ViewMore(remedy)} className="ms-1 remede-img card-img-top p-1" alt="..." />
+                        <i className="youtube-icon bg-white text-dark w-25 view" >ViewMore</i>
+                        <div className="card-body m-0 p-1 px-3">
+                            <h4 className="card-title fs-6 fw-bold p-0 m-0">{remedy.remedyName.slice(0, 30)}</h4>
+                            <p className="card-text p-0 m-0 mt-3" style={{ fontSize: "0.7rem" }}>{remedy.description.slice(0, 80)}</p>
+                            <button className="fs-6 btnn text-white my-3" onClick={() => ViewMore(remedy)}>View More</button>
                         </div>
-                        <Link to="/homeremedy"><div className="remede-arrow p-4"></div></Link>
-                    </div>
+                    </div>)}
                 </div>
-                <div className="home-products text-center">
-                    <span className="text-center fs-1 fw-bold border-bottom border-dark border-3 pt-1 ps-4 pe-4 ">Products</span>
-                    <div className="containerr mt-3 mb-3 d-flex align-items-center">
-                        <div className="containerr-inline d-flex align-items-center mb-3 mt-2">
-                            {products.map((product, index) => <div key={index}>
-                                {index < 10 ? <div className="remede-box d-flex flex-column align-items-center justify-content-center">
-                                    <div className="remede-img m-1"><img src={product.imageUrl} onClick={() => ProductView(product)} alt="Product" style={{ height: "100%", width: '100%' }} /></div>
-
-                                    <div className="remede-value m-1 d-flex flex-column justify-content-center align-items-center">
-                                        <span className="fs-5 fw-bold ms-2 me-2">{product.title.slice(0, 25)}</span>
-                                        <span className="fs-5 fw-bold ms-2 me-2" style={{ color: "var(--green)" }}>{product.price} Rs</span>
-                                        <span className="d-flex flex-wrap m-2">{product.description.slice(0, 100)}</span>
-                                        <div className="w-100 d-flex align-items-center justify-content-center">
-                                            {products.map((r, i) => <div key={i} className="d-flex">
-                                                {i < product.rating ? <span className="product-reting text-center m-2"></span> : ""}
-                                            </div>)}
-                                        </div>
-                                        <div className="d-flex justify-content-evenly w-100">
-                                            <button className="btnn addtocart-btn text-white m-2">Add To cart</button>
-                                            <button className="btnn buynow-btn text-white m-2">Buy Now</button>
-                                        </div>
-                                    </div>
-                                </div> : ""}
-                            </div>)}
+                <h3 className="text-center fw-bold mb-4 u">Medicine</h3>
+                <div className="container-fluid text-center gap-5 d-flex flex-nowrap overflow-auto overflow-x-scroll" style={{ scrollbarWidth: "none" }}>
+                    {products.map((product, index) => <div key={index} className="mb-4 mt-1 card shadow" id="view_hover" style={{ width: "20rem", flex: "0 0 auto" }}>
+                        <img src={product.imageUrl} style={{ height: "220px", cursor: "pointer" }} onClick={() => ProductView(product)} className="ms-1 remede-img card-img-top p-1" alt="..." />
+                        <i className="youtube-icon bg-white text-dark w-25 view" >ViewMore</i>
+                        <div className="card-body m-0 p-1 px-3">
+                            <h4 className="card-title fs-6 fw-bold p-0 m-0">{product.title.slice(0, 25)}</h4>
+                            <h4 className="card-title fs-6 fw-bold p-0 m-0 mt-3" style={{ color: "var(--green)" }}>{product.price} Rs</h4>
+                            <p className="card-text p-0 m-0 mt-3" style={{ fontSize: "0.7rem" }}>{product.description.slice(0, 100)}</p>
+                            <div className="d-flex justify-content-around p-0 my-3">
+                                <button style={{ fontSize: ".8rem" }} className="btnn addtocart-btn p-0 m-0 py-2 px-0" onClick={() => addToCart(product.id)}>Add To cart</button>
+                                <button style={{ fontSize: ".8rem" }} className="btnn buynow-btn text-white m-0 p-0 py-2 px-0">Buy Now</button>
+                            </div>
                         </div>
-                        <Link to="/product"><div className="remede-arrow p-4"></div></Link>
-                    </div>
+                    </div>)}
                 </div>
-                <div className="home-yoga text-center">
-                    <span className="text-center fs-1 fw-bold border-bottom border-dark border-3 pt-1 ps-4 pe-4 ">Yoga</span>
-                    <div className="containerr mt-3 mb-3 d-flex align-items-center">
-                        <div className="containerr-inline d-flex align-items-center mb-3">
-                            {yoga.map((yoga, index) => <div key={index}>
-                                {index < 10 ? <div className="remede-box d-flex flex-column align-items-center justify-content-start">
-                                    <div className="remede-img m-1"><img src={yoga.imageUrl} alt="Yoga" style={{ height: "100%", width: '100%' }} /></div>
-                                    <FaPlay className="youtube-icon" size={30} onClick={() => getStart(yoga)} />
-                                    <div className="remede-value m-1 d-flex flex-column justify-content-evenly h-100 align-items-center">
-                                        <span className="fs-5 fw-bold ms-2 me-2">{yoga.yogaName.slice(0, 25)}</span>
-                                        <span className="d-flex flex-wrap m-2">{yoga.benefits.slice(0, 110)}</span>
-                                        <button className="btnn text-white m-2" onClick={() => getStart(yoga)}>Get Start</button>
-                                    </div>
-                                </div> : ""}
-                            </div>)}
+                <h3 className="text-center fw-bold mb-4">Yoga</h3>
+                <div className="container-fluid text-center d-flex gap-5 flex-nowrap overflow-auto overflow-x-scroll" style={{ scrollbarWidth: "none" }}>
+                    {yoga.map((yogaa, index) => <div key={index} className="mb-4 mt-1 card shadow" id="view_hover" style={{ width: "20rem", flex: "0 0 auto" }}>
+                        <img src={yogaa.imageUrl} style={{ height: "220px", cursor: "pointer" }} onClick={() => getStart(yogaa)} className="ms-1 remede-img card-img-top p-1" alt="..." />
+                        <FaPlay className="youtube-icon p-2 view" onClick={() => getStart(yogaa)} />
+                        <div className="card-body m-0 p-1">
+                            <h4 className="card-title fs-6 fw-bold p-0 m-0">{yogaa.yogaName.slice(0, 28)}</h4>
+                            <p className="card-text p-0 m-0 mt-3" style={{ fontSize: "0.9rem" }}>{yogaa.benefits.slice(0, 100)}</p>
+                            <button className="fs-6 btnn text-white my-3" onClick={() => getStart(yogaa)}>Get Start</button>
                         </div>
-                        <Link to="/yoga"><div className="remede-arrow p-4"></div></Link>
-                    </div>
+                    </div>)}
+                </div>
+                <div className="box d-flex flex-nowrap overflow-auto overflow-x-scroll" style={{ scrollbarWidth: "none" }}>
+                    <div className="border bg-info box-items" style={{ width: "20rem", flex: "0 0 auto" }}></div>
                 </div>
             </div>
         </div>

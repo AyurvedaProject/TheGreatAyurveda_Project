@@ -8,6 +8,34 @@ const Appointment = sequelize.define('appointment', {
         primaryKey: true,
         autoIncrement: true
     },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+
+    },
+    phone: {
+        type: DataTypes.STRING,
+        allowNull: false
+
+    },
+    age: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false
+
+    },
+    gender: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    appointmentDate: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     appointmentTime: {
         type: DataTypes.STRING,
         allowNull: false
@@ -16,15 +44,16 @@ const Appointment = sequelize.define('appointment', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
+   
     doctorId: {
         type: DataTypes.INTEGER,
         allowNull: false
     }
+    
+
+
 });
+
 
 sequelize.sync().then(() => {
     console.log("Appointment table created....");

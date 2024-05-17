@@ -1,7 +1,8 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db/dbConfig.js";
 import bcyrpt from "bcryptjs";
-
+import Order from "./order.model.js";
+// Import the User model assuming it's defined in "user.model.js"
 
 const User = sequelize.define("user", {
     id: {
@@ -31,6 +32,21 @@ const User = sequelize.define("user", {
         type: DataTypes.STRING(10),
         allowNull: false,
         unique: true
+    },
+    gender: {
+        type: DataTypes.STRING,
+    },
+    state: {
+        type: DataTypes.STRING,
+    },
+    city: {
+        type: DataTypes.STRING,
+    },
+    address: {
+        type: DataTypes.STRING,
+    },
+    pincode: {
+        type: DataTypes.STRING,
     }
 });
 
@@ -38,6 +54,11 @@ User.checkPassword = (originalPassword, encryptedPassword) => {
     console.log("check Password called....");
     return bcyrpt.compareSync(originalPassword, encryptedPassword);
 }
+User.hasMany(Order, { foreignKey: 'userId', targetKey: 'id' }); // A user can have many orders
+Order.belongsTo(User, { foreignKey: 'userId', targetKey: 'id' }); // An order belongs to a user
+
+
+
 
 sequelize.sync()
     .then(() => {
@@ -47,5 +68,7 @@ sequelize.sync()
         console.log("user something wrong....")
         console.log(err);
     });
+
+// Define the association between User and Order
 
 export default User;

@@ -22,6 +22,10 @@
   margin: 20px 0;
 }
 
+.social-iconss {
+  margin: 20px 0;
+}
+
 .social-icons div {
   border: 1px solid var(--gray);
   border-radius: 20%;
@@ -32,6 +36,19 @@
   width: 40px;
   height: 40px;
   transition: all 0.5s;
+}
+
+.social-iconss div {
+  border: 1px solid var(--gray);
+  border-radius: 20%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  transition: all 0.5s;
+  padding: 0;
+  margin: 0;
 }
 
 .social-icons div:hover {
@@ -51,22 +68,6 @@
   height: 100%;
   width: 100%;
   background: url("../public/images/icons8-facebook-50.png") no-repeat center;
-  background-size: 70%;
-  cursor: pointer;
-}
-
-.icon-git {
-  height: 100%;
-  width: 100%;
-  background: url("../public/images/icons8-github-50.png") no-repeat center;
-  background-size: 110%;
-  cursor: pointer;
-}
-
-.icon-linkedin {
-  height: 100%;
-  width: 100%;
-  background: url("../public/images/icons8-linkedin-50.png") no-repeat center;
   background-size: 70%;
   cursor: pointer;
 }
@@ -123,13 +124,6 @@
   border: 2px solid var(--orange) !important;
 }
 
-.product-reting {
-  height: 30px;
-  width: 30px;
-  background: url("../public/images/icons8-star-96.png") no-repeat center;
-  background-size: cover;
-}
-
 @media only screen and (max-width: 600px) {
   .btnn {
     padding: 5px;
@@ -145,4 +139,34 @@
     margin: 0 !important;
     padding: 0 !important;
   }
+}
+
+/* youtube hover =================================== */
+#view_hover {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.view {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 30%;
+  height: 30px;
+  width: 50px;
+  border-radius: 7px;
+  background: var(--red);
+  left: 50%;
+  text-align: center;
+  z-index: 1;
+  display: none;
+  color: var(--white);
+}
+
+.view:hover {
+  scale: 1.1;
+}
+
+#view_hover:hover>.view {
+  display: block;
 }

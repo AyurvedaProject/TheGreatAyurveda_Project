@@ -1,4 +1,3 @@
-import "./Homeremedy.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
@@ -14,25 +13,22 @@ const Homeremedy = () => {
     }, []);
 
     const navigate = useNavigate();
+
     const ViewMore = (remedy) => {
         navigate("/ViewMore", { state: remedy });
     }
+
     return (<>
-        <div className="home">
-            <div className="containerr d-flex align-items-center justify-content-center flex-wrap">
-                <div className="containerr-inline d-flex align-items-center justify-content-center m-1 flex-wrap" style={{ gap: "0" }}>
-                    {homeremedies.map((remedy, index) => <div key={index}>
-                        <div className="remede-box d-flex flex-column align-items-center justify-content-start m-5">
-                            <div className="remede-img m-1"><img src={remedy.imageUrl} alt="..." onClick={() =>ViewMore(remedy)} style={{ height: "100%", width: '100%' }} /></div>
-                            <div className="remede-value h-100 m-1 d-flex flex-column justify-content-evenly align-items-center text-center">
-                                <span className="fs-5 fw-bold ms-2 me-2">{remedy.remedyName.slice(0, 25)}</span>
-                                <span className="d-flex flex-wrap m-2">{remedy.description.slice(0, 80)}</span>
-                                <button className="btnn text-white m-2" onClick={() =>ViewMore(remedy)}>View More</button>
-                            </div>
-                        </div>
-                    </div>)}
+        <div className="text-center mt-3 d-flex align-items-top justify-content-evenly gap-5 flex-wrap overflow-hidden" style={{ background: "var(--white)" }}>
+            {homeremedies.map((remedy, index) => <div key={index} className="mb-4 mt-1 card shadow" id="view_hover" style={{ width: "20rem", flex: "0 0 auto" }}>
+                <img src={remedy.imageUrl} style={{ height: "220px", cursor: "pointer" }} onClick={() => ViewMore(remedy)} className="ms-1 remede-img card-img-top p-1" alt="..." />
+                <i className="youtube-icon bg-white text-dark w-25 view pt-1" >ViewMore</i>
+                <div className="card-body m-0 p-1 px-3">
+                    <h4 className="card-title fs-6 fw-bold p-0 m-0">{remedy.remedyName.slice(0, 30)}</h4>
+                    <p className="card-text p-0 m-0 mt-3" style={{ fontSize: "0.7rem" }}>{remedy.description.slice(0, 80)}</p>
+                    <button className="fs-6 btnn text-white my-3" onClick={() => ViewMore(remedy)}>View More</button>
                 </div>
-            </div>
+            </div>)}
         </div>
     </>);
 };
