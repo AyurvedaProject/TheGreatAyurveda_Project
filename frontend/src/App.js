@@ -19,7 +19,6 @@ import AboutUs from "./components/AboutUs/About.js";
 import Contact from "./components/Contact/Contact.js";
 import Consult from "./components/Consult/Consult.js";
 import Appointment from "./components/Appointment/Appointment.js";
-import ChatBot from "./components/ChatBot/ChatBot.js";
 import DoctorLogIn from "./components/DoctorLogin/LogIn.js";
 import DoctorForgetPassword from "./components/DoctorLogin/ForgetPassword.js";
 import DoctorConsult from "./components/DoctorConsult/DoctorConsult.js";
@@ -28,13 +27,6 @@ import DoctorDashboard from "./components/DoctorModule/Doctor/DoctorDashboard/Do
 import Footer from "./components/Footer/Footer.js";
 import UserProfile from "./components/UserProfile/UserProfile.js";
 import DoctorVarication from "./components/DoctorModule/Doctor/DoctorVarification/DoctorVarification/DoctorVarification.js";
-import Viewcart from "./components/Product/Viewcart.js";
-import Checkout from "./components/Product/CheckOut.js";
-import Header from "./components/Header/Header.js";
-import PaymentSuccess from "./components/Product/paymentsuccess.js";
-import ProductView from "./components/Product/ProductViewMore.js";
-import PatientInformation from "./components/Doctor/Patients/Patients.js";
-
 
 function App() {
   return (
@@ -59,20 +51,14 @@ function App() {
           <Route path="/forgetpassword" element={<UserForgetPassword />} />
           <Route path="/Consult" element={<Consult />} />
           <Route path="/Appointment" element={<Appointment />} />
-          <Route path="/Chatbot" element={<ChatBot />} />
           <Route path="/doctorDashboard" element={<DoctorDashboard />} />
+          <Route path="/doctorconsult" element={<DoctorConsult />} />
           <Route path="/doctorconsult" element={<DoctorConsult />} />
           <Route path="/doctorlogin" element={<DoctorLogIn />} />
           <Route path="/doctorforgetpassword" element={<DoctorForgetPassword />} />
+          <Route path="/doctorConsultation" element={<DoctorConsultation />} />
           <Route path="/doctorvarication" element={<DoctorVarication />} />
           <Route path="/contact" element={<Contact />} />
-          {/* <Route path="/appointmentDetails" element={<AppointmentDetails />} /> */}
-          <Route path="/viewcart" element={<Viewcart />} />
-          <Route path="/Checkout" element={<Checkout />} />
-          <Route path="/doctorconsult" element={<DoctorConsult />} />
-          <Route path="/header" element={<Header />} />
-          <Route path="/PatientInformation" element={<PatientInformation/>}/>
-          <Route path="/doctorConsultation" element={<DoctorConsultation />} />
         </Routes>
         <Footer />
       </div>

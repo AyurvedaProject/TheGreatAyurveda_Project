@@ -8,16 +8,16 @@
 .icon-wikipedia {
     height: 100%;
     width: 100%;
-    background: url("./images/icons8-wikipedia-48.png") no-repeat center;
-    background-size: 80%;
+    background: url("./images/icons8-wikipedia-50.png") no-repeat center;
+    /* background-size: 120%; */
     cursor: pointer;
 }
 
 .icon-insta {
     height: 100%;
     width: 100%;
-    background: url("./images/icons8-instagram-48.png") no-repeat center;
-    background-size: 110%;
+    background: url("./images/icons8-instagram-96.png") no-repeat center;
+    background-size: 70%;
     cursor: pointer;
 }
 

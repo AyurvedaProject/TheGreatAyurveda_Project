@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
-const Product = () => {
+import { ToastContainer, toast } from "react-toastify"; const Product = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
         axios.get("http://localhost:3005/product/productlist")
@@ -13,7 +11,6 @@ const Product = () => {
                 console.log(err);
             })
     }, []);
-
     const addToCart = (productId) => {
         if (localStorage.getItem('userId')) {
             axios.post("http://localhost:3005/cart/addToCart", { userId: localStorage.getItem("userId"), productId, quantity: 1 })
@@ -31,7 +28,6 @@ const Product = () => {
     const ProductView = (product) => {
         navigate("/ProductView", { state: product });
     }
-
     return (<>
         <ToastContainer />
         <div className="mt-3 d-flex align-items-top justify-content-evenly gap-5 flex-wrap overflow-hidden" style={{ background: "var(--white)" }}>

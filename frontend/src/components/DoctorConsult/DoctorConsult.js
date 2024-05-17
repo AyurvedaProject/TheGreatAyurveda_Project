@@ -6,7 +6,6 @@ import { LiaLanguageSolid } from "react-icons/lia";
 import { FaUserDoctor } from "react-icons/fa6";
 import { MdWorkHistory } from "react-icons/md";
 import { AiOutlineMessage } from "react-icons/ai";
-import ChatBot from '../ChatBot/ChatBot.js';
 import "./DoctorConsult.css";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -92,7 +91,7 @@ const DoctorConsult = () => {
                     </div>
                 ))}
             </div>
-            {isChatbotOpen && <ChatBot style={{ zIndex: 1 }} />}
+            {/* {isChatbotOpen && <ChatBot style={{ zIndex: 1 }} />} */}
             {/* Ensure ChatBot z-index is lower than buttons */}
         </>
     );
