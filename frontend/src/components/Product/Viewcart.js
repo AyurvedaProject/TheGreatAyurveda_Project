@@ -117,6 +117,7 @@ export default () => {
                                 <h4 className="fw-bold">Total Bill : <BsCurrencyRupee />{(totalBillAmount).toFixed(2)}</h4>
                                 <button onClick={() => CheckOut(cartItemList, totalBillAmount)} className="btn btn-success mt-3 fw-bold" style={{ background: "var(--green)" }}>Checkout</button>
                             </div>
+
                         </div>
                     </section>
 

@@ -32,7 +32,6 @@
     "react-toastify": "^10.0.5",
     "semantic-ui-react": "^2.1.5",
     "styled-components": "^4.4.1",
-    "sweetalert2": "^11.10.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

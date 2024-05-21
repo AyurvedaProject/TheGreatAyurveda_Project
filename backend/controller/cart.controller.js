@@ -10,7 +10,6 @@ export const addToCart = async (request, response, next) => {
         const errors = validationResult(request);
         if (!errors.isEmpty())
             return response.status(401).json({ error: "Bad request..." });
-        // console.log(err);  
         
         let { userId, productId, quantity } = request.body;
         let cart = await Cart.findOne({ raw: true, where: { userId: userId * 1 } });
@@ -26,10 +25,10 @@ export const addToCart = async (request, response, next) => {
         else {             
             cart = await Cart.create({ userId: userId * 1 }, { transaction })
                 .then(result => { return result.dataValues });
-            
+
             await CartItems.create({ cartId: cart.id, productId: productId, quantity: quantity }, { transaction })
                 .then(result => { return result.dataValues });
-            
+
             await transaction.commit();
 
             return response.status(201).json({ message: "Item Successfully added into cart" });
