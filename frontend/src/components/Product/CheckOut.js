@@ -52,7 +52,7 @@ function Checkout() {
                     currency: "INR",
                     name: "The Great Ayurveda APP",
                     description: "Tutorial of RazorPay",
-                    image: "./images/A2.png",
+                    image: "https://www.pngarts.com/files/1/Gift-PNG-Transparent-Image.png",
                     order_id: order.id,
                     callback_url: "http://localhost:3005/payment/paymentverification",
                     prefill: {

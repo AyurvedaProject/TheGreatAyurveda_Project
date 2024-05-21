@@ -1,8 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-
 export default function ProductView() {
     const { state } = useLocation();
 
@@ -25,22 +23,12 @@ export default function ProductView() {
         navigate(-1)
     }
 
-    const Buynow = (product) => {
-        if (localStorage.getItem("userId")) {
-            navigate("/Buynow", { state: product });
-        }
-        else {
-            toast.error("please SignIn and add items in your cart");
-        }
-    }
-
     return <>
         <div class="card container-fluid my-3">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src={state.imageUrl} class="p-1 img-fluid rounded-start" alt="..." />
                 </div>
-
                 <div class="col-md-8">
                     <div class="card-body m-0 p-0">
                         <h5 class="card-title m-0 p-0 fs-5">{state.title}</h5>
