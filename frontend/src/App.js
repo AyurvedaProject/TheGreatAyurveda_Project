@@ -29,6 +29,7 @@ import UserProfile from "./components/UserProfile/UserProfile.js";
 import DoctorVarication from "./components/DoctorModule/Doctor/DoctorVarification/DoctorVarification/DoctorVarification.js";
 import PatientInformation from "./components/DoctorModule/Doctor/Patients/Patients.js";
 import DoctorAppointment from "./components/DoctorModule/Doctor/DoctorAppointment/DoctorAppointment.js";
+import Buynow from "./components/Product/Buynow.js";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
           <Route path="/doctorDashboard" element={<DoctorDashboard />} />
           <Route path="/doctorappointment" element={<DoctorAppointment/>}/>
           <Route path="/doctorconsultation " element={<DoctorAppointment/>}/>
+          <Route path="/Buynow" element={<Buynow/>} />
           
             {/* <Route/> */}
           <Route path="/doctorconsult" element={<DoctorConsult />} />

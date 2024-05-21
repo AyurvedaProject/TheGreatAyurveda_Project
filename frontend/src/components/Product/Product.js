@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Product = () => {
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
     useEffect(() => {
         axios.get("http://localhost:3005/product/productlist")
             .then(response => {
@@ -27,11 +28,17 @@ const Product = () => {
             toast.error("please SignIn and add items in your cart");
         }
     }
-    const navigate = useNavigate();
     const ProductView = (product) => {
         navigate("/ProductView", { state: product });
     }
-
+    const Buynow = (product) => {
+        if (localStorage.getItem("userId")) {
+            navigate("/Buynow", { state: product });
+        }
+        else {
+            toast.error("please SignIn and add items in your cart");
+        }
+    }
     return (<>
         <ToastContainer />
         <div className="mt-3 d-flex align-items-top justify-content-evenly gap-5 flex-wrap overflow-hidden" style={{ background: "var(--white)" }}>
@@ -44,7 +51,7 @@ const Product = () => {
                     <p className="card-text p-0 m-0 mt-2" style={{ fontSize: "0.7rem" }}>{product.description.slice(0, 100)}</p>
                     <div className="d-flex justify-content-around p-0 my-2">
                         <button style={{ fontSize: ".8rem" }} className="btnn addtocart-btn p-0 m-0 py-2 px-0" onClick={() => addToCart(product.id)}>Add To cart</button>
-                        <button style={{ fontSize: ".8rem" }} className="btnn buynow-btn text-white m-0 p-0 py-2 px-0">Buy Now</button>
+                        <button style={{ fontSize: ".8rem" }} className="btnn buynow-btn text-white m-0 p-0 py-2 px-0" onClick={() => Buynow(product)}>Buy Now</button>
                     </div>
                 </div>
             </div>)}
