@@ -16,7 +16,8 @@ const DoctorConsultation = () => {
     }, []);
     return <>
         <div>
-            <div className="container  border shadow-lg p-3 mb-5 b
+            <h2 className="d-flex justify-content-center align-items-center" style={{color:"var(--green)"}}>Consultation</h2>
+            <div className="container shadow-lg p-3 mt-3 mb-5 b
             g-body rounded ">
                 <table className="table ">
                     <thead>

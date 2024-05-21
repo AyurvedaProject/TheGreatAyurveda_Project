@@ -15,7 +15,7 @@ const DoctorAppointment = () => {
 
     return <>
         <div>
-        <h1 className="d-flex justify-content-center align-items-center">Appointment</h1>
+        <h2 className="d-flex justify-content-center align-items-center" style={{color:"var(--green)"}}>Appointment</h2>
             <div className="container  border shadow-lg p-3 mt-2 b
             g-body rounded ">
                 <table className="table ">
@@ -24,14 +24,18 @@ const DoctorAppointment = () => {
                             <th> Patient Name</th>
                             <th>Appointment Date</th>
                             <th>Time</th>
+                            <th>Phone</th>
                         </tr>
                     </thead>
                     <tbody>
                         {doctorAppointment.map((patient, index) => (
                             <tr key={index}>
                                 <td>{patient.name}</td>
+                                <td>{patient.appointmentDate.split("T")[0]}</td>
+                                <td>{patient.appointmentTime}</td>
                                 <td>{patient.phone}</td>
-                                <td>{patient.message}</td>
+
+
                             </tr>
                         ))}
 
