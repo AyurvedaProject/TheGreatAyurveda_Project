@@ -29,6 +29,7 @@ import UserProfile from "./components/UserProfile/UserProfile.js";
 import DoctorVarication from "./components/DoctorModule/Doctor/DoctorVarification/DoctorVarification/DoctorVarification.js";
 import PatientInformation from "./components/DoctorModule/Doctor/Patients/Patients.js";
 import DoctorAppointment from "./components/DoctorModule/Doctor/DoctorAppointment/DoctorAppointment.js";
+import ProfileSetting from "./components/DoctorModule/Doctor/DoctorDashboard/ProfileSetting/ProfileSetting.js";
 
 function App() {
   return (
@@ -53,18 +54,19 @@ function App() {
           <Route path="/forgetpassword" element={<UserForgetPassword />} />
           <Route path="/Consult" element={<Consult />} />
           <Route path="/Appointment" element={<Appointment />} />
-          <Route path="/doctorDashboard" element={<DoctorDashboard />} />
-          <Route path="/doctorappointment" element={<DoctorAppointment/>}/>
-          <Route path="/doctorconsultation " element={<DoctorAppointment/>}/>
-          
-            {/* <Route/> */}
+
+          <Route path="doctorDashboard" element={<DoctorDashboard />} >
+            <Route index element={<DoctorAppointment />} />
+            <Route path="doctorconsultation" element={<DoctorConsultation />} />
+            <Route path="profilesetting" element={<ProfileSetting/>}/>
+          </Route>
+
           <Route path="/doctorconsult" element={<DoctorConsult />} />
           <Route path="/doctorlogin" element={<DoctorLogIn />} />
           <Route path="/doctorforgetpassword" element={<DoctorForgetPassword />} />
-          <Route path="/doctorConsultation" element={<DoctorConsultation />} />
           <Route path="/doctorvarication" element={<DoctorVarication />} />
           <Route path="/contact" element={<Contact />} />
-          {/* <Route path="/patientInformation" element={<PatientInformation/>}/> */}
+
         </Routes>
         <Footer />
       </div>

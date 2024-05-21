@@ -41,7 +41,7 @@ router.delete("/remove", body("email", "invalid email").isEmail().notEmpty(), re
 
 router.post("/addDoctordetail", AddDoctorDetail);
 
-router.post("/doctorProfile", body("id", "invalid id").notEmpty(), doctorProfile);
+router.post("/doctorProfile",  doctorProfile);
 
 router.put("/updateDoctordetail",
     body("id", "invalid id").notEmpty(),

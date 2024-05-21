@@ -202,10 +202,6 @@ export const UpdateDoctorDetail = (request, response, next) => {
 }
 
 export const doctorProfile = (request, response, next) => {
-    const errors = validationResult(request);
-    if (!errors.isEmpty())
-        return response.status(401).json({ error: errors.array() });
-
     DoctorDetail.findOne({
         where: { doctorId: request.body.id },
         include: [{ model: Doctor, required: true }]
