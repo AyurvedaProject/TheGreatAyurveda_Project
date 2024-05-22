@@ -15,9 +15,9 @@ const DoctorConsultation = () => {
     }, []);
 
     return <>
-        <div>
+        <div className="border border-dark p-0 m-0 qwerty">
             <h1 >Consultation</h1>
-            <div className="container  border shadow-lg p-3 mt-2 b
+            <div className="table-responsive border shadow-lg p-3 mt-2 b
             g-body rounded ">
 
                 <table className="table ">

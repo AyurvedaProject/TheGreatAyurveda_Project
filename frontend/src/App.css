@@ -139,6 +139,9 @@
     margin: 0 !important;
     padding: 0 !important;
   }
+  .qwerty{
+    width: 90vw;
+  }
 }
 
 /* youtube hover =================================== */
