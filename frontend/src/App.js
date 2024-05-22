@@ -30,6 +30,7 @@ import DoctorVarication from "./components/DoctorModule/Doctor/DoctorVarificatio
 import PatientInformation from "./components/DoctorModule/Doctor/Patients/Patients.js";
 import DoctorAppointment from "./components/DoctorModule/Doctor/DoctorAppointment/DoctorAppointment.js";
 import ProfileSetting from "./components/DoctorModule/Doctor/DoctorDashboard/ProfileSetting/ProfileSetting.js";
+import Buynow from "./components/Product/Buynow.js";
 
 function App() {
   return (
@@ -54,13 +55,12 @@ function App() {
           <Route path="/forgetpassword" element={<UserForgetPassword />} />
           <Route path="/Consult" element={<Consult />} />
           <Route path="/Appointment" element={<Appointment />} />
-
           <Route path="doctorDashboard" element={<DoctorDashboard />} >
             <Route index element={<DoctorAppointment />} />
             <Route path="doctorconsultation" element={<DoctorConsultation />} />
             <Route path="profilesetting" element={<ProfileSetting/>}/>
           </Route>
-
+          <Route path="/Buynow" element={<Buynow/>} />
           <Route path="/doctorconsult" element={<DoctorConsult />} />
           <Route path="/doctorlogin" element={<DoctorLogIn />} />
           <Route path="/doctorforgetpassword" element={<DoctorForgetPassword />} />

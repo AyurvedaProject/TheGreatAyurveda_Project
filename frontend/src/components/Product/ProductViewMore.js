@@ -10,7 +10,7 @@ export default function ProductView() {
                 .then(response => {
                     toast.success(response.data.message);
                 }).catch(err => {
-                    toast.danger("Already added this product");
+                    toast.error("Already added this product");
                 });
         }
         else {
@@ -21,6 +21,14 @@ export default function ProductView() {
     const navigate = useNavigate();
     const back = () => {
         navigate(-1)
+    }
+    const Buynow = (product) => {
+        if (localStorage.getItem("userId")) {
+            navigate("/Buynow", { state: product });
+        }
+        else {
+            toast.error("please SignIn and add items in your cart");
+        }
     }
 
     return <>
@@ -36,7 +44,7 @@ export default function ProductView() {
                         <p className="m-0 px-0 pt-3 card-text"><small className="text-muted">{state.description}</small></p>
                         <div className="m-0 p-0 pt-3 gap-2 d-flex justify-content-start flex-wrap">
                             <button onClick={() => addToCart(state.id)} className="btnn addtocart-btn text-white">Add To cart</button>
-                            <button className="btnn buynow-btn text-white">Buy Now</button>
+                            <button className="btnn buynow-btn text-white"onClick={() => Buynow(state)}>Buy Now</button>
                             <button onClick={back} className="btnn text-white">Back</button>
                         </div>
                     </div>
