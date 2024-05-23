@@ -15,7 +15,7 @@ const DoctorDashboard = () => {
             }).catch(err => {
                 console.log(err);
             })
-    }, []);
+    }, [localStorage.getItem("doctorId")]);
 
 
     return <>

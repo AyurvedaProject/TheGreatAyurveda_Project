@@ -23,7 +23,7 @@ export default function UserProfile() {
                 setdisabledinput(1);
             }).catch(err => {
                 console.log(err);
-            })
+            }) 
     };
     useEffect(() => {
         UserInformation();

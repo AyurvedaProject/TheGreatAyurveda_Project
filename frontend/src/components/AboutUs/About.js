@@ -54,7 +54,7 @@ export default function AboutUs() {
             className="col-md-4 col-12 mt-3 text-center"
             id="history_right-image">
             <img
-              src="./images/HistoryImage.webp"
+              src="./images/home1.jpg"
               height={"300px"}
               width={"300px"}
             />
