@@ -199,7 +199,7 @@ const Disease = () => {
                         <div className="m-0 d-flex align-items-top justify-content-evenly flex-wrap overflow-hidden" style={{ background: "var(--white)" }}>
                             {homeremedies.map((remedy, index) => <div key={index} className="mb-4 mt-1 card shadow" id="view_hover" style={{ width: "18rem" }}>
                                 <img alt="..." src={remedy.imageUrl} style={{ height: "200px", cursor: "pointer" }} onClick={() => ViewMore(remedy)} className="ms-1 remede-img card-img-top p-1" />
-                                <i className="youtube-icon bg-white text-dark w-25 view pt-1" >ViewMore</i>
+                                <i className="youtube-icon bg-white text-dark w-25 view pt-1" onClick={() => ViewMore(remedy)} style={{ cursor: "pointer" }} >ViewMore</i>
                                 <div className="card-body m-0 p-1 px-3">
                                     <h4 className="card-title fs-6 fw-bold p-0 m-0">{remedy.remedyName.slice(0, 30)}</h4>
                                     <p className="card-text p-0 m-0 mt-2" style={{ fontSize: "0.7rem" }}>{remedy.description.slice(0, 80)}</p>
@@ -236,7 +236,7 @@ const Disease = () => {
                         <div className="m-0 d-flex align-items-top justify-content-evenly flex-wrap overflow-hidden" style={{ background: "var(--white)" }}>
                             {products.map((product, index) => <div key={index} className="mb-4 mt-1 card shadow" id="view_hover" style={{ width: "18rem" }}>
                                 <img alt="..." src={product.imageUrl} style={{ height: "200px", cursor: "pointer" }} onClick={() => ProductView(product)} className="ms-1 remede-img card-img-top p-1" />
-                                <i className="youtube-icon bg-white text-dark w-25 view" >ViewMore</i>
+                                <i className="youtube-icon bg-white text-dark w-25 view pt-1" onClick={() => ProductView(product)} style={{ cursor: "pointer" }}>ViewMore</i>
                                 <div className="card-body m-0 p-1 px-3">
                                     <h4 className="card-title fs-6 fw-bold p-0 m-0">{product.title.slice(0, 25)}</h4>
                                     <h4 className="card-title fs-6 fw-bold p-0 m-0" style={{ color: "var(--green)" }}>{product.price} Rs</h4>
@@ -298,7 +298,7 @@ const Disease = () => {
                     <div className="m-0 d-flex align-items-top justify-content-evenly flex-wrap overflow-hidden" style={{ background: "var(--white)" }}>
                         {doctorConsult.map((doctor, index) => <div key={index} className="mb-4 mt-1 card shadow" id="view_hover" style={{ width: "16rem" }}>
                             <img alt="..." src={doctor.doctorimage} onClick={() => consult(doctor)} style={{ height: "190px", cursor: "pointer" }} className="ms-1 remede-img card-img-top cursor-pointer p-1" />
-                            <i className="youtube-icon bg-white text-dark w-25 view" >ViewMore</i>
+                            <i className="youtube-icon bg-white text-dark w-25 view pt-1" onClick={() => consult(doctor)} style={{ cursor: "pointer" }}>ViewMore</i>
                             <div className="text-start card-body m-0 p-1 ps-2 ">
                                 <h4 className="card-title fs-6 fw-bold p-0 m-0">{doctor.doctor.doctorName.slice(0, 30)}</h4>
                                 <p className="card-text p-0 m-0 mt-1" style={{ fontSize: "0.7rem" }}>{capitalizeFirstLetter(doctor.specialization)}</p>
