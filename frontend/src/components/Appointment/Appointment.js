@@ -8,47 +8,43 @@ import { MdWorkHistory } from "react-icons/md";
 import "./Appointment.css";
 import { PiSunHorizon } from "react-icons/pi";
 import { FiSun } from "react-icons/fi";
-import ReactHorizontalDatePicker from 'react-horizontal-strip-datepicker'
-import 'react-horizontal-strip-datepicker/dist/ReactHorizontalDatePicker.css'
+import ReactHorizontalDatePicker from 'react-horizontal-strip-datepicker';
+import 'react-horizontal-strip-datepicker/dist/ReactHorizontalDatePicker.css';
 import { MdOutlineNightlight } from "react-icons/md";
-import { RxCross2 } from "react-icons/rx"
+import { RxCross2 } from "react-icons/rx";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const Appointment = () => {
     const { state } = useLocation();
-    // console.log(state)
     const navigate = useNavigate();
     const back = () => {
         navigate("/");
         navigate("/doctorConsult");
-    }
-    const currentDate = new Date();
-    const onSelectedDay = (d) => {
-
-    }
-
-    const handleTimeSelection = (time) => {
-        setSelectedTime(time);
-        // console.log(selectedTime);
     };
+    const currentDate = new Date();
+    const [selectedTime, setSelectedTime] = useState("");
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [age, setAge] = useState("");
     const [email, setEmail] = useState("");
     const [selectedOption, setSelectedOption] = useState('');
-    const [selectedTime, setSelectedTime] = useState("");
     const [selectedDate, setSelectedDate] = useState("");
-
+    const [time, setTime] = useState("");
 
     const handleDateSelection = (date) => {
         setSelectedDate(date);
-        // console.log(date);
     };
-    //   alert(state.doctorId);
 
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value);
     };
+
+    const handleTimeSelection = (time) => {
+        setTime(time);
+        setSelectedTime(time);
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -58,21 +54,20 @@ const Appointment = () => {
             email: email,
             age: age,
             gender: selectedOption,
-            appointmentTime: selectedTime,
+            appointmentTime: time,
             appointmentDate: selectedDate,
             doctorId: state.doctorId
         };
 
         try {
-            if (name && phone && email && age && selectedOption && selectedTime && selectedDate) {
+            if (name && phone && email && age && selectedOption && time && selectedDate) {
                 axios.post('http://localhost:3005/doctor/doctorAppointment', formData).then(res => {
-                    // console.log('Appointment booked successfully:', res.data);
-                    alert("Appointment booked successfully")
+                    toast.success("Appointment booked successfully");
                 }).catch(err => {
-                    console.log("hello", err)
+                    console.log("hello", err);
                 });
             } else {
-                alert("Please fill all the fields");
+                toast.error("Please fill all the fields");
             }
 
             setName('');
@@ -82,23 +77,19 @@ const Appointment = () => {
             setSelectedTime('');
             setSelectedDate('');
         } catch (error) {
-            // Handle errors
             console.error('Error booking appointment:', error);
         }
-
+        console.log(formData);
     };
-
-
 
     return (
         <>
-
+            <ToastContainer />
             <div className="doctor-consult container rounded my-5 shadow-lg p-0 bg-body rounded">
                 <RxCross2 className="closeicon text-white mt-2" onClick={back} />
                 <h1 className="fs-3 text-center text-white p-2" style={{ background: "var(--green)" }}>Schedule Appointment</h1>
                 <div className='m-2 py-2 row alldata'>
                     <div className='col-4'>
-
                         <div className="doctor-img">
                             <img src={state.doctorimage} alt="Doctor Image" className="doctor-images rounded-circle border-3" />
                         </div>
@@ -118,84 +109,41 @@ const Appointment = () => {
                         </div>
                     </div>
                 </div>
-                <div className="calender"> <ReactHorizontalDatePicker
-                    selectedDay={handleDateSelection}
-                    enableScroll={true}
-                    enableDays={180}
-                /></div>
-
-                <div className="timing-slots">
-                    <div>
-                        <div className="shift">
-                            <span><PiSunHorizon /></span>
-                            <span>Morning</span>
-                            <br></br>
-                        </div>
-                        <div className="time mb-2 mt-2">
-                            <span onClick={() => handleTimeSelection("10:00 AM")} className={selectedTime === "10:00 AM" ? "selected-time" : ""}>10:00 AM</span>
-                            <span onClick={() => handleTimeSelection("10:30 AM")} className={selectedTime === "10:30 AM" ? "selected-time" : ""}>10:30 AM</span>
-                            <span onClick={() => handleTimeSelection("11:00 AM")} className={selectedTime === "11:00 AM" ? "selected-time" : ""}>11:00 AM</span>
-                            <span onClick={() => handleTimeSelection("11:30 AM")} className={selectedTime === "11:30 AM" ? "selected-time" : ""}>11:30 AM</span>
-                            <span onClick={() => handleTimeSelection("12:00 AM")} className={selectedTime === "12:00 AM" ? "selected-time" : ""}>12:00 AM</span>
-
-
-
-
-                        </div>
-                    </div>
-
-                    <div>
-                        <div className="shift">
-                            <span><FiSun /></span>
-                            <span>Afternoon</span>
-                        </div>
-                        <div className="time mb-2 mt-2">
-                            <div className="time mb-2 mt-2">
-                                <span
-                                    onClick={() => handleTimeSelection("12:00 PM")}
-                                    className={selectedTime === "12:00 PM" ? "selected-time" : ""}
-                                >
-                                    12:00 PM
-                                </span>
-                                <span
-                                    onClick={() => handleTimeSelection("12:30 PM")}
-                                    className={selectedTime === "12:30 PM" ? "selected-time" : ""}
-                                >
-                                    12:30 PM
-                                </span>
-                                <span
-                                    onClick={() => handleTimeSelection("01:00 PM")}
-                                    className={selectedTime === "01:00 PM" ? "selected-time" : ""}
-                                >
-                                    01:00 PM
-                                </span>
-                                <span
-                                    onClick={() => handleTimeSelection("01:30 PM")}
-                                    className={selectedTime === "01:30 PM" ? "selected-time" : ""}
-                                >
-                                    01:30 PM
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div>
-                        <div className="shift">
-                            <span><MdOutlineNightlight /></span>
-                            <span>Evening</span>
-                        </div>
-                        <div className="time mb-2 mt-2">
-                            <span onClick={() => handleTimeSelection("05:00 PM")}>05:00 PM</span>
-                            <span onClick={() => handleTimeSelection("05:30 PM")}>05:30 PM</span>
-                            <span onClick={() => handleTimeSelection("06:00 PM")}>06:00 PM</span>
-                            <span onClick={() => handleTimeSelection("06:30 PM")}>06:30 PM</span>
-                            <span onClick={() => handleTimeSelection("07:00 PM")}>07:00 PM</span>
-                            <span onClick={() => handleTimeSelection("0:30 PM")}>07:30 PM</span>
-                        </div>
-                    </div>
-
+                <div className="calender">
+                    <ReactHorizontalDatePicker
+                        selectedDay={handleDateSelection}
+                        enableScroll={true}
+                        enableDays={180}
+                    />
                 </div>
+
+                {/* <div className="timing-slots border">
+                    <div className="time mb-2 mt-2 border border success">
+                        {state.time.split("M")?.map((timeValue, index) => (
+                            <span 
+                                key={index} 
+                                onClick={() => handleTimeSelection(timeValue + "M")} 
+                                className={`time mb-2 mt-2 time-span border border-dark ${selectedTime === timeValue + "M" ? 'selected' : ''}`}
+                            >
+                                {timeValue}M
+                            </span>
+                        ))}
+                    </div>
+                </div> */}
+                <div className="timing-slots">
+                    <div className="time mb-2 mt-2 ">
+                        {state.time.split("M")?.filter(timeValue => timeValue).map((timeValue, index) => (
+                            <span
+                                key={index}
+                                onClick={() => handleTimeSelection(timeValue + "M")}
+                                className={`time mb-2 mt-2 time-span border border-dark ${selectedTime === timeValue + "M" ? 'selected' : ''}`}
+                            >
+                                {timeValue}M
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
                 <form>
                     <div className="form-group">
                         <div className="row">
@@ -227,7 +175,6 @@ const Appointment = () => {
                                             checked={selectedOption === 'male'}
                                             onChange={handleOptionChange}
                                         />
-
                                     </label>
                                     <label className=" ms-4">
                                         female
@@ -238,7 +185,6 @@ const Appointment = () => {
                                             checked={selectedOption === 'female'}
                                             onChange={handleOptionChange}
                                         />
-
                                     </label>
                                     <label className=" ms-4">
                                         other
@@ -249,25 +195,17 @@ const Appointment = () => {
                                             checked={selectedOption === 'other'}
                                             onChange={handleOptionChange}
                                         />
-
                                     </label>
-
                                 </div>
 
                                 <div>
-
-                                    <button onClick={handleSubmit} type="submit" className="btnnn text-white mb-3 ms-3  mt-4 ">Book Appointment</button>
-
-
+                                    <button onClick={handleSubmit} type="submit" className="btnnn text-white mb-3 ms-3 mt-4">Book Appointment</button>
                                 </div>
                             </div>
-                            <div />
                         </div>
                     </div>
                 </form>
-
             </div>
-
         </>
     );
 }

@@ -7,6 +7,7 @@
     font-size: 20px;
 
 }
+
 .btnnn{
     width: 530px;
     border: 2px solid var(--green) !important;
@@ -22,7 +23,7 @@
     color: var(--green) !important;
     scale: 1.01;
   }
-.time span {
+.time-span {
 
     border: 1px solid var(--green) !important;
     padding: 6px;
@@ -31,12 +32,17 @@
     border-radius: 10px;
     color: var(--green);
     cursor: pointer;
+    
 
 }
 .selected-time {
     background-color:var(--green);
     /* color: var(--white) !important; */
     color:var(--white) !important;
+}
+.time-span.selected{
+    background-color: var(--green) !important;
+    color: white;
 }
 
 

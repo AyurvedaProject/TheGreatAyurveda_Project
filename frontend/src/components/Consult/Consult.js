@@ -17,11 +17,13 @@ const Consult = () => {
     const { state } = useLocation();
     console.log(state)
     const navigate = useNavigate();
+    const doctorId=localStorage.getItem("doctorId");
 
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
-        message: ''
+        message: '',
+        doctorId:localStorage.getItem("doctorId")
     });
     const [successMessage, setSuccessMessage] = useState('');
     const [failureMessage, setFailureMessage] = useState('');
@@ -53,7 +55,7 @@ const Consult = () => {
 
         // Logging form data
         // console.log('Form Data:', formData);
-        axios.post("http://localhost:3005/consult/addconsult", { formData })
+        axios.post("http://localhost:3005/consult/doctorConsultData", { formData,doctorid:doctorId })
             .then(response => {
                 console.log("Response:", response.data);
                 setSuccessMessage("Message sent successfullly !");
@@ -61,7 +63,8 @@ const Consult = () => {
                 setFormData({
                     name: '',
                     phone: "",
-                    message: " "
+                    message: " ",
+                    doctorId:localStorage.getItem("doctorId")
                 });
                 setShowModal(true);
             })
@@ -71,7 +74,6 @@ const Consult = () => {
                 toast.error('Failed to send message. Please try again later.');
 
             })
-        // Perform other actions like submitting to backend or navigating
     };
 
     const validateFormData = (data) => {

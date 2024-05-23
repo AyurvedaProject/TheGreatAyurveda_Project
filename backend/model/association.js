@@ -2,6 +2,7 @@ import Appointment from "./appointment.model.js";
 import Cart from "./cart.model.js";
 import CartItems from "./cartitems.model.js";
 import Category from "./category.model.js";
+import Consult from "./consult.model.js";
 import Doctor from "./doctor.model.js";
 import DoctorDetail from "./doctordetail.model.js";
 import HomeRemedy from "./homeremedy.model.js";
@@ -39,6 +40,10 @@ Order.belongsTo(User, { foreignKey: 'userId' });
 // appointment
 Doctor.hasMany(Appointment, { foreignKey: 'doctorId', onDelete: 'CASCADE' })
 Appointment.belongsTo(Doctor, { foreignKey: 'doctorId', onDelete: 'CASCADE' })
+
+// consults
+Doctor.hasMany(Consult, { foreignKey: 'doctorId', onDelete: 'CASCADE' })
+Consult.belongsTo(Doctor, { foreignKey: 'doctorId', onDelete: 'CASCADE' })
 
 // User.hasMany(Appointment, { foreignKey: 'userId', onDelete: 'CASCADE' })
 // Appointment.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' })

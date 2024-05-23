@@ -60,6 +60,14 @@ const Home = () => {
     const getStart = (yoga) => {
         navigate("/getstart", { state: yoga });
     }
+    const Buynow = (product) => {
+        if (localStorage.getItem("userId")) {
+            navigate("/Buynow", { state: product });
+        }
+        else {
+            toast.error("please SignIn and add items in your cart");
+        }
+    }
 
     return (<>
         <ToastContainer />
@@ -87,7 +95,7 @@ const Home = () => {
                 <div className="container-fluid text-center gap-5 d-flex flex-nowrap overflow-auto overflow-x-scroll" style={{ scrollbarWidth: "none" }}>
                     {homeremedies.map((remedy, index) => <div key={index} className="mb-4 mt-1 card shadow" id="view_hover" style={{ width: "20rem", flex: "0 0 auto" }}>
                         <img src={remedy.imageUrl} style={{ height: "220px", cursor: "pointer" }} onClick={() => ViewMore(remedy)} className="ms-1 remede-img card-img-top p-1" alt="..." />
-                        <i className="youtube-icon bg-white text-dark w-25 view" >ViewMore</i>
+                        <i className="youtube-icon bg-danger text-light w-25 view pt-1" onClick={() => ViewMore(remedy)} style={{ cursor: "pointer" }}>ViewMore</i>
                         <div className="card-body m-0 p-1 px-3">
                             <h4 className="card-title fs-6 fw-bold p-0 m-0">{remedy.remedyName.slice(0, 30)}</h4>
                             <p className="card-text p-0 m-0 mt-3" style={{ fontSize: "0.7rem" }}>{remedy.description.slice(0, 80)}</p>
@@ -99,14 +107,14 @@ const Home = () => {
                 <div className="container-fluid text-center gap-5 d-flex flex-nowrap overflow-auto overflow-x-scroll" style={{ scrollbarWidth: "none" }}>
                     {products.map((product, index) => <div key={index} className="mb-4 mt-1 card shadow" id="view_hover" style={{ width: "20rem", flex: "0 0 auto" }}>
                         <img src={product.imageUrl} style={{ height: "220px", cursor: "pointer" }} onClick={() => ProductView(product)} className="ms-1 remede-img card-img-top p-1" alt="..." />
-                        <i className="youtube-icon bg-white text-dark w-25 view" >ViewMore</i>
+                        <i className="youtube-icon bg-danger text-light w-25 view pt-1" onClick={() => ProductView(product)} style={{ cursor: "pointer" }}>ViewMore</i>
                         <div className="card-body m-0 p-1 px-3">
                             <h4 className="card-title fs-6 fw-bold p-0 m-0">{product.title.slice(0, 25)}</h4>
                             <h4 className="card-title fs-6 fw-bold p-0 m-0 mt-3" style={{ color: "var(--green)" }}>{product.price} Rs</h4>
                             <p className="card-text p-0 m-0 mt-3" style={{ fontSize: "0.7rem" }}>{product.description.slice(0, 100)}</p>
                             <div className="d-flex justify-content-around p-0 my-3">
                                 <button style={{ fontSize: ".8rem" }} className="btnn addtocart-btn p-0 m-0 py-2 px-0" onClick={() => addToCart(product.id)}>Add To cart</button>
-                                <button style={{ fontSize: ".8rem" }} className="btnn buynow-btn text-white m-0 p-0 py-2 px-0">Buy Now</button>
+                                <button style={{ fontSize: ".8rem" }} className="btnn buynow-btn text-white m-0 p-0 py-2 px-0" onClick={() => Buynow(product)}>Buy Now</button>
                             </div>
                         </div>
                     </div>)}

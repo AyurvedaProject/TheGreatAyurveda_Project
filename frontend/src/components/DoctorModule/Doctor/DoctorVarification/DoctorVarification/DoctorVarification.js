@@ -1,102 +1,198 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./DoctorVarification.css";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const DoctorVarication = () => {
-  const [qualification, setQualification] = useState(" ");
-  const [experience, setExperience] = useState("  ");
-  const [language, setLanguage] = useState("   ");
-  const [specialization, setSpecialization] = useState("    ");
-  const [clinicAddress, setClinicAddress] = useState("     ");
-  const [doctorImage, setDoctorImage] = useState("      ");
-
-  const [qualificationValue, setQualificationValue] = useState("");
-  const [experienceValue, setExperienceValue] = useState("");
-  const [languageValue, setLanguageValue] = useState("");
-  const [specializationValue, setSpecializationValue] = useState("");
-  const [genderValue, setGenderValue] = useState("");
-  const [clinicAddressValue, setClinicAddressValue] = useState("");
-  const [doctorImageValue, setDoctorImageValue] = useState("");
+const DoctorVarification = () => {
+  const [qualification, setQualification] = useState("");
+  const [experience, setExperience] = useState("");
+  const [language, setLanguage] = useState("");
+  const [time, setTime] = useState("");
+  const [specialization, setSpecialization] = useState("");
+  const [clinicAddress, setClinicAddress] = useState("");
+  const [doctorImage, setDoctorImage] = useState("");
+  const [gender, setGender] = useState("");
 
   const navigate = useNavigate();
-  const adddoctordetails = () => {
-    if (qualification === experience && experience === language && language === specialization && specialization === clinicAddress && clinicAddress === doctorImage) {
-      axios.post("http://localhost:3005/doctor/addDoctordetail", { qualification: qualificationValue, experience: experienceValue, language: languageValue, specialization: specializationValue, gender: genderValue, clinicAddress: clinicAddressValue, doctorimage: doctorImageValue, doctorId: (localStorage.getItem("doctorId")) })
-        .then(response => {
+
+  const addDoctorDetails = () => {
+    alert(doctorImage)
+    if (
+      qualification &&
+      experience &&
+      language &&
+      time &&
+      specialization &&
+      clinicAddress &&
+      doctorImage &&
+      gender
+    ) {
+      axios
+        .post("http://localhost:3005/doctor/addDoctordetail", {
+          qualification,
+          experience,
+          language,
+          time,
+          specialization,
+          gender,
+          clinicAddress,
+          doctorImage,
+          doctorId: localStorage.getItem("doctorId"),
+        })
+        .then((response) => {
           if (response.status === 200) {
-            toast.success("data add Successfully....");
+            toast.success("Data added successfully.");
             navigate("/doctorDashboard");
           }
-        }).catch(err => {
-          console.log(err);
-          toast.error("data add fail...");
         })
+        .catch((err) => {
+          console.log(err);
+          toast.error("Failed to add data.");
+        });
     } else {
-      toast.info("Please fill the all details");
+      toast.info("Please fill in all details.");
     }
-  }
+  };
 
   return (
     <>
       <ToastContainer />
-      <h1 className="text-center mt-2 mb-2">Doctor Varification</h1>
+      <h1 className="text-center mt-2 mb-2">Doctor Verification</h1>
       <div className="container mt-3 p-3 mb-3 border">
         <div className="row">
-          <div className="col-md-6">Qualification
-            <select name="qualification" onClick={(event) => { event.target.value === "" ? setQualification("Qualification is requeired") : setQualification(""); setQualificationValue(event.target.value); }} className="form-control" id="qualification">
-              <option value="BAMS (Bachelor of Ayurvedic Medicine and Surgery)">BAMS (Bachelor of Ayurvedic Medicine and Surgery)</option>
-              <option value="MD (Ayurveda)">MD (Ayurveda)</option>
-              <option value="MS (Ayurveda)">MS (Ayurveda)</option>
-              <option value="PG Diploma Courses">PG Diploma Courses</option>
-              <option value="Ph.D. in Ayurveda">Ph.D. in Ayurveda</option>
+          <div className="col-md-6">
+            Qualification
+            <select
+              name="qualification"
+              className="form-control"
+              id="qualification"
+              onChange={(e) => setQualification(e.target.value)}
+            >
+              <option value="">Select Qualification</option>
+              <option value="BAMS">BAMS</option>
+              <option value="MD">MD</option>
+              <option value="MS">MS</option>
             </select>
-            <small className="text-danger">{qualification}</small>
           </div>
-          <div className="col-md-6">Experience
-            <input type="text" className="form-control" placeholder="Enter Experience" required onChange={(event) => { event.target.value === "" ? setExperience("Experience is requeired") : !event.target.value.match("^[0-9]+$") ? setExperience("Only digit is allow") : !event.target.value.match("^[0-9]{1,1}$") ? setExperience("experience invelid") : setExperience(""); setExperienceValue(event.target.value); }}></input>
-            <small className="text-danger">{experience}</small>
+          <div className="col-md-6">
+            Experience
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter Experience"
+              onChange={(e) => setExperience(e.target.value)}
+            />
           </div>
         </div>
         <div className="row">
-          <div className="col-md-6 mt-3">Language
-            <select name="language" className="form-control" id="language" onClick={(event) => { event.target.value === "" ? setLanguage("Qualification is requeired") : setLanguage(""); setLanguageValue(event.target.value); }}>
+          <div className="col-md-6 mt-3">
+            Language
+            <select
+              name="language"
+              className="form-control"
+              id="language"
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              <option value="">Select Language</option>
               <option value="Hindi">Hindi</option>
               <option value="English">English</option>
-              <option value="Hindi,English">Hindi,English</option>
             </select>
-            <small className="text-danger">{language}</small>
           </div>
-          <div className="col-md-6 mt-3">Specialization
-            <input type="text" className="form-control" placeholder="Specialization" required onChange={(event) => { event.target.value === "" ? setSpecialization("Specialization is requeired") : !event.target.value.match("^[a-z A-Z]+$") ? setSpecialization("Only character is allow") : !event.target.value.match("^[a-z A-Z]{5,50}$") ? setSpecialization("Specialization must be at least 5 character") : setSpecialization(""); setSpecializationValue(event.target.value); }}></input>
-            <small className="text-danger">{specialization}</small>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6 mt-3 genderClass">Gender
-            <label htmlFor="male" className="ms-2">male</label>
-            <input type="radio" name="gender" id="male" value="male" onClick={(event) => setGenderValue(event.target.value)}></input>
-            <label htmlFor="female" className="ms-2">female</label>
-            <input type="radio" name="gender" id="female" value="female" onClick={(event) => setGenderValue(event.target.value)}></input>
-            <label htmlFor="other" className="ms-2">other</label>
-            <input type="radio" name="gender" id="other" value="other" onClick={(event) => setGenderValue(event.target.value)}></input>
-            <br></br>
-          </div>
-          <div className="col-md-6 mt-3">Doctor Image
-            <input type="file" required className="form-control" onChange={(event) => { event.target.value === "" ? setDoctorImage("Doctor image is requeired") : setDoctorImage(""); setDoctorImageValue(event.target.value); }}></input>
-            <small className="text-danger">{doctorImage}</small>
+          <div className="col-md-6 mt-3">
+            Specialization
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Specialization"
+              onChange={(e) => setSpecialization(e.target.value)}
+            />
           </div>
         </div>
         <div className="row">
-          <div className="col-12 mt-3">Clinic Address
-            <textarea className="form-control" type="text" placeholder="Enter clinic Address" required onChange={(event) => { event.target.value === "" ? setClinicAddress("Clinic Address is requeired") : !event.target.value.match("[A-Za-z0-9]") ? setClinicAddress("Only character and digit is allow") : !event.target.value.match("^[A-Za-z0-9]{10,70}$") ? setClinicAddress("Clinic Address must be at least 10 character") : setClinicAddress(""); setClinicAddressValue(event.target.value); }}></textarea>
-            <small className="text-danger">{clinicAddress}</small>
+          <div className="col-md-6 mt-3 genderClass">
+            Gender
+            <div>
+              <label htmlFor="male" className="ms-2">
+                Male
+              </label>
+              <input
+                type="radio"
+                name="gender"
+                id="male"
+                value="male"
+                onChange={(e) => setGender(e.target.value)}
+              />
+              <label htmlFor="female" className="ms-2">
+                Female
+              </label>
+              <input
+                type="radio"
+                name="gender"
+                id="female"
+                value="female"
+                onChange={(e) => setGender(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="col-md-6 mt-3">
+            Doctor Image
+            <input
+              type="file"
+              className="form-control"
+              onChange={(e) => setDoctorImage(e.target.value)}
+            />
           </div>
         </div>
         <div className="row">
-          <div className="col-md-2">
-            <button type="submit" onClick={() => adddoctordetails()} className="btnn text-white mt-3">Verify</button>
+          <div className="col-md-6 mt-3">
+            Select Time
+            <select
+              name="time"
+              className="form-control"
+              id="time"
+              multiple
+              onChange={(e) => setTime(Array.from(e.target.selectedOptions).map(option => option.value))}
+            >
+              <option value="10:00 AM">10:00 AM</option>
+              <option value="10:30 AM">10:30 AM</option>
+              <option value="11:00 AM">11:00 AM</option>
+              <option value="11:30 AM">11:30 AM</option>
+              <option value="12:00 PM">12:00 PM</option>
+              <option value="12:30 PM">12:30 PM</option>
+              <option value="01:00 PM">01:00 PM</option>
+              <option value="01:30 PM">01:30 PM</option>
+              <option value="02:00 PM">02:00 PM</option>
+              <option value="02:30 PM">02:30 PM</option>
+              <option value="03:00 PM">03:00 PM</option>
+              <option value="03:30 PM">03:30 PM</option>
+              <option value="04:00 PM">04:00 PM</option>
+              <option value="04:30 PM">04:30 PM</option>
+              <option value="05:00 PM">05:00 PM</option>
+              <option value="05:30 PM">05:30 PM</option>
+              <option value="06:00 PM">06:00 PM</option>
+              <option value="06:30 PM">06:30 PM</option>
+            </select>
+          </div>
+          <div className="col-md-6 mt-3">
+            Clinic Address
+            <textarea
+              className="form-control"
+              placeholder="Enter Clinic Address"
+              onChange={(e) => setClinicAddress(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12 mt-3">
+            <button
+              type="submit"
+              onClick={addDoctorDetails}
+              className="btn btn-primary"
+            >
+              Verify
+            </button>
           </div>
         </div>
       </div>
@@ -104,4 +200,4 @@ const DoctorVarication = () => {
   );
 };
 
-export default DoctorVarication;
+export default DoctorVarification;

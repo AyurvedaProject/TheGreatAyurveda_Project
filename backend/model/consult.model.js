@@ -15,15 +15,21 @@ const Consult = sequelize.define("consult", {
     },
    
     phone: {
-        type: DataTypes.STRING, // Allow variable-length strings
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
+
+    doctorId:{
+        type:DataTypes.INTEGER,
+   
+    },
     
     message: {
-        type: DataTypes.TEXT, // Use TEXT for longer strings
+        type: DataTypes.TEXT, 
         allowNull: false
     }
+    
 });
 
 

@@ -145,24 +145,27 @@ export const update = (request, response, next) => {
 }
 
 export const AddDoctorDetail = (request, response, next) => {
-    const errors = validationResult(request);
-    if (!errors.isEmpty())
-        return response.status(401).json({ error: errors.array() });
-
+    console.log(request.body)
+    let time = "";
+    for(let item of request.body.time){
+        time+=item;
+    }
     DoctorDetail.create({
         qualification: request.body.qualification,
         experience: request.body.experience,
         gender: request.body.gender,
         language: request.body.language,
+        time:time,
         clinicAddress: request.body.clinicAddress,
-        doctorimage: request.body.doctorimage,
+        doctorimage: request.body.doctorImage,
         specialization: request.body.specialization,
         doctorId: request.body.doctorId
     })
         .then((result) => {
-            return response.status(200).json({ message: "DoctorDetail Saved...." });
+            return response.status(200).json({ message: "DoctorDetail Saved....",result });
         })
         .catch((err) => {
+            console.log(err)
             return response.status(500).json({ error: "Internal server error...", err });
         })
 }
@@ -199,10 +202,6 @@ export const UpdateDoctorDetail = (request, response, next) => {
 }
 
 export const doctorProfile = (request, response, next) => {
-    const errors = validationResult(request);
-    if (!errors.isEmpty())
-        return response.status(401).json({ error: errors.array() });
-
     DoctorDetail.findOne({
         where: { doctorId: request.body.id },
         include: [{ model: Doctor, required: true }]
@@ -247,7 +246,9 @@ export const doctorAppointment = (request, response, next) => {
 }
 
 export const appointmentList = (request, response, next) => {
-    Appointment.findAll()
+
+    
+    Appointment.findAll({ where: { doctorId: request.body.doctorid }})
         .then((result) => {
             return response.status(200).json({ Data: result });
         })
@@ -255,6 +256,7 @@ export const appointmentList = (request, response, next) => {
             return response.status(500).json({ error: "Internal server error...", err });
         })
 }
+
 
 
 export const appointmentDetailslist = (request, response, next) => {
@@ -307,24 +309,7 @@ export const updateAppointmentStatus = (request, response, next) => {
         })
 
 }
-// export const doctorConsult = (request, response, next) => {
-//     const errors = validationResult(request);
-//     if (!errors.isEmpty()) {
-//         console.log("DoctorConsult");
-//         return response.status(401).json({ error: errors.array() });
-//     }
-//     Doctor.findAll({
-//         // , include: [{ model: Product, required: true }, { model: HomeRemedy, required: true }, { model: Yoga, required: true }]
-//         include: [{ model: DoctorDetail, required: true, attributes: ['doctorId', 'doctorImage', 'specialization', 'experience', 'qualification', 'clinicAddress', 'gender', 'language'] }]
-//     })
 
-//         .then((result) => {
-//             return response.status(200).json({ message: 'Status updated....', result })
-//         })
-//         .catch(err => {
-//             return response.status(500).json({ error: "Internal server error...", err });
-//         });
-// }
 
 export const doctorConsult = (request, response, next) => {
     const errors = validationResult(request);
@@ -402,3 +387,4 @@ export const setnewpassword = (request, response, next) => {
             return response.status(500).json({ error: 'internal server error....', err })
         })
 }
+

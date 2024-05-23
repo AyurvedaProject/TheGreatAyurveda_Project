@@ -1,22 +1,24 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+// const doctorid = localStorage.getItem("doctorId");
+const doctorid = 8;
 
 const DoctorConsultation = () => {
     const [doctorConsultation, setDoctorConsultation] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:3005/consult/getconsultdata")
+        axios.post("http://localhost:3005/consult/doctorConsultData", { doctorid })
             .then(response => {
                 setDoctorConsultation(response.data);
-                console.log(response.data);
+                console.log(response);
             }).catch(err => {
                 console.log(err);
             })
     }, []);
-
     return <>
-        <div>
-            <div className="container  border shadow-lg p-3 mb-5 b
-            g-body rounded ">
+        <div className="qwerty">
+            <h2 className="d-flex justify-content-center align-items-center" style={{color:"var(--green)"}}>Consultation</h2>
+            <div className="container shadow-lg p-3 mt-3 mb-5 b
+            g-body rounded table-responsive ">
                 <table className="table ">
                     <thead>
                         <tr>
@@ -40,7 +42,7 @@ const DoctorConsultation = () => {
             </div>
         </div>
     </>
- 
+
 
 }
 export default DoctorConsultation;
