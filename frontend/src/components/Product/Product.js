@@ -44,7 +44,7 @@ const Product = () => {
         <div className="mt-3 d-flex align-items-top justify-content-evenly gap-5 flex-wrap overflow-hidden" style={{ background: "var(--white)" }}>
             {products.map((product, index) => <div key={index} className="mb-4 mt-1 card shadow" id="view_hover" style={{ width: "18rem" }}>
                 <img src={product.imageUrl} style={{ height: "200px", cursor: "pointer" }} onClick={() => ProductView(product)} className="ms-1 remede-img card-img-top p-1" alt="..." />
-                <i className="youtube-icon bg-white text-dark w-25 view pt-1" >ViewMore</i>
+                <i className="youtube-icon bg-danger text-light w-25 view pt-1"onClick={() => ProductView(product)} style={{cursor:"pointer"}} >ViewMore</i>
                 <div className="card-body m-0 p-1 px-3">
                     <h4 className="card-title fs-6 fw-bold p-0 m-0">{product.title.slice(0, 25)}</h4>
                     <h4 className="card-title fs-6 fw-bold p-0 m-0" style={{ color: "var(--green)" }}>{product.price} Rs</h4>
