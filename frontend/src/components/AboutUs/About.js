@@ -1,5 +1,3 @@
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
 import { FaHeart, FaLeaf } from "react-icons/fa";
 import { IoMdDoneAll } from "react-icons/io";
 import "./About.css";

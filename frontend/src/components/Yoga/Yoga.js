@@ -6,7 +6,7 @@ import { FaPlay } from "react-icons/fa";
 const Yoga = () => {
     const [yogalist, setYoga] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:3005/yoga/yogalist")
+        axios.get(process.env.React_APP_SECRET_KEY_Yoga)
             .then(response => {
                 setYoga(response.data.YogaList);
             }).catch(err => {

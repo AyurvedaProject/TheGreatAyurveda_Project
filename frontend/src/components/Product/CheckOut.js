@@ -10,7 +10,7 @@ let userId = localStorage.getItem("userId")
 function Checkout() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { cartItemList, totalBillAmount } = location.state;
+    const {cartItemList, totalBillAmount } = location.state;
 
     const [FullName, setFullName] = useState("");
     const [FullName2, setFullName2] = useState("");
@@ -52,7 +52,7 @@ function Checkout() {
                     currency: "INR",
                     name: "The Great Ayurveda APP",
                     description: "Tutorial of RazorPay",
-                    image: "https://www.pngarts.com/files/1/Gift-PNG-Transparent-Image.png",
+                    image: "./images/2.png",
                     order_id: order.id,
                     callback_url: "http://localhost:3005/payment/paymentverification",
                     prefill: {

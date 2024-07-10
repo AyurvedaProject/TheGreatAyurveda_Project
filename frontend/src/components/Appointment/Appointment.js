@@ -61,7 +61,7 @@ const Appointment = () => {
 
         try {
             if (name && phone && email && age && selectedOption && time && selectedDate) {
-                axios.post('http://localhost:3005/doctor/doctorAppointment', formData).then(res => {
+                axios.post(process.env.React_APP_SECRET_KEY_DoctorAppointment, formData).then(res => {
                     toast.success("Appointment booked successfully");
                 }).catch(err => {
                     console.log("hello", err);

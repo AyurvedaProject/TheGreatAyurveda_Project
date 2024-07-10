@@ -6,23 +6,24 @@ const doctorid = 8;
 const DoctorConsultation = () => {
     const [doctorConsultation, setDoctorConsultation] = useState([]);
     useEffect(() => {
-        axios.post("http://localhost:3005/consult/doctorConsultData", { doctorid })
+        axios.post("http://localhost:3005/consult/getconsultdata", { doctorid: 1 })
             .then(response => {
-                setDoctorConsultation(response.data);
-                console.log(response);
-            }).catch(err => {
+                if (response.data[0])
+                    setDoctorConsultation(response.data);
+            })
+            .catch(err => {
                 console.log(err);
             })
     }, []);
     return <>
         <div className="qwerty">
-            <h2 className="d-flex justify-content-center align-items-center" style={{color:"var(--green)"}}>Consultation</h2>
+            <h2 className="d-flex justify-content-center align-items-center" style={{ color: "var(--green)" }}>Consultation</h2>
             <div className="container shadow-lg p-3 mt-3 mb-5 b
             g-body rounded table-responsive ">
                 <table className="table ">
                     <thead>
                         <tr>
-                            <th> Patient Name</th>
+                            <th>Patient Name</th>
                             <th>Phone Number</th>
                             <th>Symptoms</th>
                         </tr>

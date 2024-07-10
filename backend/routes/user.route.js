@@ -50,9 +50,7 @@ router.get("/viewuserbyemail",
     body("email", "invalid email").isEmail().notEmpty(),
     listbyemail);
 
-router.post("/viewuserbyid",
-    body("id", "invalid id").notEmpty(),
-    Viewuserbyid);
+router.post("/viewuserbyid", verifyToken, Viewuserbyid);
 
 router.get("/viewUserList", list);
 

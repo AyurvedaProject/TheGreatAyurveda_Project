@@ -33,7 +33,7 @@ const DoctorDetail = sequelize.define('doctordetail', {
         allowNull: false
     },
     doctorimage: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
     specialization: {

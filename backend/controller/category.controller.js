@@ -72,6 +72,7 @@ export const search = async (request, response, next) => {
         const keywords = query
             .toLowerCase()
             .split(" ")
+            //  the raj
             .filter((word) => word.length > 0);
 
         // Assuming Category, Yoga, HomeRemedy, and Product are Sequelize models

@@ -16,7 +16,7 @@ export default function ForgetPassword() {
     let [email2, setemail2] = useState(" ");
 
     const forgetpassword = (flag) => {
-        axios.post("http://localhost:3005/user/forgotpassword", { email })
+        axios.post(process.env.React_APP_SECRET_KEY_ForgotPassword, { email })
             .then(response => {
                 if (response.status === 200) {
                     toast.success("OTP Send Successfuly....")
@@ -32,7 +32,7 @@ export default function ForgetPassword() {
 
     let [OTP, setOTP] = useState("");
     const verifyOTP = () => {
-        axios.post("http://localhost:3005/user/verifyOTP", { OTP })
+        axios.post(process.env.React_APP_SECRET_KEY_verifyOTP, { OTP })
             .then(response => {
                 if (response.status === 200) {
                     toast.success(response.data.message)
@@ -52,7 +52,7 @@ export default function ForgetPassword() {
     let [pass2, setpass2] = useState(" ");
 
     const setnewpassword = () => {
-        axios.put("http://localhost:3005/user/setnewpassword", { email, password })
+        axios.put(process.env.React_APP_SECRET_KEY_SetNewPassword, { email, password })
             .then(response => {
                 if (response.status === 200) {
                     toast.success("Password Successfuly Chenged....")

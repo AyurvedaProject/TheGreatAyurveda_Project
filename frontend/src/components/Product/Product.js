@@ -7,7 +7,7 @@ const Product = () => {
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
-        axios.get("http://localhost:3005/product/productlist")
+        axios.get(process.env.React_APP_SECRET_KEY_Products)
             .then(response => {
                 setProducts(response.data.productList)
             }).catch(err => {
@@ -17,7 +17,7 @@ const Product = () => {
 
     const addToCart = (productId) => {
         if (localStorage.getItem('userId')) {
-            axios.post("http://localhost:3005/cart/addToCart", { userId: localStorage.getItem("userId"), productId, quantity: 1 })
+            axios.post(process.env.React_APP_SECRET_KEY_AddToCart, { userId: localStorage.getItem("userId"), productId, quantity: 1 })
                 .then(response => {
                     toast.success(response.data.message);
                 }).catch(err => {

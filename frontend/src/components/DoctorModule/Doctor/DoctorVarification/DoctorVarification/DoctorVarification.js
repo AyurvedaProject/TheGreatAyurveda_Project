@@ -15,10 +15,21 @@ const DoctorVarification = () => {
   const [doctorImage, setDoctorImage] = useState("");
   const [gender, setGender] = useState("");
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result;
+        setDoctorImage("base64String");
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const navigate = useNavigate();
 
   const addDoctorDetails = () => {
-    alert(doctorImage)
     if (
       qualification &&
       experience &&
@@ -141,7 +152,7 @@ const DoctorVarification = () => {
             <input
               type="file"
               className="form-control"
-              onChange={(e) => setDoctorImage(e.target.value)}
+              onChange={handleImageChange}
             />
           </div>
         </div>

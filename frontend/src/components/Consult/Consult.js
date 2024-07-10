@@ -15,16 +15,16 @@ import { ToastContainer, toast } from "react-toastify";
 
 const Consult = () => {
     const { state } = useLocation();
-    console.log(state)
     const navigate = useNavigate();
-    const doctorId=localStorage.getItem("doctorId");
+    const doctorId = localStorage.getItem("doctorId");
 
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
         message: '',
-        doctorId:localStorage.getItem("doctorId")
+        doctorId: state.doctorId
     });
+    // console.log(state.doctorId);
     const [successMessage, setSuccessMessage] = useState('');
     const [failureMessage, setFailureMessage] = useState('');
     const [errors, setErrors] = useState({});
@@ -53,18 +53,15 @@ const Consult = () => {
             return;
         }
 
-        // Logging form data
-        // console.log('Form Data:', formData);
-        axios.post("http://localhost:3005/consult/doctorConsultData", { formData,doctorid:doctorId })
+        axios.post(process.env.React_APP_SECRET_KEY_DoctorConsult, { formData })
             .then(response => {
-                console.log("Response:", response.data);
                 setSuccessMessage("Message sent successfullly !");
                 toast.success("Message sent successfullly !");
                 setFormData({
                     name: '',
                     phone: "",
                     message: " ",
-                    doctorId:localStorage.getItem("doctorId")
+                    doctorId: state.doctorId
                 });
                 setShowModal(true);
             })

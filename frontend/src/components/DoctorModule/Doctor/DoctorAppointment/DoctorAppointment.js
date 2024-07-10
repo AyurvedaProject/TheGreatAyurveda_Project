@@ -6,7 +6,7 @@ const DoctorAppointment = () => {
     useEffect(() => {
         axios.post("http://localhost:3005/doctor/appointmentList", { doctorid: doctorId })
             .then(response => {
-                console.log(response.data.Data);
+                // console.log(response.data.Data);
                 setDoctorAppointment(response.data.Data);
             }).catch(err => {
                 console.log(err);
@@ -14,14 +14,14 @@ const DoctorAppointment = () => {
     }, []);
 
     return <>
-        <div className="border border-dark p-0 m-0 qwerty">
-            <h2 className="d-flex justify-content-center align-items-center border border-dark" style={{ color: "var(--green)" }}>Appointment</h2>
-            <div className=" border border-dark shadow-lg p-3 mt-2 b
+        <div className="p-0 m-0 qwerty">
+            <h2 className="d-flex justify-content-center align-items-center" style={{ color: "var(--green)" }}>Appointment</h2>
+            <div className="shadow-lg p-3 mt-2 b
             g-body rounded  table-responsive">
                 <table className="table ">
                     <thead>
                         <tr>
-                            <th> Patient Name</th>
+                            <th>Patient Name</th>
                             <th>Appointment Date</th>
                             <th>Time</th>
                             <th>Phone</th>
@@ -34,19 +34,13 @@ const DoctorAppointment = () => {
                                 <td>{patient.appointmentDate.split("T")[0]}</td>
                                 <td>{patient.appointmentTime}</td>
                                 <td>{patient.phone}</td>
-
-
                             </tr>
                         ))}
-
                     </tbody>
                 </table>
-
             </div>
         </div>
     </>
-
-
 }
 export default DoctorAppointment;
 
