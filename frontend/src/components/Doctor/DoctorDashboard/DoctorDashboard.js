@@ -54,7 +54,7 @@ const DoctorDashboard = () => {
                                                     <li className="border shadow-lg p-3  bg-body rounded px-5 ">Appointments</li>
                                                     <li className="border shadow-lg p-3  bg-body rounded  px-5">My Patients</li>
                                                     <Link to="doctorconsultation">
-                                                    <li className="border shadow-lg p-3  bg-body rounded  px-5">Consult</li>
+                                                    <li className="border shadow-lg p-3  bg-body rounded  px-5">Consultr</li>
                                                     </Link>
                                                     <li className="border shadow-lg p-3  bg-body rounded px-5">Profile Setting</li>
                                                     <li className="border shadow-lg p-3  bg-body rounded px-5">LogOut</li>

@@ -75,7 +75,7 @@ export const signIn = async (request, response, next) => {
     if (user) {
         if (User.checkPassword(password, user.password)) {
             let payload = { subject: email };
-            let token = jwt.sign(payload, 'fdfjfjrwieroerivxcnmvnnvrweiorddfsdfdlkfjlfjljlraj');
+            let token = jwt.sign(payload, 'fdfjfjrwieroerivxcnmvnnvrweiorddfsdfdlkfjlfjljlraj', { expiresIn: '1h' });
             return response.status(200).json({ message: "Sign In Success", user, token: token });
         } else {
             return response.status(401).json({ error: "Unauthorized user" });

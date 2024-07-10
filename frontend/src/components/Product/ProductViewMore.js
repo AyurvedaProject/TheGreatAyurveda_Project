@@ -6,7 +6,7 @@ export default function ProductView() {
 
     const addToCart = (productId) => {
         if (localStorage.getItem('userId')) {
-            axios.post("http://localhost:3005/cart/addToCart", { userId: localStorage.getItem("userId"), productId, quantity: 1 })
+            axios.post(process.env.React_APP_SECRET_KEY_AddToCart, { userId: localStorage.getItem("userId"), productId, quantity: 1 })
                 .then(response => {
                     toast.success(response.data.message);
                 }).catch(err => {
@@ -44,7 +44,7 @@ export default function ProductView() {
                         <p className="m-0 px-0 pt-3 card-text"><small className="text-muted">{state.description}</small></p>
                         <div className="m-0 p-0 pt-3 gap-2 d-flex justify-content-start flex-wrap">
                             <button onClick={() => addToCart(state.id)} className="btnn addtocart-btn text-white">Add To cart</button>
-                            <button className="btnn buynow-btn text-white"onClick={() => Buynow(state)}>Buy Now</button>
+                            <button className="btnn buynow-btn text-white" onClick={() => Buynow(state)}>Buy Now</button>
                             <button onClick={back} className="btnn text-white">Back</button>
                         </div>
                     </div>

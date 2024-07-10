@@ -6,6 +6,50 @@ import orderItem from "../model/orderitems.model.js";
 import { validationResult } from "express-validator";
 import User from "../model/user.model.js";
 
+// export const placedOrder = async (request, res, next) => {
+//     // const errors = validationResult(request);
+//     // if (!errors.isEmpty())
+//     //     return res.status(401).json({ error: errors.array() });
+
+//     let date = new Date();
+//     let currentDate = date.toString().split("GM")[0];
+//     let userId = request.body.userId;
+//     console.log(userId)
+//     let cartResult = await Cart.findOne({ where: { userId: userId } });
+//     console.log(cartResult)
+//     let cartId = cartResult.dataValues.id;
+//     let cartItemResult = await CartItems.findAll({ where: { cartId: cartId }, raw: true });
+
+
+//     let orderItemRes;
+//     for (let i = 0; i < cartItemResult.length; i++) {
+//         let productId = cartItemResult[i].productId;
+//         let quantity = cartItemResult[i].quantity;
+//         await Order.create({
+//             OrderDate: currentDate,
+//             State: request.body.State,
+//             FullName: request.body.FullName,
+//             City: request.body.City,
+//             Address: request.body.Address,
+//             Pincode: request.body.Pincode,
+//             status: "pending",
+//             UserContact: request.body.UserContact,
+//             userId: userId
+//         });
+//         let orderId = await Order.findAll({ where: { OrderDate: currentDate }, raw: true })
+//         orderId = orderId[i].id;
+//         // console.log("orderid :" + orderId);
+//         orderItemRes = await orderItem.create({
+//             productId: productId,
+//             Quantity: quantity,
+//             orderId: orderId
+//         })
+//     }
+//     if (orderItemRes)
+//         return res.status(200).json({ message: "Order placed successfully..." })
+//     return res.status(401).json({ message: "Something went wrong", orderItemRes })
+// }
+
 export const placedOrder = async (request, res, next) => {
     // const errors = validationResult(request);
     // if (!errors.isEmpty())
@@ -19,6 +63,7 @@ export const placedOrder = async (request, res, next) => {
     console.log(cartResult)
     let cartId = cartResult.dataValues.id;
     let cartItemResult = await CartItems.findAll({ where: { cartId: cartId }, raw: true });
+    await CartItems.destroy({ where: { cartId: cartId } })
 
 
     let orderItemRes;
@@ -32,7 +77,7 @@ export const placedOrder = async (request, res, next) => {
             City: request.body.City,
             Address: request.body.Address,
             Pincode: request.body.Pincode,
-            status: "pending",
+            status: "completed",
             UserContact: request.body.UserContact,
             userId: userId
         });

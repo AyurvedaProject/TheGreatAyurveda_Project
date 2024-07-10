@@ -1,5 +1,6 @@
 import "./Home.css";
 import axios from "axios";
+import React, { Suspense, lazy } from "react";
 import { useEffect, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { useNavigate } from "react-router-dom"
@@ -8,7 +9,7 @@ const Home = () => {
 
     const [homeremedies, setHomeremedies] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:3005/homeremedy/homeremedylist")
+        axios.get(process.env.React_APP_SECRET_KEY_Homeremedies)
             .then(response => {
                 setHomeremedies(response.data.HomeRemedyList)
             }).catch(err => {
@@ -18,7 +19,7 @@ const Home = () => {
 
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:3005/product/productlist")
+        axios.get(process.env.React_APP_SECRET_KEY_Products)
             .then(response => {
                 setProducts(response.data.productList)
             }).catch(err => {
@@ -28,7 +29,7 @@ const Home = () => {
 
     const [yoga, setYoga] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:3005/yoga/yogalist")
+        axios.get(process.env.React_APP_SECRET_KEY_Yoga)
             .then(response => {
                 setYoga(response.data.YogaList);
             }).catch(err => {
@@ -38,11 +39,11 @@ const Home = () => {
 
     const addToCart = (productId) => {
         if (localStorage.getItem('userId')) {
-            axios.post("http://localhost:3005/cart/addToCart", { userId: localStorage.getItem("userId"), productId, quantity: 1 })
+            axios.post(process.env.React_APP_SECRET_KEY_AddToCart, { userId: localStorage.getItem("userId"), productId, quantity: 1 })
                 .then(response => {
                     toast.success(response.data.message);
                 }).catch(err => {
-                    toast.danger("Already added this product");
+                    toast.error("Already added this product");
                 });
         }
         else {
@@ -76,7 +77,7 @@ const Home = () => {
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
-                            <img src="./images/home1.jpg" className="d-block w-100" alt="..." />
+                            <img src="./images/2.png" className="d-block w-100" alt="..." />
                         </div>
                         <div className="carousel-item">
                             <img src="./images/home2.jpg" className="d-block w-100" alt="..." />

@@ -7,92 +7,92 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { ToastContainer, toast } from "react-toastify";
 
 export default function LogIn() {
-        const [isSignUp, setIsSignUp] = useState(false);
+    const [isSignUp, setIsSignUp] = useState(false);
 
-        const toggleForm = () => {
-            setIsSignUp(!isSignUp);
-        };
+    const toggleForm = () => {
+        setIsSignUp(!isSignUp);
+    };
 
 
-        const [name, setname] = useState("");
-        const [email, setEmail] = useState("");
-        const [password, setPassword] = useState("");
-        const [contactNumber, setcontactNumber] = useState("");
-        let [input, setinput] = useState("");
-        let [pass, setpass] = useState(" ");
-        let [input2, setinput2] = useState("");
-        let [pass2, setpass2] = useState(" ");
-        let [email2, setemail2] = useState("");
-        let [number2, setnumber2] = useState("");
+    const [name, setname] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [contactNumber, setcontactNumber] = useState("");
+    let [input, setinput] = useState("");
+    let [pass, setpass] = useState(" ");
+    let [input2, setinput2] = useState("");
+    let [pass2, setpass2] = useState(" ");
+    let [email2, setemail2] = useState("");
+    let [number2, setnumber2] = useState("");
 
-        const navigate = useNavigate();
-        const signIn = () => {
-            axios.post("http://localhost:3005/user/signin", { email, password })
-                .then(response => {
-                    console.log(response);
-                    if (response.status === 200) {
-                        localStorage.setItem("userId", response.data.user.id);
-                        toast.success("Sign In Success....");
-                        navigate("/");
+    const navigate = useNavigate();
+    const signIn = () => {
+        axios.post(process.env.React_APP_SECRET_KEY_SignIn, { email, password })
+            .then(response => {
+                console.log(response);
+                if (response.status === 200) {
+                    localStorage.setItem("userId", response.data.user.id);
+                    toast.success("Sign In Success....");
+                    navigate("/");
+                }
+            }).catch(err => {
+                console.log(err);
+                toast.error("Sign in fail....");
+            });
+    }
+
+    const signUp = () => {
+        axios.post(process.env.React_APP_SECRET_KEY_SignUp, { name, email, password, contactNumber })
+            .then(response => {
+                if (response.status === 200) {
+                    toast.success("Sign Up Success....");
+                    toggleForm();
+                }
+            }).catch(err => {
+                console.log(err);
+                toast.info("User is Already exist...");
+            })
+    }
+
+    const handleSubmit = event => {
+        console.log('handleSubmit ran');
+        event.preventDefault(); // 👈️ prevent page refresh
+    }
+
+    const [user, setUser] = useState(null);
+    const [profile, setProfile] = useState(null);
+
+    const login = useGoogleLogin({
+        onSuccess: (codeResponse) => {
+            setUser(codeResponse);
+            console.log(codeResponse);
+            Userdata(codeResponse);
+        },
+        onError: (error) => console.log('Login Failed:', error),
+    });
+
+    const Userdata = (userData) => {
+        if (userData) {
+            axios
+                .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${userData.access_token}`, {
+                    headers: {
+                        Authorization: `Bearer ${userData.access_token}`,
+                        Accept: 'application/json'
                     }
-                }).catch(err => {
-                    console.log(err);
-                    toast.error("Sign in fail....");
-                });
-        }
-
-        const signUp = () => {
-            axios.post("http://localhost:3005/user/signUp", { name, email, password, contactNumber })
-                .then(response => {
-                    if (response.status === 200) {
-                        toast.success("Sign Up Success....");
-                        toggleForm();
-                    }
-                }).catch(err => {
-                    console.log(err);
-                    toast.info("User is Already exist...");
                 })
+                .then((res) => {
+                    const googleemail = document.getElementById('googleemail');
+                    const googleemail2 = document.getElementById('googleemail2');
+                    const googlename = document.getElementById('googlename');
+                    googleemail.value = res.data.email;
+                    googleemail2.value = res.data.email;
+                    googlename.value = res.data.name;
+                    setProfile(res.data);
+                    console.log(res.data);
+                })
+                .catch((err) => console.log('Failed', err));
         }
-
-        const handleSubmit = event => {
-            console.log('handleSubmit ran');
-            event.preventDefault(); // 👈️ prevent page refresh
-        }
-
-        const [user, setUser] = useState(null);
-        const [profile, setProfile] = useState(null);
-
-        const login = useGoogleLogin({
-            onSuccess: (codeResponse) => {
-                setUser(codeResponse);
-                console.log(codeResponse);
-                Userdata(codeResponse);
-            },
-            onError: (error) => console.log('Login Failed:', error),
-        });
-
-        const Userdata = (userData) => {
-            if (userData) {
-                axios
-                    .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${userData.access_token}`, {
-                        headers: {
-                            Authorization: `Bearer ${userData.access_token}`,
-                            Accept: 'application/json'
-                        }
-                    })
-                    .then((res) => {
-                        const googleemail = document.getElementById('googleemail');
-                        const googleemail2 = document.getElementById('googleemail2');
-                        const googlename = document.getElementById('googlename');
-                        googleemail.value = res.data.email;
-                        googleemail2.value = res.data.email;
-                        googlename.value = res.data.name;
-                        setProfile(res.data);
-                        console.log(res.data);
-                    })
-                    .catch((err) => console.log('Failed', err));
-            }
-        };
+    };
 
     return (
         <div>

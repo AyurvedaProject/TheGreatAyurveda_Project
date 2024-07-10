@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 const Homeremedy = () => {
     const [homeremedies, setHomeremedies] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:3005/homeremedy/homeremedylist")
+        axios.get(process.env.React_APP_SECRET_KEY_Homeremedies)
             .then(response => {
                 setHomeremedies(response.data.HomeRemedyList)
             }).catch(err => {

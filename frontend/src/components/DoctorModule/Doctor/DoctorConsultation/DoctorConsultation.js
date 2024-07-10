@@ -7,10 +7,10 @@ const DoctorConsultation = () => {
     useEffect(() => {
         axios.post("http://localhost:3005/consult/getconsultdata", { doctorid: doctorId })
             .then(response => {
-                setDoctorConsultation(response.data.Data);
-                console.log(response.data.Data);
+                // setDoctorConsultation(response.data.Data);
+                console.log("response", response);
             }).catch(err => {
-                console.log(err);
+                console.log("err", err);
             })
     }, []);
 

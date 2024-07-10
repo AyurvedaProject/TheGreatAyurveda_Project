@@ -16,7 +16,7 @@ export default function UserProfile() {
     const UserInformation = () => {
         setbuttondisplyblock(true)
         setbuttondisplyblock2(true)
-        axios.post("http://localhost:3005/user/viewuserbyid", { id })
+        axios.post(process.env.React_APP_SECRET_KEY_GetUser, { id })
             .then(response => {
                 setuserData(response.data.data);
                 setuserData2(response.data.data);
@@ -48,7 +48,7 @@ export default function UserProfile() {
         if (id !== "" && name !== "" && email !== "" && contactNumber !== "" && gender !== "") {
             if (userData2 !== "") {
                 toast.info("every thing is uptodate")
-            } axios.put("http://localhost:3005/user/updateProfile", { id, name, email, contactNumber, gender })
+            } axios.put(process.env.React_APP_SECRET_KEY_UpdateProfile, { id, name, email, contactNumber, gender })
                 .then(response => {
                     toast.success("Personal Information updated !");
                     UserInformation();
@@ -68,7 +68,7 @@ export default function UserProfile() {
         if (id !== "" && state !== "" && city !== "" && address !== "" && pincode !== "") {
             if (userData2 !== "") {
                 toast.info("every thing is uptodate")
-            } axios.put("http://localhost:3005/user/updateAddress", { id, state, city, address, pincode })
+            } axios.put(process.env.React_APP_SECRET_KEY_UpdateAddress, { id, state, city, address, pincode })
                 .then(response => {
                     toast.success("Address Updated !");
                     UserInformation();
@@ -87,7 +87,7 @@ export default function UserProfile() {
     const ChangePassword = () => {
         if (id !== "" && oldpassword !== "" && newpassword !== "" && conformpassword !== "") {
             if (newpassword === conformpassword) {
-                axios.put("http://localhost:3005/user/updatepassword", { id, oldpassword, newpassword })
+                axios.put(process.env.React_APP_SECRET_KEY_UpdatePassword, { id, oldpassword, newpassword })
                     .then(response => {
                         if (response.status === 200) {
                             toast.success("Password Successfuly Chenged....")

@@ -10,7 +10,7 @@ const Disease = () => {
 
     const [doctorConsult, setDoctorConsult] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:3005/doctor/doctorconsult")
+        axios.get(process.env.React_APP_SECRET_KEY_DoctorConsult)
             .then(response => {
                 setDoctorConsult(response.data.result);
             }).catch(err => {
@@ -48,7 +48,7 @@ const Disease = () => {
 
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        axios.post("http://localhost:3005/product/viewProductByCategory", { categoryname })
+        axios.post(process.env.React_APP_SECRET_KEY_ProductByCategory, { categoryname })
             .then(response => {
                 setProducts(response.data.productList);
             }).catch(err => {
@@ -58,7 +58,7 @@ const Disease = () => {
 
     const addToCart = (productId) => {
         if (localStorage.getItem('userId')) {
-            axios.post("http://localhost:3005/cart/addToCart", { userId: localStorage.getItem("userId"), productId, quantity: 1 })
+            axios.post(process.env.React_APP_SECRET_KEY_AddToCart, { userId: localStorage.getItem("userId"), productId, quantity: 1 })
                 .then(response => {
                     toast.success(response.data.message);
                 }).catch(err => {
@@ -72,7 +72,7 @@ const Disease = () => {
 
     const [homeremedies, sethomeremedies] = useState([]);
     useEffect(() => {
-        axios.post("http://localhost:3005/homeremedy/viewremedyByCategory", { categoryname })
+        axios.post(process.env.React_APP_SECRET_KEY_HomeremedyByCategory, { categoryname })
             .then(response => {
                 sethomeremedies(response.data.remedyList);
             }).catch(err => {
@@ -82,7 +82,7 @@ const Disease = () => {
 
     const [yoga, setyoga] = useState([]);
     useEffect(() => {
-        axios.post("http://localhost:3005/yoga/viewYogaByCategory", { categoryname })
+        axios.post(process.env.React_APP_SECRET_KEY_YogaByCategory, { categoryname })
             .then(response => {
                 setyoga(response.data.yogalist);
             }).catch(err => {

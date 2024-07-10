@@ -1,5 +1,3 @@
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
 import { FaHeart, FaLeaf } from "react-icons/fa";
 import { IoMdDoneAll } from "react-icons/io";
 import "./About.css";
@@ -54,7 +52,7 @@ export default function AboutUs() {
             className="col-md-4 col-12 mt-3 text-center"
             id="history_right-image">
             <img
-              src="./images/HistoryImage.webp"
+              src="./images/home1.jpg"
               height={"300px"}
               width={"300px"}
             />

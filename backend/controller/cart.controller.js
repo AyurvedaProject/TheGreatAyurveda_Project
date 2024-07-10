@@ -16,11 +16,11 @@ export const addToCart = async (request, response, next) => {
         if (cart) {
             let isExists = !! await CartItems.findOne({ raw: true, where: { cartId: cart.id, productId, quantity } });
             if (isExists)
-                return response.status(200).json({ message: "Product is already added in cart" });
+                return response.status(401).json({ message: "Product is already added in cart" });
             
             await CartItems.create({ cartId: cart.id, productId, quantity }, { transaction });
             await transaction.commit();
-            return response.status(201).json({ message: 'Product successfully added into cart' });
+            return response.status(200).json({ message: 'Product successfully added into cart' });
         }
         else {             
             cart = await Cart.create({ userId: userId * 1 }, { transaction })
